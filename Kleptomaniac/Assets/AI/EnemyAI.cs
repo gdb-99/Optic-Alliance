@@ -22,9 +22,8 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] float _ProximityDetectionRange = 3f;
     [SerializeField] Color _ProximityRangeColour = new Color(1f, 1f, 1f, 0.25f);
 
-    //AGGIUNTA:
-    [SerializeField] float rotationSpeed = 5f;
-    //AGGIUNTA:
+    [SerializeField] float speed = 5f;
+    
     public bool isPlayerVisible = false;
     public Vector3 EyeLocation => transform.position;
     public Vector3 EyeDirection => transform.forward;
@@ -42,6 +41,8 @@ public class EnemyAI : MonoBehaviour
     public float CosVisionConeAngle { get; private set; } = 0f;
 
     AwarenessSystem Awareness;
+    //AGGIUNTA
+    private bool isMoving = false;
 
     void Awake()
     {
@@ -58,20 +59,35 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //IN ORIGINE ERA VUOTO
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        /* //IN ORIGINE ERA VUOTO
+         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
-        if (player != null && isPlayerVisible)
+         if (player != null && isPlayerVisible)
+         {
+             // Ottenere la direzione verso il giocatore
+             Vector3 playerDirection = player.transform.position - transform.position;
+             playerDirection.y = 0f; // Assicurarsi che la rotazione sia solo attorno all'asse y
+
+             // Ruotare l'Enemy Character verso il giocatore
+             if (playerDirection != Vector3.zero)
+             {
+                 Quaternion targetRotation = Quaternion.LookRotation(playerDirection);
+                 transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+             }
+         } */
+        if (isMoving)
         {
-            // Ottenere la direzione verso il giocatore
-            Vector3 playerDirection = player.transform.position - transform.position;
-            playerDirection.y = 0f; // Assicurarsi che la rotazione sia solo attorno all'asse y
+            GameObject player = GameObject.FindWithTag("Player");
 
-            // Ruotare l'Enemy Character verso il giocatore
-            if (playerDirection != Vector3.zero)
+            if (player != null)
             {
-                Quaternion targetRotation = Quaternion.LookRotation(playerDirection);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                Vector3 targetPosition = player.transform.position;
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+
+                // Orienta l'EnemyCharacter verso il giocatore
+                transform.LookAt(targetPosition);
+
+                // Puoi aggiungere ulteriori logiche qui, come l'attacco al giocatore
             }
         }
     }
@@ -107,7 +123,17 @@ public class EnemyAI : MonoBehaviour
     public void OnFullyDetected(GameObject target)
     {
         FeedbackDisplay.text = "Charge! " + target.gameObject.name;
+        isMoving = true;
+
+        // Ottieni il componente EnemyPatrolling
+        EnemyPatrolling enemyPatrolling = GetComponent<EnemyPatrolling>();
+        if (enemyPatrolling != null)
+        {
+            // Interrompi il patrolling
+            enemyPatrolling.StopPatrolling();
+        }
     }
+
 
     public void OnLostDetect(GameObject target)
     {
