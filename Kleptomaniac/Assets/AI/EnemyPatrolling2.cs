@@ -68,7 +68,8 @@ public class EnemyPatrolling2 : MonoBehaviour
 
     void Chase()
     {
-        transform.Translate(Vector3.forward * AIMoveSpeed * Time.deltaTime);
+        agent.destination = player.position;
+        //transform.Translate(Vector3.forward * AIMoveSpeed * Time.deltaTime);
     }
 
 #if UNITY_EDITOR
