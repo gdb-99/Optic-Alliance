@@ -23,6 +23,19 @@ public class EnemyPatrolling2 : MonoBehaviour
     public Transform goal;
 
     private bool CanSeePlayer => IsPlayerInVisionCone() && !IsPlayerObstructed();
+    private Vector3 lastKnownPlayerPosition;
+    private float searchTimer;
+    private float searchDuration = 5f;
+    private float rotationSpeed = 360f; // Velocità di rotazione in gradi al secondo
+
+    enum EnemyState
+    {
+        Patrolling,
+        Chasing,
+        Searching
+    }
+
+    private EnemyState currentState;
 
     void Start()
     {
@@ -30,26 +43,71 @@ public class EnemyPatrolling2 : MonoBehaviour
         agent.destination = goal.position;
 
         agent.autoBraking = false;
+        currentState = EnemyState.Patrolling;
     }
 
     void Update()
     {
         playerDistance = Vector3.Distance(player.position, transform.position);
 
-        if (CanSeePlayer)
+        switch (currentState)
         {
-            LookAtPlayer();
-            Debug.Log("Seen");
+            case EnemyState.Patrolling:
+                if (CanSeePlayer)
+                {
+                    Debug.Log("Ehi ti ho visto!");
+                    currentState = EnemyState.Chasing;
+                    Chase();
+                }
+                else if (agent.remainingDistance < 0.2f)
+                {
+                    Debug.Log("Punto raggiunto, next");
+                    GotoNextPoint();
+                }
+                break;
 
-            if (playerDistance > 2f)
-                Chase();
-            else
-                GotoNextPoint();
-        }
-        else
-        {
-            if (agent.remainingDistance < 0.5f)
-                GotoNextPoint();
+            case EnemyState.Chasing:
+                if (CanSeePlayer)
+                {
+                    LookAtPlayer();
+                    if (playerDistance > 2f)
+                    {
+                        Chase();
+                    }
+                    else
+                    {
+                        Debug.Log("Game Over");
+                        //currentState = EnemyState.Searching;
+                        //searchTimer = 0f;
+                    }
+                }
+                else
+                {
+                    Debug.Log("Dove sei finito?");
+                    currentState = EnemyState.Searching;
+                    searchTimer = 0f;
+                }
+                break;
+
+            case EnemyState.Searching:
+                searchTimer += Time.deltaTime;
+                if (CanSeePlayer)
+                {
+                    currentState = EnemyState.Chasing;
+                    searchTimer = 0f;
+                }
+                if (searchTimer >= searchDuration)
+                {
+                    currentState = EnemyState.Patrolling;
+                    searchTimer = 0f;
+                }
+                else
+                {
+                    //DA MIGLIORARE
+                    Debug.Log("Girotondo");
+                    LookAround();
+                }
+                break;
         }
     }
 
@@ -69,7 +127,29 @@ public class EnemyPatrolling2 : MonoBehaviour
     void Chase()
     {
         agent.destination = player.position;
-        //transform.Translate(Vector3.forward * AIMoveSpeed * Time.deltaTime);
+    }
+
+    void ReturnToLastKnownPlayerPosition()
+    {
+        agent.destination = lastKnownPlayerPosition;
+    }
+
+    void LookAround()
+    {
+        // Calcola l'angolo di rotazione desiderato per un giro completo
+        float rotationAngle = 360f;
+        // Calcola la velocità di rotazione in radianti al secondo
+        float rotationSpeedRad = rotationSpeed * Mathf.Deg2Rad;
+
+        // Ruota il nemico attorno all'asse verticale (asse Y)
+        transform.Rotate(Vector3.up, rotationSpeedRad * Time.deltaTime);
+
+        // Controlla se è trascorso il tempo per un giro completo
+        if (searchTimer >= searchDuration)
+        {
+            // Arresta la rotazione
+            transform.rotation = Quaternion.identity;
+        }
     }
 
 #if UNITY_EDITOR
@@ -99,6 +179,7 @@ public class EnemyPatrolling2 : MonoBehaviour
             {
                 if (hit.transform.CompareTag("Player"))
                 {
+                    lastKnownPlayerPosition = player.position;
                     return true;
                 }
             }
