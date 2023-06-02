@@ -300,7 +300,7 @@ MonoBehaviour:
   gizmoColor: {r: 1, g: 0, b: 0, a: 1}
   awareAI: 5
   VisionConeAngle: 20
-  VisionConeRange: 10
+  VisionConeRange: 13
   navPoint:
   - {fileID: 461061511}
   - {fileID: 1543826064}
@@ -309,6 +309,7 @@ MonoBehaviour:
   agent: {fileID: 85956582}
   destPoint: 0
   goal: {fileID: 461061511}
+  rotationSpeed: 8
 --- !u!54 &85956593
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -320,7 +321,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -2285,7 +2286,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1078177335}
-  m_LocalRotation: {x: -0.14143339, y: 0.23703781, z: 0.03490317, w: 0.9605163}
+  m_LocalRotation: {x: -0.14143339, y: 0.23703781, z: 0.034903165, w: 0.9605163}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4124,7 +4125,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2062318762}
-  m_LocalRotation: {x: -0.10644935, y: 0.23814924, z: 0.026269753, w: 0.96501994}
+  m_LocalRotation: {x: -0.106449336, y: 0.23814923, z: 0.026269741, w: 0.9650199}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

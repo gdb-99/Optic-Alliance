@@ -110,7 +110,7 @@ public class SurveillanceAI : MonoBehaviour
         //AGGIUNTA:
         isPlayerVisible = false;
 
-        FeedbackDisplay.text = "Where are you " + target.gameObject.name;
+        //FeedbackDisplay.text = "Where are you " + target.gameObject.name;
     }
 
     public void OnLostSuspicion()
@@ -118,7 +118,7 @@ public class SurveillanceAI : MonoBehaviour
         //AGGIUNTA:
         isPlayerVisible = false;
 
-        FeedbackDisplay.text = "Where did you go";
+        //FeedbackDisplay.text = "Where did you go";
     }
 
     public void OnFullyLost()
@@ -126,7 +126,7 @@ public class SurveillanceAI : MonoBehaviour
         //AGGIUNTA:
         isPlayerVisible = false;
 
-        FeedbackDisplay.text = "Must be nothing";
+        //FeedbackDisplay.text = "Must be nothing";
     }
 }
 
