@@ -23,6 +23,19 @@ public class EnemyPatrolling2 : MonoBehaviour
     public Transform goal;
 
     private bool CanSeePlayer => IsPlayerInVisionCone() && !IsPlayerObstructed();
+    private Vector3 lastKnownPlayerPosition;
+    private float searchTimer;
+    [SerializeField] private float searchDuration = 5f;
+    [SerializeField] private float rotateSpeed = 60f;
+
+    enum EnemyState
+    {
+        Patrolling,
+        Chasing,
+        Searching
+    }
+
+    private EnemyState currentState;
 
     void Start()
     {
@@ -30,26 +43,73 @@ public class EnemyPatrolling2 : MonoBehaviour
         agent.destination = goal.position;
 
         agent.autoBraking = false;
+        currentState = EnemyState.Patrolling;
     }
 
     void Update()
     {
         playerDistance = Vector3.Distance(player.position, transform.position);
 
-        if (CanSeePlayer)
+        switch (currentState)
         {
-            LookAtPlayer();
-            Debug.Log("Seen");
+            case EnemyState.Patrolling:
+                if (CanSeePlayer)
+                {
+                    Debug.Log("Ehi ti ho visto!");
+                    currentState = EnemyState.Chasing;
+                    Chase();
+                }
+                else if (agent.remainingDistance < 0.2f)
+                {
+                    Debug.Log("Punto raggiunto, next");
+                    GotoNextPoint();
+                }
+                break;
 
-            if (playerDistance > 2f)
-                Chase();
-            else
-                GotoNextPoint();
-        }
-        else
-        {
-            if (agent.remainingDistance < 0.5f)
-                GotoNextPoint();
+            case EnemyState.Chasing:
+                if (CanSeePlayer)
+                {
+                    LookAtPlayer();
+                    if (playerDistance > 2f)
+                    {
+                        Chase();
+                    }
+                    else
+                    {
+                        Debug.Log("Game Over");
+                    }
+                }
+                else
+                {
+                    Debug.Log("Dove sei finito?");
+                    ReturnToLastKnownPlayerPosition();
+                    if (agent.remainingDistance < 0.1f)
+                    {
+                        agent.angularSpeed = 0f;
+                        searchTimer = 0f;
+                        currentState = EnemyState.Searching;
+                    }
+                }
+                break;
+
+            case EnemyState.Searching:
+                searchTimer += Time.deltaTime;
+                if (CanSeePlayer)
+                {
+                    agent.angularSpeed = 120f;
+                    currentState = EnemyState.Chasing;
+                }
+                if (searchTimer >= searchDuration)
+                {
+                    agent.angularSpeed = 120f;
+                    currentState = EnemyState.Patrolling;
+                }
+                else
+                {
+                    transform.localEulerAngles = new Vector3(0, Mathf.PingPong(Time.time * rotateSpeed, 60) - 30, 0);
+                    Debug.Log("Forse è qui intorno...");
+                }
+                break;
         }
     }
 
@@ -68,8 +128,14 @@ public class EnemyPatrolling2 : MonoBehaviour
 
     void Chase()
     {
-        transform.Translate(Vector3.forward * AIMoveSpeed * Time.deltaTime);
+        agent.destination = player.position;
     }
+
+    void ReturnToLastKnownPlayerPosition()
+    {
+        agent.destination = lastKnownPlayerPosition;
+    }
+
 
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
@@ -98,6 +164,8 @@ public class EnemyPatrolling2 : MonoBehaviour
             {
                 if (hit.transform.CompareTag("Player"))
                 {
+                    lastKnownPlayerPosition = player.position;
+                    Debug.Log("True");
                     return true;
                 }
             }
