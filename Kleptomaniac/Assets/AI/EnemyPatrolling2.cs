@@ -28,6 +28,8 @@ public class EnemyPatrolling2 : MonoBehaviour
     [SerializeField] private float searchDuration = 5f;
     [SerializeField] private float rotateSpeed = 60f;
 
+    Animator policeAnimator;
+
     enum EnemyState
     {
         Patrolling,
@@ -44,6 +46,8 @@ public class EnemyPatrolling2 : MonoBehaviour
 
         agent.autoBraking = false;
         currentState = EnemyState.Patrolling;
+
+        policeAnimator = GetComponent<Animator>();
     }
 
     void Update()
@@ -87,6 +91,7 @@ public class EnemyPatrolling2 : MonoBehaviour
                     {
                         agent.angularSpeed = 0f;
                         searchTimer = 0f;
+                        policeAnimator.SetBool("isStop", true);
                         currentState = EnemyState.Searching;
                     }
                 }
@@ -97,11 +102,13 @@ public class EnemyPatrolling2 : MonoBehaviour
                 if (CanSeePlayer)
                 {
                     agent.angularSpeed = 120f;
+                    policeAnimator.SetBool("isStop", false);
                     currentState = EnemyState.Chasing;
                 }
                 if (searchTimer >= searchDuration)
                 {
                     agent.angularSpeed = 120f;
+                    policeAnimator.SetBool("isStop", false);
                     currentState = EnemyState.Patrolling;
                 }
                 else
