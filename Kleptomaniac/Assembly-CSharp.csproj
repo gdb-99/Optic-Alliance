@@ -71,6 +71,10 @@
     <Compile Include="Assets\Sensors\DetectableTarget.cs" />
     <Compile Include="Assets\Sensors\AwarenessSystem.cs" />
     <Compile Include="Assets\Sensors\ProximitySensor.cs" />
+    <Compile Include="Assets\FoxHeadController.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\ItemSO.cs" />
+    <Compile Include="Assets\MenuItemController.cs" />
+    <Compile Include="Assets\PurchaseDetailsController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
