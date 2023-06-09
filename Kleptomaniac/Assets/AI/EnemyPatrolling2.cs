@@ -65,6 +65,7 @@ public class EnemyPatrolling2 : MonoBehaviour
                 }
                 else if (agent.remainingDistance < 0.2f)
                 {
+                    Debug.Log("REMAINING DISTANCE = " + agent.remainingDistance);
                     Debug.Log("Punto raggiunto, next");
                     GotoNextPoint();
                 }
@@ -127,10 +128,18 @@ public class EnemyPatrolling2 : MonoBehaviour
 
     void GotoNextPoint()
     {
-        if (navPoint.Length == 0)
+        if (navPoint.Length == 0) {
             return;
-        agent.destination = navPoint[destPoint].position;
-        destPoint = (destPoint + 1) % navPoint.Length;
+        }
+        
+        if(agent.remainingDistance == 0f) {
+            UnityEngine.AI.NavMeshPath path = new UnityEngine.AI.NavMeshPath();
+            agent.CalculatePath(navPoint[destPoint].position, path);
+        } else {
+            agent.destination = navPoint[destPoint].position;
+            destPoint = (destPoint + 1) % navPoint.Length;
+        }
+        
     }
 
     void Chase()
