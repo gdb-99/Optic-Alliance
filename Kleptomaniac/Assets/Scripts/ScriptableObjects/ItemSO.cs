@@ -19,5 +19,6 @@ public class ItemSO : ScriptableObject
     {
         LIGHT,
         DISABLE_CAMERA,
+        MAP,
     }
 }

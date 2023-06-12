@@ -15,10 +15,7 @@ public class MenuItemController : MonoBehaviour, IPointerDownHandler
     // Start is called before the first frame update
     void Start()
     {
-        _image= GetComponent<Image>();
-        _image.sprite = item.itemSprite;
-
-        _detailsPanel = FindObjectOfType<PurchaseDetailsController>();
+        
     }
 
     // Update is called once per frame
@@ -33,5 +30,14 @@ public class MenuItemController : MonoBehaviour, IPointerDownHandler
         _detailsPanel.showDetailsEvent.Invoke(item);
 
 
+    }
+
+    public void SetItem(ItemSO itemToSet)
+    {
+        item = itemToSet;
+        _image = GetComponent<Image>();
+        _image.sprite = itemToSet.itemSprite;
+
+        _detailsPanel = FindObjectOfType<PurchaseDetailsController>();
     }
 }
