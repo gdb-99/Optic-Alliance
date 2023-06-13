@@ -17,6 +17,8 @@ public class Player : MonoBehaviour {
     private float playerHeight = 2f;
     private Vector3 myDirection;
 
+    private Interactable selectedInteractable;
+
     private void Awake() {
         if(Instance != null) {
             Debug.LogError("A player object already exists");
@@ -37,21 +39,21 @@ public class Player : MonoBehaviour {
 
     }
 
-    //private void Interact() {
-    //    //float interactDistance = 2f;
+    private void Interact() {
+        float interactDistance = 2f;
 
-    //    //if(Physics.Raycast(transform.position, myDirection, out RaycastHit raycastHit, interactDistance)) {
-    //    //    if(raycastHit.transform.TryGetComponent(out BaseCounter baseCounter)) {
-    //    //        if(baseCounter != selectedCounter) {
-    //    //            SetSelectedCounter(baseCounter);
-    //    //        }   
-    //    //    } else {
-    //    //        SetSelectedCounter(null);
-    //    //    }
-    //    //} else {
-    //    //    SetSelectedCounter(null);
-    //    //}
-    //}
+        if (Physics.Raycast(transform.position, myDirection, out RaycastHit raycastHit, interactDistance)) {
+            if (raycastHit.transform.TryGetComponent(out Interactable interactable)) {
+                if (interactable != selectedInteractable) {
+                    selectedInteractable = interactable;
+                }
+            } else {
+                selectedInteractable = null;
+            }
+        } else {
+            selectedInteractable = null;
+        }
+    }
 
     private void Move() {
 
