@@ -131,12 +131,11 @@ public class EnemyPatrolling2 : MonoBehaviour
         if (navPoint.Length == 0) {
             return;
         }
-        
-        if(agent.remainingDistance == 0f) {
+
+        if(agent.remainingDistance < 0.2f) {
             UnityEngine.AI.NavMeshPath path = new UnityEngine.AI.NavMeshPath();
             agent.CalculatePath(navPoint[destPoint].position, path);
-        } else {
-            agent.destination = navPoint[destPoint].position;
+            agent.path = path;
             destPoint = (destPoint + 1) % navPoint.Length;
         }
         
