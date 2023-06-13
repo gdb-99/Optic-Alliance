@@ -59,13 +59,17 @@
     <Compile Include="Assets\AI\EnemyPatrolling2.cs" />
     <Compile Include="Assets\PlayerInputActions.cs" />
     <Compile Include="Assets\Sensors\HearingSensor.cs" />
+    <Compile Include="Assets\BlackMarketController.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\InventorySO.cs" />
     <Compile Include="Assets\Scripts\PlayerVisual.cs" />
     <Compile Include="Assets\AI\SurveillanceAI.cs" />
     <Compile Include="Assets\Sensors\HearingManager.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\ItemSO.cs" />
     <Compile Include="Assets\FoxHeadController.cs" />
+    <Compile Include="Assets\Scripts\PlayerInGameMenuController.cs" />
     <Compile Include="Assets\AI\EnemyPatrolling.cs" />
     <Compile Include="Assets\AI\EnemyAI.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\BlackMarketSO.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Sensors\DetectableTargetManager.cs" />
     <Compile Include="Assets\MenuItemController.cs" />
@@ -74,14 +78,12 @@
     <Compile Include="Assets\Scripts\GameInput.cs" />
     <Compile Include="Assets\Sensors\DetectableTarget.cs" />
     <Compile Include="Assets\Sensors\AwarenessSystem.cs" />
-    <Compile Include="Assets\Sensors\ProximitySensor.cs" />
-    <Compile Include="Assets\Scripts\Interactable.cs" />
-    <Compile Include="Assets\Scripts\PlayerInGameMenuController.cs" />
-    <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\ScriptableObjects\InventorySO.cs" />
-    <Compile Include="Assets\BlackMarketController.cs" />
-    <Compile Include="Assets\Scripts\ScriptableObjects\BlackMarketSO.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\PlayerSO.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Sensors\ProximitySensor.cs" />
+    <Compile Include="Assets\AI\CamRotation.cs" />
+    <Compile Include="Assets\AI\Detection.cs" />
+    <Compile Include="Assets\Scripts\Interactable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
