@@ -26,10 +26,8 @@ public class MenuItemController : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("Mouse click");
+        Debug.Log("POINTER");
         _detailsPanel.showDetailsEvent.Invoke(item);
-
-
     }
 
     public void SetItem(ItemSO itemToSet)

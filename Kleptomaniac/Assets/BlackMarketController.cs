@@ -18,7 +18,7 @@ public class BlackMarketController : MonoBehaviour
     {
         _blackMarketData.items.ForEach(item => {
             GameObject newItemInstance = Instantiate(_prefabItem);
-            newItemInstance.transform.SetParent(item.isPermanent ? _permanentGrid.transform : _consumableGrid.transform);
+            newItemInstance.transform.SetParent(item.isPermanent ? _permanentGrid.transform : _consumableGrid.transform, false);
 
             if(!newItemInstance.TryGetComponent<MenuItemController>(out var controller)) { return; }
 

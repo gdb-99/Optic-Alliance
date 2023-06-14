@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class ShowItemDetailsEvent: UnityEvent<ItemSO> { }
 
@@ -15,6 +16,7 @@ public class PurchaseDetailsController : MonoBehaviour
     [SerializeField] TextMeshProUGUI itemDesc;
     [SerializeField] TextMeshProUGUI itemPrice;
     [SerializeField] TextMeshProUGUI itemType;
+    [SerializeField] TextMeshProUGUI emptyText;
     [SerializeField] Image itemImage;
     [SerializeField] InventorySO globalInventory;
 
@@ -27,6 +29,8 @@ public class PurchaseDetailsController : MonoBehaviour
             showDetailsEvent = new ShowItemDetailsEvent();
 
         showDetailsEvent.AddListener(HandleShowDetails);
+
+        Reset();
     }
 
     // Update is called once per frame
@@ -35,10 +39,21 @@ public class PurchaseDetailsController : MonoBehaviour
         
     }
 
+    private void Reset()
+    {
+        itemName.text = string.Empty;
+        itemDesc.text = string.Empty;
+        itemPrice.text = string.Empty;
+        itemType.text = string.Empty;
+        itemImage.sprite = null;
+        itemImage.enabled = false;
+
+        emptyText.enabled = true;
+
+    }
+
     void HandleShowDetails(ItemSO item)
     {
-        Debug.Log(item.name + " " + item.description);
-
         selectedItem = item;
 
         itemName.text = item.name;
@@ -46,6 +61,9 @@ public class PurchaseDetailsController : MonoBehaviour
         itemPrice.text = item.price + " $";
         itemType.text = item.isPermanent ? "PERMANENT" : "CONSUMABLE";
         itemImage.sprite = item.itemSprite;
+        itemImage.enabled = true;
+
+        emptyText.enabled = false;
     }
 
     public void HandleBuyItem()
