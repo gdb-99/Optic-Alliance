@@ -24,7 +24,7 @@ public class Detection : MonoBehaviour
 
     }
 
-    private void OnTriggerStay(Collider col)
+    private void OnTriggerEnter(Collider col) //era OnTriggerStay
     {
         if (col.gameObject.CompareTag(playerTag))
         {
@@ -42,15 +42,17 @@ public class Detection : MonoBehaviour
                     if (hit.collider.gameObject.CompareTag(playerTag))
                     {
                         camRotationScript.CurrentCameraState = CamRotation.CameraState.Aware;
+                        camRotationScript.SetPlayerTransform(hit.collider.transform);
                         Debug.Log(camRotationScript.CurrentCameraState);
                     }
-                    else
-                    {
-                        camRotationScript.CurrentCameraState = CamRotation.CameraState.Idle;
-                    }
-
                 }
             }
         }
+    }
+
+    private void OnTriggerExit(Collider col)
+    {
+        camRotationScript.CurrentCameraState = CamRotation.CameraState.Idle;
+        Debug.Log(camRotationScript.CurrentCameraState);
     }
 }

@@ -96,7 +96,7 @@ public class Player : MonoBehaviour {
 
     private bool CanMove(Vector3 moveDir) {
         float moveDistance = moveSpeed * Time.deltaTime;
-        bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDir, moveDistance);
+        bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDir, moveDistance, -1, QueryTriggerInteraction.Ignore);
         return canMove;
     }
 
