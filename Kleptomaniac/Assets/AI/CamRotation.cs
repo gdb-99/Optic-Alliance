@@ -15,6 +15,15 @@ public class CamRotation : MonoBehaviour
 
     public float secondsToRot;
     public float rotSwitchTime;
+    private Transform playerTransform;
+
+    public CameraState CurrentCameraState { get; set; }
+
+    public enum CameraState
+    {
+        Idle,
+        Aware
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +37,28 @@ public class CamRotation : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        Debug.Log(CurrentCameraState);
+        switch (CurrentCameraState)
+        {
+            case CameraState.Idle:
+                if (startNextRotation && rotRight)
+                {
+                    StartCoroutine(Rotate(yaw, secondsToRot));
+                }
+                else if (startNextRotation && !rotRight)
+                {
+                    StartCoroutine(Rotate(-yaw, secondsToRot));
+                }
+                break;
+            case CameraState.Aware:
+                //QUI
+                if(playerTransform != null)
+                {
+                    transform.LookAt(playerTransform);
+                }
+                break;
+
+        }
         if(startNextRotation && rotRight)
         {
             StartCoroutine(Rotate(yaw, secondsToRot));
@@ -70,4 +101,10 @@ public class CamRotation : MonoBehaviour
             transform.forward = Quaternion.Euler(0, yaw / 2, 0) * transform.forward;
         }
     }
+
+    public void SetPlayerTransform(Transform playerTransform)
+    {
+        this.playerTransform = playerTransform;
+    }
+
 }

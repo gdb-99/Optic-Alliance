@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Detection : MonoBehaviour
 {
+    CamRotation camRotationScript;
 
     string playerTag;
 
@@ -12,35 +13,44 @@ public class Detection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        camRotationScript = GetComponentInParent<CamRotation>();
         lens = transform.parent.GetComponent<Transform>();
         playerTag = GameObject.FindGameObjectWithTag("Player").tag;
     }
 
     // Update is called once per frame
-    private void Update()
+    void Update()
     {
-        
+
     }
-
-
 
     private void OnTriggerStay(Collider col)
     {
-        if(col.gameObject.tag == playerTag)
+        if (col.gameObject.CompareTag(playerTag))
         {
-            Vector3 direction = col.transform.position - lens.position;
-            RaycastHit hit;
-
-            if(Physics.Raycast(lens.transform.position, direction.normalized, out hit, 1000))
+            if (camRotationScript != null)
             {
-                Debug.Log(hit.collider.name);
+                camRotationScript.CurrentCameraState = CamRotation.CameraState.Aware;
 
-                if(hit.collider.gameObject.tag == playerTag)
+                Vector3 direction = col.transform.position - lens.position;
+                RaycastHit hit;
+
+                if (Physics.Raycast(lens.transform.position, direction.normalized, out hit, 1000))
                 {
-                    //Debug.Log("Maiale spotted");
+                    Debug.Log(hit.collider.name);
+
+                    if (hit.collider.gameObject.CompareTag(playerTag))
+                    {
+                        camRotationScript.CurrentCameraState = CamRotation.CameraState.Aware;
+                        Debug.Log(camRotationScript.CurrentCameraState);
+                    }
+                    else
+                    {
+                        camRotationScript.CurrentCameraState = CamRotation.CameraState.Idle;
+                    }
+
                 }
             }
         }
     }
-
 }

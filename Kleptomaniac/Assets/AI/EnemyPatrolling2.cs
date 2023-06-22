@@ -34,7 +34,8 @@ public class EnemyPatrolling2 : MonoBehaviour
     {
         Patrolling,
         Chasing,
-        Searching
+        Searching,
+        Warned
     }
 
     private EnemyState currentState;
@@ -117,6 +118,8 @@ public class EnemyPatrolling2 : MonoBehaviour
                     transform.localEulerAngles = new Vector3(0, Mathf.PingPong(Time.time * rotateSpeed, 60) - 30, 0);
                     Debug.Log("Forse è qui intorno...");
                 }
+                break;
+            case EnemyState.Warned:
                 break;
         }
     }
