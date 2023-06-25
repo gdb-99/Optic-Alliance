@@ -5,8 +5,11 @@ using UnityEngine;
 public class Detection : MonoBehaviour
 {
     CamRotation camRotationScript;
+    [SerializeField] private List<EnemyPatrolling2> reactingGuards = new List<EnemyPatrolling2>();
 
     string playerTag;
+
+    public event System.Action<Transform> OnPlayerDetected;
 
     Transform lens;
 
@@ -44,6 +47,10 @@ public class Detection : MonoBehaviour
                         camRotationScript.CurrentCameraState = CamRotation.CameraState.Aware;
                         camRotationScript.SetPlayerTransform(hit.collider.transform);
                         Debug.Log(camRotationScript.CurrentCameraState);
+                        if (OnPlayerDetected != null)
+                        {
+                            OnPlayerDetected.Invoke(hit.collider.transform);
+                        }
                     }
                 }
             }
@@ -54,5 +61,20 @@ public class Detection : MonoBehaviour
     {
         camRotationScript.CurrentCameraState = CamRotation.CameraState.Idle;
         Debug.Log(camRotationScript.CurrentCameraState);
+    }
+
+    public List<EnemyPatrolling2> GetReactingGuards()
+    {
+        return reactingGuards;
+    }
+
+    public void AddReactingGuard(EnemyPatrolling2 guard)
+    {
+        reactingGuards.Add(guard);
+    }
+
+    public void RemoveReactingGuard(EnemyPatrolling2 guard)
+    {
+        reactingGuards.Remove(guard);
     }
 }
