@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &957360799
 Transform:
   m_ObjectHideFlags: 0
@@ -1415,11 +1415,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3967195958715363139}
   - component: {fileID: 7056686930454771001}
-  - component: {fileID: 7644212524928736947}
   - component: {fileID: 739308657}
   - component: {fileID: 739308651}
   - component: {fileID: 739308652}
   - component: {fileID: 739308653}
+  - component: {fileID: 4797431600239090502}
   m_Layer: 0
   m_Name: pig
   m_TagString: Player
@@ -1468,19 +1468,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &7644212524928736947
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4343052341283943929}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.9, y: 1.6, z: 0.9}
-  m_Center: {x: 0, y: 0.79, z: 0}
 --- !u!54 &739308657
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1536,6 +1523,19 @@ MonoBehaviour:
   moveSpeed: 3
   rotateSpeed: 5
   gameInput: {fileID: 0}
+--- !u!65 &4797431600239090502
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4343052341283943929}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.72, y: 1.55, z: 0.63}
+  m_Center: {x: 0, y: 0.77, z: 0}
 --- !u!1 &4524538861849209794
 GameObject:
   m_ObjectHideFlags: 0
