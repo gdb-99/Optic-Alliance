@@ -59,8 +59,8 @@ public class EnemyPatrolling2 : MonoBehaviour
 
             if (detectionScript != null)
             {
-                detectionScript.OnPlayerDetected += OnPlayerDetectedHandler;
-
+                //detectionScript.OnPlayerDetected += OnPlayerDetectedHandler;
+                detectionScript.OnPlayerDetected += DetectionScript_OnPlayerDetected;
                 // Controlla se questa guardia deve reagire a questa telecamera
                 if (detectionScript.GetReactingGuards().Contains(this))
                 {
@@ -72,6 +72,16 @@ public class EnemyPatrolling2 : MonoBehaviour
         policeAnimator = GetComponent<Animator>();
     }
 
+    private void DetectionScript_OnPlayerDetected(object sender, Detection.OnSwitchItemEventArgs aaa)
+    {
+        // Controllo se la telecamera corrente è nella lista detectionCameras
+        if (detectionCameras.Contains(aaa.camera)) //
+        {
+            currentState = EnemyState.Chasing;
+            lastKnownPlayerPosition = aaa.playerTransform.position;
+            // Esegui le azioni specifiche per la guardia quando il giocatore viene rilevato da questa telecamera
+        }
+    }
 
     void Update()
     {
@@ -177,17 +187,6 @@ public class EnemyPatrolling2 : MonoBehaviour
     void ReturnToLastKnownPlayerPosition()
     {
         agent.destination = lastKnownPlayerPosition;
-    }
-
-    void OnPlayerDetectedHandler(Transform playerTransform)
-    {
-        // Controllo se la telecamera corrente è nella lista detectionCameras
-        if (detectionCameras.Contains((Detection)UnityEngine.Object.FindObjectOfType(typeof(Detection))))
-        {
-            currentState = EnemyState.Chasing;
-            lastKnownPlayerPosition = playerTransform.position;
-            // Esegui le azioni specifiche per la guardia quando il giocatore viene rilevato da questa telecamera
-        }
     }
 
 
