@@ -320,7 +320,7 @@ GameObject:
   - component: {fileID: 5120842840196343979}
   - component: {fileID: 5906561362059820476}
   m_Layer: 0
-  m_Name: Center vert wall - 2.5
+  m_Name: Center vert wall - 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1238,7 +1238,7 @@ GameObject:
   - component: {fileID: 3110473029662361750}
   - component: {fileID: 3785689880744439850}
   m_Layer: 0
-  m_Name: L bottom wall - 5
+  m_Name: L bottom wall - 2.5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
