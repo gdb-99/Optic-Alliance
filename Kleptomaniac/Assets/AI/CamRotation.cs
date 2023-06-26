@@ -14,7 +14,7 @@ public class CamRotation : MonoBehaviour
     public Quaternion endPoint;
     [SerializeField]  public float yaw;
     public float pitch;
-    public float stopTime;
+    // public float stopTime;
     public float secondsToRot;
     public float rotSwitchTime;
     private Transform playerTransform;

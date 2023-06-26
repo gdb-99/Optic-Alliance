@@ -10,6 +10,7 @@ public class EnemyPatrolling2 : MonoBehaviour
 {
     public List<Detection> detectionCameras = new List<Detection>();
 
+    [SerializeField] private Transform vision;
     public Transform player;
     public float playerDistance;
     public float AIMoveSpeed;
@@ -195,7 +196,7 @@ public class EnemyPatrolling2 : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
-        DrawVisionCone(transform.position, transform.forward, VisionConeAngle, VisionConeRange);
+        DrawVisionCone(vision.position, transform.forward, VisionConeAngle, VisionConeRange);
     }
 
     private void DrawVisionCone(Vector3 center, Vector3 forward, float angle, float range)
@@ -215,7 +216,7 @@ public class EnemyPatrolling2 : MonoBehaviour
         if (angleToPlayer <= VisionConeAngle)
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, directionToPlayer, out hit, VisionConeRange))
+            if (Physics.Raycast(vision.position, directionToPlayer, out hit, VisionConeRange))
             {
                 if (hit.transform.CompareTag("Player"))
                 {
@@ -234,7 +235,7 @@ public class EnemyPatrolling2 : MonoBehaviour
         Vector3 directionToPlayer = player.position - transform.position;
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, directionToPlayer, out hit, playerDistance))
+        if (Physics.Raycast(vision.position, directionToPlayer, out hit, playerDistance))
         {
             if (hit.transform.CompareTag("Player"))
             {
