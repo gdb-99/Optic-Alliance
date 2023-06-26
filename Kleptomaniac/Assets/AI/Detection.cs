@@ -4,43 +4,77 @@ using UnityEngine;
 
 public class Detection : MonoBehaviour
 {
+    CamRotation camRotationScript;
+    [SerializeField] private List<EnemyPatrolling2> reactingGuards = new List<EnemyPatrolling2>();
 
     string playerTag;
+
+    public event System.Action<Transform> OnPlayerDetected;
 
     Transform lens;
 
     // Start is called before the first frame update
     void Start()
     {
+        camRotationScript = GetComponentInParent<CamRotation>();
         lens = transform.parent.GetComponent<Transform>();
         playerTag = GameObject.FindGameObjectWithTag("Player").tag;
     }
 
     // Update is called once per frame
-    private void Update()
+    void Update()
     {
-        
+
     }
 
-
-
-    private void OnTriggerStay(Collider col)
+    private void OnTriggerEnter(Collider col) //era OnTriggerStay
     {
-        if(col.gameObject.tag == playerTag)
+        if (col.gameObject.CompareTag(playerTag))
         {
-            Vector3 direction = col.transform.position - lens.position;
-            RaycastHit hit;
-
-            if(Physics.Raycast(lens.transform.position, direction.normalized, out hit, 1000))
+            if (camRotationScript != null)
             {
-                Debug.Log(hit.collider.name);
+                camRotationScript.CurrentCameraState = CamRotation.CameraState.Aware;
 
-                if(hit.collider.gameObject.tag == playerTag)
+                Vector3 direction = col.transform.position - lens.position;
+                RaycastHit hit;
+
+                if (Physics.Raycast(lens.transform.position, direction.normalized, out hit, 1000))
                 {
-                    //Debug.Log("Maiale spotted");
+                    Debug.Log(hit.collider.name);
+
+                    if (hit.collider.gameObject.CompareTag(playerTag))
+                    {
+                        camRotationScript.CurrentCameraState = CamRotation.CameraState.Aware;
+                        camRotationScript.SetPlayerTransform(hit.collider.transform);
+                        Debug.Log(camRotationScript.CurrentCameraState);
+                        if (OnPlayerDetected != null)
+                        {
+                            OnPlayerDetected.Invoke(hit.collider.transform);
+                        }
+                    }
                 }
             }
         }
     }
 
+    private void OnTriggerExit(Collider col)
+    {
+        camRotationScript.CurrentCameraState = CamRotation.CameraState.Idle;
+        Debug.Log(camRotationScript.CurrentCameraState);
+    }
+
+    public List<EnemyPatrolling2> GetReactingGuards()
+    {
+        return reactingGuards;
+    }
+
+    public void AddReactingGuard(EnemyPatrolling2 guard)
+    {
+        reactingGuards.Add(guard);
+    }
+
+    public void RemoveReactingGuard(EnemyPatrolling2 guard)
+    {
+        reactingGuards.Remove(guard);
+    }
 }

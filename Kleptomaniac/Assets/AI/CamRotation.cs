@@ -9,54 +9,89 @@ public class CamRotation : MonoBehaviour
 
     bool startNextRotation = true;
     public bool rotRight;
-
-    public float yaw;
+    public Quaternion initialRotation;
+    public Quaternion startPoint;
+    public Quaternion endPoint;
+    [SerializeField]  public float yaw;
     public float pitch;
-
+    public float stopTime;
     public float secondsToRot;
     public float rotSwitchTime;
+    private Transform playerTransform;
+
+    public CameraState CurrentCameraState { get; set; }
+
+    public enum CameraState
+    {
+        Idle,
+        Aware
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         camGFX = transform.GetChild(0);
         camGFX.localRotation = Quaternion.AngleAxis(pitch, Vector3.right);
-
+        startPoint = transform.rotation;
+        endPoint = Quaternion.Euler(0, yaw, 0) * startPoint;
         SetUpStartRotation();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if(startNextRotation && rotRight)
+        Debug.Log(CurrentCameraState);
+        switch (CurrentCameraState)
         {
-            StartCoroutine(Rotate(yaw, secondsToRot));
-        }
-        else if(startNextRotation && !rotRight)
-        {
-            StartCoroutine(Rotate(-yaw, secondsToRot));
+            case CameraState.Idle:
+
+                if (startNextRotation && rotRight)
+                {
+                    StartCoroutine(Rotate(yaw, secondsToRot, startPoint));
+                }
+                else if (startNextRotation && !rotRight)
+                {
+                    StartCoroutine(Rotate(-yaw, secondsToRot, endPoint));
+                }
+                break;
+            case CameraState.Aware:
+                //QUI
+
+                if(playerTransform != null)
+                {
+                    StopAllCoroutines();
+                    transform.LookAt(playerTransform);
+                    startNextRotation = true;
+                    //tornaAllAngoloDiPartenza();
+                }
+                break;
+
         }
     }
 
-    IEnumerator Rotate (float yaw, float duration)
+
+
+    IEnumerator Rotate (float yaw, float duration, Quaternion initAngle)
     {
-        startNextRotation = false;
 
-        Quaternion initialRotation = transform.rotation;
-
-        float timer = 0f;
-
-        while(timer < duration)
+        if (CurrentCameraState == CameraState.Idle)
         {
-            timer += Time.deltaTime;
-            transform.rotation = initialRotation * Quaternion.AngleAxis(timer / duration * yaw, Vector3.up);
-            yield return null;
+            startNextRotation = false;
+
+            float timer = 0f;
+
+            while (timer < duration)
+            {
+                timer += Time.deltaTime;
+                transform.rotation = initAngle * Quaternion.AngleAxis(timer / duration * yaw, Vector3.up);
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(rotSwitchTime);
+
+            startNextRotation = true;
+            rotRight = !rotRight;
         }
-
-        yield return new WaitForSeconds(rotSwitchTime);
-
-        startNextRotation = true;
-        rotRight = !rotRight;
     }
 
     void SetUpStartRotation()
@@ -70,4 +105,10 @@ public class CamRotation : MonoBehaviour
             transform.forward = Quaternion.Euler(0, yaw / 2, 0) * transform.forward;
         }
     }
+
+    public void SetPlayerTransform(Transform playerTransform)
+    {
+        this.playerTransform = playerTransform;
+    }
+
 }

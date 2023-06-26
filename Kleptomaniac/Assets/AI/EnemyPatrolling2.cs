@@ -8,6 +8,8 @@ using UnityEditor;
 
 public class EnemyPatrolling2 : MonoBehaviour
 {
+    public List<Detection> detectionCameras = new List<Detection>();
+
     public Transform player;
     public float playerDistance;
     public float AIMoveSpeed;
@@ -34,7 +36,8 @@ public class EnemyPatrolling2 : MonoBehaviour
     {
         Patrolling,
         Chasing,
-        Searching
+        Searching,
+        // Warned
     }
 
     private EnemyState currentState;
@@ -47,8 +50,27 @@ public class EnemyPatrolling2 : MonoBehaviour
         agent.autoBraking = false;
         currentState = EnemyState.Patrolling;
 
+        GameObject[] detectionObjects = GameObject.FindGameObjectsWithTag("DetectionCamera");
+
+        foreach (GameObject detectionObject in detectionObjects)
+        {
+            Detection detectionScript = detectionObject.GetComponentInChildren<Detection>();
+
+            if (detectionScript != null)
+            {
+                detectionScript.OnPlayerDetected += OnPlayerDetectedHandler;
+
+                // Controlla se questa guardia deve reagire a questa telecamera
+                if (detectionScript.GetReactingGuards().Contains(this))
+                {
+                    detectionCameras.Add(detectionScript);
+                }
+            }
+        }
+
         policeAnimator = GetComponent<Animator>();
     }
+
 
     void Update()
     {
@@ -118,6 +140,9 @@ public class EnemyPatrolling2 : MonoBehaviour
                     Debug.Log("Forse è qui intorno...");
                 }
                 break;
+                //  case EnemyState.Warned:
+                //      agent.destination = lastKnownPlayerPosition;
+                //      break;
         }
     }
 
@@ -128,17 +153,19 @@ public class EnemyPatrolling2 : MonoBehaviour
 
     void GotoNextPoint()
     {
-        if (navPoint.Length == 0) {
+        if (navPoint.Length == 0)
+        {
             return;
         }
 
-        if(agent.remainingDistance < 0.2f) {
+        if (agent.remainingDistance < 0.2f)
+        {
             UnityEngine.AI.NavMeshPath path = new UnityEngine.AI.NavMeshPath();
             agent.CalculatePath(navPoint[destPoint].position, path);
             agent.path = path;
             destPoint = (destPoint + 1) % navPoint.Length;
         }
-        
+
     }
 
     void Chase()
@@ -150,6 +177,19 @@ public class EnemyPatrolling2 : MonoBehaviour
     {
         agent.destination = lastKnownPlayerPosition;
     }
+
+    void OnPlayerDetectedHandler(Transform playerTransform)
+    {
+        // Controllo se la telecamera corrente è nella lista detectionCameras
+        if (detectionCameras.Contains((Detection)UnityEngine.Object.FindObjectOfType(typeof(Detection))))
+        {
+            currentState = EnemyState.Chasing;
+            lastKnownPlayerPosition = playerTransform.position;
+            // Esegui le azioni specifiche per la guardia quando il giocatore viene rilevato da questa telecamera
+        }
+    }
+
+
 
 
 #if UNITY_EDITOR
