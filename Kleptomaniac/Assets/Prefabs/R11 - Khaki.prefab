@@ -320,7 +320,7 @@ GameObject:
   - component: {fileID: 5120842840196343979}
   - component: {fileID: 5906561362059820476}
   m_Layer: 0
-  m_Name: Center vert wall - 2.5
+  m_Name: Center vert wall - 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -334,8 +334,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 673695125826963293}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.07, y: 2.5, z: 4.74}
-  m_LocalScale: {x: 2.5, y: 5, z: 0.5}
+  m_LocalPosition: {x: -13.82, y: 2.5, z: 4.74}
+  m_LocalScale: {x: 4, y: 5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5238547974764955146}
@@ -525,8 +525,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1988684057214557976}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -16.07, y: 2.5, z: 1}
-  m_LocalScale: {x: 8, y: 5, z: 0.5}
+  m_LocalPosition: {x: -16.07, y: 2.5, z: 0.75}
+  m_LocalScale: {x: 8.5, y: 5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5238547974764955146}
@@ -1244,7 +1244,7 @@ GameObject:
   - component: {fileID: 3110473029662361750}
   - component: {fileID: 3785689880744439850}
   m_Layer: 0
-  m_Name: L bottom wall - 5
+  m_Name: L bottom wall - 2.5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1258,8 +1258,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8024571391426292258}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.82, y: 2.5, z: -3.25}
-  m_LocalScale: {x: 5, y: 5, z: 0.5}
+  m_LocalPosition: {x: -12.57, y: 2.5, z: -3.25}
+  m_LocalScale: {x: 2.5, y: 5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5238547974764955146}

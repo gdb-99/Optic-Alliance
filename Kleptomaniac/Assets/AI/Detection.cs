@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Detection : MonoBehaviour
 {
@@ -9,7 +10,12 @@ public class Detection : MonoBehaviour
 
     string playerTag;
 
-    public event System.Action<Transform> OnPlayerDetected;
+    public event EventHandler<OnSwitchItemEventArgs> OnPlayerDetected;
+    public class OnSwitchItemEventArgs : EventArgs
+    {
+        public Detection camera;
+        public Transform playerTransform;
+    }
 
     Transform lens;
 
@@ -49,7 +55,7 @@ public class Detection : MonoBehaviour
                         Debug.Log(camRotationScript.CurrentCameraState);
                         if (OnPlayerDetected != null)
                         {
-                            OnPlayerDetected.Invoke(hit.collider.transform);
+                            OnPlayerDetected.Invoke(this, new OnSwitchItemEventArgs { camera = this, playerTransform = hit.collider.transform }); // + codice univoco
                         }
                     }
                 }

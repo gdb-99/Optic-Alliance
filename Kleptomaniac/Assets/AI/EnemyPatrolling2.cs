@@ -10,6 +10,7 @@ public class EnemyPatrolling2 : MonoBehaviour
 {
     public List<Detection> detectionCameras = new List<Detection>();
 
+    [SerializeField] private Transform vision;
     public Transform player;
     public float playerDistance;
     public float AIMoveSpeed;
@@ -58,8 +59,8 @@ public class EnemyPatrolling2 : MonoBehaviour
 
             if (detectionScript != null)
             {
-                detectionScript.OnPlayerDetected += OnPlayerDetectedHandler;
-
+                //detectionScript.OnPlayerDetected += OnPlayerDetectedHandler;
+                detectionScript.OnPlayerDetected += DetectionScript_OnPlayerDetected;
                 // Controlla se questa guardia deve reagire a questa telecamera
                 if (detectionScript.GetReactingGuards().Contains(this))
                 {
@@ -71,6 +72,16 @@ public class EnemyPatrolling2 : MonoBehaviour
         policeAnimator = GetComponent<Animator>();
     }
 
+    private void DetectionScript_OnPlayerDetected(object sender, Detection.OnSwitchItemEventArgs aaa)
+    {
+        // Controllo se la telecamera corrente è nella lista detectionCameras
+        if (detectionCameras.Contains(aaa.camera)) //
+        {
+            currentState = EnemyState.Chasing;
+            lastKnownPlayerPosition = aaa.playerTransform.position;
+            // Esegui le azioni specifiche per la guardia quando il giocatore viene rilevato da questa telecamera
+        }
+    }
 
     void Update()
     {
@@ -178,24 +189,13 @@ public class EnemyPatrolling2 : MonoBehaviour
         agent.destination = lastKnownPlayerPosition;
     }
 
-    void OnPlayerDetectedHandler(Transform playerTransform)
-    {
-        // Controllo se la telecamera corrente è nella lista detectionCameras
-        if (detectionCameras.Contains((Detection)UnityEngine.Object.FindObjectOfType(typeof(Detection))))
-        {
-            currentState = EnemyState.Chasing;
-            lastKnownPlayerPosition = playerTransform.position;
-            // Esegui le azioni specifiche per la guardia quando il giocatore viene rilevato da questa telecamera
-        }
-    }
-
 
 
 
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
-        DrawVisionCone(transform.position, transform.forward, VisionConeAngle, VisionConeRange);
+        DrawVisionCone(vision.position, transform.forward, VisionConeAngle, VisionConeRange);
     }
 
     private void DrawVisionCone(Vector3 center, Vector3 forward, float angle, float range)
@@ -215,7 +215,7 @@ public class EnemyPatrolling2 : MonoBehaviour
         if (angleToPlayer <= VisionConeAngle)
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, directionToPlayer, out hit, VisionConeRange))
+            if (Physics.Raycast(vision.position, directionToPlayer, out hit, VisionConeRange))
             {
                 if (hit.transform.CompareTag("Player"))
                 {
@@ -234,7 +234,7 @@ public class EnemyPatrolling2 : MonoBehaviour
         Vector3 directionToPlayer = player.position - transform.position;
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, directionToPlayer, out hit, playerDistance))
+        if (Physics.Raycast(vision.position, directionToPlayer, out hit, playerDistance))
         {
             if (hit.transform.CompareTag("Player"))
             {
