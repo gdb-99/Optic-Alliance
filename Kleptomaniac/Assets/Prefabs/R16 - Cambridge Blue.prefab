@@ -1151,6 +1151,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bench
       objectReference: {fileID: 0}
+    - target: {fileID: 1035000716878818246, guid: 06fcea66ec1f39b438a3b8a69e4ff70a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06fcea66ec1f39b438a3b8a69e4ff70a, type: 3}
 --- !u!4 &2637561952554322342 stripped
@@ -1302,6 +1306,10 @@ PrefabInstance:
     - target: {fileID: 1035000716878818246, guid: 06fcea66ec1f39b438a3b8a69e4ff70a, type: 3}
       propertyPath: m_Name
       value: bench (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1035000716878818246, guid: 06fcea66ec1f39b438a3b8a69e4ff70a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06fcea66ec1f39b438a3b8a69e4ff70a, type: 3}
