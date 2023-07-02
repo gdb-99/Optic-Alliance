@@ -2426,7 +2426,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 898591731}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2010728994}
+        m_TargetAssemblyTypeName: PurchaseDetailsController, Assembly-CSharp
+        m_MethodName: NavigateTo
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: SelectLevelScene
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &898591731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3602,7 +3614,7 @@ GameObject:
   - component: {fileID: 1955273685}
   - component: {fileID: 1955273688}
   m_Layer: 5
-  m_Name: Button
+  m_Name: BuyButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3962,7 +3974,11 @@ MonoBehaviour:
   itemType: {fileID: 1783346566}
   emptyText: {fileID: 509973367}
   itemImage: {fileID: 2145763412}
-  globalInventory: {fileID: 11400000, guid: 298039ee15503bf4b8cf4b2d3c908760, type: 2}
+  player: {fileID: 11400000, guid: 932f15615a5566a48ac5217077a67dc6, type: 2}
+  buyButton: {fileID: 1955273685}
+  conversation: {fileID: 2095579137}
+  money: {fileID: 845141981}
+  reputation: {fileID: 223721817}
 --- !u!114 &2010728995
 MonoBehaviour:
   m_ObjectHideFlags: 0
