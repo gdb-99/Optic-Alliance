@@ -34,13 +34,13 @@ public class EnemyPatrolling2 : MonoBehaviour
 
     Animator policeAnimator;
 
-    public enum GamePhase
+    /* public enum GamePhase
     {
         Theft,
         Escape
-    }
+    } */
 
-    public GamePhase currentPhase;
+    //public GamePhase currentPhase;
 
 
     enum EnemyState
@@ -157,7 +157,7 @@ public class EnemyPatrolling2 : MonoBehaviour
                 }
                 else
                 {
-                    transform.localEulerAngles = new Vector3(0, Mathf.PingPong(Time.time * rotateSpeed, 60) - 30, 0);
+                    transform.localEulerAngles = new Vector3(0, Mathf.PingPong(Time.time * rotateSpeed, 90) - 30, 0);
                     Debug.Log("Forse è qui intorno...");
                 }
                 break;
@@ -174,7 +174,7 @@ public class EnemyPatrolling2 : MonoBehaviour
 
     void GotoNextPoint()
     {
-        if (currentPhase == GamePhase.Theft)
+        if (GameManager.Instance.currentPhase == GameManager.GamePhase.Theft) //(currentPhase == GamePhase.Theft)
         {
             if (navPoint.Length == 0)
             {
@@ -189,7 +189,7 @@ public class EnemyPatrolling2 : MonoBehaviour
                 destPoint = (destPoint + 1) % navPoint.Length;
             }
         }
-        else if (currentPhase == GamePhase.Escape)
+        else if (GameManager.Instance.currentPhase == GameManager.GamePhase.Escape)
         {
             if (escapeNavPoint.Length == 0)
             {

@@ -25,7 +25,30 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    public enum GameState
+    {
+        GameOver,
+        Running,
+        Pause,
+        Clear
+    }
+
+    public enum GamePhase
+    {
+        Theft,
+        Escape
+    }
+
+    public GamePhase currentPhase;
+
     [SerializeField] PlayerSO _playerData;
+
+    void Start()
+    {
+        // Inizializza lo stato di gioco
+        currentPhase = GamePhase.Theft;
+    }
+
     public PlayerSO PlayerData
     {
         get
@@ -34,5 +57,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SetPhaseTheft()
+    {
+        currentPhase = GamePhase.Theft;
+    }
 
+    public void SetPhaseEscape()
+    {
+        currentPhase = GamePhase.Escape;
+    }
 }
