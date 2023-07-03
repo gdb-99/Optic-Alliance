@@ -27,7 +27,14 @@ public class Player : MonoBehaviour {
     }
 
     private void Start() {
+        gameInput.OnInteractAction += GameInput_OnInteractAction;
         SetLookDirection();
+    }
+
+    private void GameInput_OnInteractAction(object sender, EventArgs e)
+    {
+        selectedInteractable?.Interact();
+        // throw new NotImplementedException();
     }
 
     private void Update() {
@@ -35,23 +42,38 @@ public class Player : MonoBehaviour {
         SetLookDirection();
 
         Move();
-        //Interact();
+        Interact();
 
     }
 
-    private void Interact() {
+    private void Interact()
+    {
         float interactDistance = 2f;
 
-        if (Physics.Raycast(transform.position, myDirection, out RaycastHit raycastHit, interactDistance)) {
-            if (raycastHit.transform.TryGetComponent(out Interactable interactable)) {
-                if (interactable != selectedInteractable) {
-                    selectedInteractable = interactable;
-                }
-            } else {
-                selectedInteractable = null;
-            }
-        } else {
+        RaycastHit[] raycastHits = Physics.CapsuleCastAll(transform.position, transform.position + Vector3.up * 2 * playerHeight, playerRadius, myDirection, interactDistance);
+
+        if (raycastHits.Length == 0)
+        {
             selectedInteractable = null;
+        }
+        else
+        {
+            foreach (RaycastHit raycastHit in raycastHits)
+            {
+                if (raycastHit.transform.gameObject.TryGetComponent(out Interactable interactable))
+                {
+                    if (interactable != selectedInteractable)
+                    {
+                        selectedInteractable = interactable;
+                        Debug.Log("FOUND INTERACTABLE");
+                    }
+                    break;
+                }
+                else
+                {
+                    selectedInteractable = null;
+                }
+            }
         }
     }
 

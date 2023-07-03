@@ -25,7 +25,7 @@ public class EnemyPatrolling2 : MonoBehaviour
     public UnityEngine.AI.NavMeshAgent agent;
     public int destPoint = 0;
     public Transform goal;
-
+    private GameManager gameManager;
     private bool CanSeePlayer => IsPlayerInVisionCone() && !IsPlayerObstructed();
     private Vector3 lastKnownPlayerPosition;
     private float searchTimer;
@@ -57,6 +57,8 @@ public class EnemyPatrolling2 : MonoBehaviour
     {
         UnityEngine.AI.NavMeshAgent agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         agent.destination = goal.position;
+
+        GameManager.Instance.OnGamePhaseChanged += OnGamePhaseChanged;
 
         agent.autoBraking = false;
         currentState = EnemyState.Patrolling;
@@ -108,7 +110,6 @@ public class EnemyPatrolling2 : MonoBehaviour
                 }
                 else if (agent.remainingDistance < 0.2f)
                 {
-                    Debug.Log("REMAINING DISTANCE = " + agent.remainingDistance);
                     Debug.Log("Punto raggiunto, next");
                     GotoNextPoint();
                 }
@@ -161,9 +162,6 @@ public class EnemyPatrolling2 : MonoBehaviour
                     Debug.Log("Forse è qui intorno...");
                 }
                 break;
-                //  case EnemyState.Warned:
-                //      agent.destination = lastKnownPlayerPosition;
-                //      break;
         }
     }
 
@@ -216,7 +214,20 @@ public class EnemyPatrolling2 : MonoBehaviour
         agent.destination = lastKnownPlayerPosition;
     }
 
-
+    private void OnGamePhaseChanged(GameManager.GamePhase newPhase)
+    {
+        // Controlla la nuova fase di gioco e abilita o disabilita gli oggetti di conseguenza
+        if (newPhase == GameManager.GamePhase.Theft)
+        {
+            // Abilita gli oggetti per la fase di furto
+            //gameObject.SetActive(true);
+        }
+        else if (newPhase == GameManager.GamePhase.Escape)
+        {
+            // Abilita gli oggetti per la fase di fuga
+            gameObject.SetActive(true);
+        }
+    }
 
 
 #if UNITY_EDITOR

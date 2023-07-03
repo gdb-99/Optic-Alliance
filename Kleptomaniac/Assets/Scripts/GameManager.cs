@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
+using System;
 
 
 public class GameManager : MonoBehaviour
@@ -32,6 +33,8 @@ public class GameManager : MonoBehaviour
         Pause,
         Clear
     }
+
+    public event Action<GamePhase> OnGamePhaseChanged;
 
     public enum GamePhase
     {
@@ -65,5 +68,13 @@ public class GameManager : MonoBehaviour
     public void SetPhaseEscape()
     {
         currentPhase = GamePhase.Escape;
+    }
+
+    public void SetGamePhase(GamePhase phase)
+    {
+        currentPhase = phase;
+
+        // Se hai sottoscritto l'evento OnGamePhaseChanged, notifica gli ascoltatori del cambio di fase
+        OnGamePhaseChanged?.Invoke(currentPhase);
     }
 }
