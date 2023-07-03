@@ -946,6 +946,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 461061511}
     - target: {fileID: 85956583, guid: d94d282393512f44996ff98bbf14ea9d, type: 3}
+      propertyPath: escapeNavPoint.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 85956583, guid: d94d282393512f44996ff98bbf14ea9d, type: 3}
       propertyPath: detectionCameras.Array.size
       value: 2
       objectReference: {fileID: 0}

@@ -21,6 +21,7 @@ public class EnemyPatrolling2 : MonoBehaviour
     [SerializeField] private float VisionConeRange = 30f;
 
     public Transform[] navPoint;
+    public Transform[] escapeNavPoint;
     public UnityEngine.AI.NavMeshAgent agent;
     public int destPoint = 0;
     public Transform goal;
@@ -32,6 +33,15 @@ public class EnemyPatrolling2 : MonoBehaviour
     [SerializeField] private float rotateSpeed = 60f;
 
     Animator policeAnimator;
+
+    public enum GamePhase
+    {
+        Theft,
+        Escape
+    }
+
+    public GamePhase currentPhase;
+
 
     enum EnemyState
     {
@@ -164,19 +174,36 @@ public class EnemyPatrolling2 : MonoBehaviour
 
     void GotoNextPoint()
     {
-        if (navPoint.Length == 0)
+        if (currentPhase == GamePhase.Theft)
         {
-            return;
-        }
+            if (navPoint.Length == 0)
+            {
+                return;
+            }
 
-        if (agent.remainingDistance < 0.2f)
+            if (agent.remainingDistance < 0.2f)
+            {
+                UnityEngine.AI.NavMeshPath path = new UnityEngine.AI.NavMeshPath();
+                agent.CalculatePath(navPoint[destPoint].position, path);
+                agent.path = path;
+                destPoint = (destPoint + 1) % navPoint.Length;
+            }
+        }
+        else if (currentPhase == GamePhase.Escape)
         {
-            UnityEngine.AI.NavMeshPath path = new UnityEngine.AI.NavMeshPath();
-            agent.CalculatePath(navPoint[destPoint].position, path);
-            agent.path = path;
-            destPoint = (destPoint + 1) % navPoint.Length;
-        }
+            if (escapeNavPoint.Length == 0)
+            {
+                return;
+            }
 
+            if (agent.remainingDistance < 0.2f)
+            {
+                UnityEngine.AI.NavMeshPath path = new UnityEngine.AI.NavMeshPath();
+                agent.CalculatePath(escapeNavPoint[destPoint].position, path);
+                agent.path = path;
+                destPoint = (destPoint + 1) % escapeNavPoint.Length;
+            }
+        }
     }
 
     void Chase()

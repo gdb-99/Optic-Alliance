@@ -44,7 +44,7 @@ public class Detection : MonoBehaviour
                 Vector3 direction = col.transform.position - lens.position;
                 RaycastHit hit;
 
-                if (Physics.Raycast(lens.transform.position, direction.normalized, out hit, 1000, LayerMask.GetMask("Player")))
+                if (Physics.Raycast(lens.transform.position, direction.normalized, out hit, 1000))
                 {
                     Debug.Log(hit.collider.name);
 
