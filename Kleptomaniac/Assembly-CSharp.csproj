@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scripts\MenuItemController.cs" />
     <Compile Include="Assets\Scripts\OptionsMenu.cs" />
     <Compile Include="Assets\Sensors\VisionSensor.cs" />
+    <Compile Include="Assets\light.cs" />
     <Compile Include="Assets\Scripts\PurchaseDetailsController.cs" />
     <Compile Include="Assets\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\GameInput.cs" />
@@ -88,8 +89,9 @@
     <Compile Include="Assets\Scripts\ScriptableObjects\PlayerSO.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Sensors\ProximitySensor.cs" />
-    <Compile Include="Assets\Scripts\Interactable.cs" />
     <Compile Include="Assets\MonaLisa.cs" />
+    <Compile Include="Assets\Scripts\Interactable.cs" />
+    <Compile Include="Assets\AI\BannerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

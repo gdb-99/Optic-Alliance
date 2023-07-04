@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        
         // Inizializza lo stato di gioco
         currentPhase = GamePhase.Theft;
     }

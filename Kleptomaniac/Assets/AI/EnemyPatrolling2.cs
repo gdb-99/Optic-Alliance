@@ -9,14 +9,14 @@ using UnityEditor;
 public class EnemyPatrolling2 : MonoBehaviour
 {
     public List<Detection> detectionCameras = new List<Detection>();
-
+    [SerializeField] private bool isActive;
     [SerializeField] private Transform vision;
     public Transform player;
     public float playerDistance;
     public float AIMoveSpeed;
     public float damping = 6.0f;
     [SerializeField] private Color gizmoColor = Color.red;
-    [SerializeField] private float awareAI = 10f;
+    // [SerializeField] private float awareAI = 10f;
     [SerializeField] private float VisionConeAngle = 60f;
     [SerializeField] private float VisionConeRange = 30f;
 
@@ -33,6 +33,8 @@ public class EnemyPatrolling2 : MonoBehaviour
     [SerializeField] private float rotateSpeed = 60f;
 
     Animator policeAnimator;
+    private GameObject exclamationObject;
+    private GameObject questionObject;
 
     /* public enum GamePhase
     {
@@ -82,6 +84,9 @@ public class EnemyPatrolling2 : MonoBehaviour
         }
 
         policeAnimator = GetComponent<Animator>();
+        exclamationObject = transform.Find("Status/Exclamation").gameObject;
+        questionObject = transform.Find("Status/Question").gameObject;
+        // exclamationObject.SetActive(false);
     }
 
     private void DetectionScript_OnPlayerDetected(object sender, Detection.OnSwitchItemEventArgs aaa)
@@ -102,8 +107,10 @@ public class EnemyPatrolling2 : MonoBehaviour
         switch (currentState)
         {
             case EnemyState.Patrolling:
+                questionObject.SetActive(false);
                 if (CanSeePlayer)
                 {
+                    exclamationObject.SetActive(true);
                     Debug.Log("Ehi ti ho visto!");
                     currentState = EnemyState.Chasing;
                     Chase();
@@ -116,8 +123,10 @@ public class EnemyPatrolling2 : MonoBehaviour
                 break;
 
             case EnemyState.Chasing:
+                questionObject.SetActive(false);
                 if (CanSeePlayer)
                 {
+                    exclamationObject.SetActive(true);
                     LookAtPlayer();
                     if (playerDistance > 2f)
                     {
@@ -143,6 +152,8 @@ public class EnemyPatrolling2 : MonoBehaviour
                 break;
 
             case EnemyState.Searching:
+                exclamationObject.SetActive(false);
+                questionObject.SetActive(true);
                 searchTimer += Time.deltaTime;
                 if (CanSeePlayer)
                 {
@@ -172,7 +183,19 @@ public class EnemyPatrolling2 : MonoBehaviour
 
     void GotoNextPoint()
     {
-        if (GameManager.Instance.currentPhase == GameManager.GamePhase.Theft) //(currentPhase == GamePhase.Theft)
+        if (navPoint.Length == 0)
+        {
+            return;
+        }
+
+        if (agent.remainingDistance < 0.2f)
+        {
+            UnityEngine.AI.NavMeshPath path = new UnityEngine.AI.NavMeshPath();
+            agent.CalculatePath(navPoint[destPoint].position, path);
+            agent.path = path;
+            destPoint = (destPoint + 1) % navPoint.Length;
+        }
+        /*if (GameManager.Instance.currentPhase == GameManager.GamePhase.Theft) //(currentPhase == GamePhase.Theft)
         {
             if (navPoint.Length == 0)
             {
@@ -201,7 +224,7 @@ public class EnemyPatrolling2 : MonoBehaviour
                 agent.path = path;
                 destPoint = (destPoint + 1) % escapeNavPoint.Length;
             }
-        }
+        } */
     }
 
     void Chase()
