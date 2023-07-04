@@ -35,6 +35,8 @@ public class EnemyPatrolling2 : MonoBehaviour
     Animator policeAnimator;
     private GameObject exclamationObject;
     private GameObject questionObject;
+    private AudioSource barkAudioSource;
+    private AudioSource sniffAudioSource;
 
     /* public enum GamePhase
     {
@@ -86,6 +88,8 @@ public class EnemyPatrolling2 : MonoBehaviour
         policeAnimator = GetComponent<Animator>();
         exclamationObject = transform.Find("Status/Exclamation").gameObject;
         questionObject = transform.Find("Status/Question").gameObject;
+        barkAudioSource = transform.Find("Audio/Bark").gameObject.GetComponent<AudioSource>();
+        sniffAudioSource = transform.Find("Audio/Sniff").gameObject.GetComponent<AudioSource>();
         // exclamationObject.SetActive(false);
     }
 
@@ -111,6 +115,7 @@ public class EnemyPatrolling2 : MonoBehaviour
                 if (CanSeePlayer)
                 {
                     exclamationObject.SetActive(true);
+                    barkAudioSource.Play();
                     Debug.Log("Ehi ti ho visto!");
                     currentState = EnemyState.Chasing;
                     Chase();
@@ -146,17 +151,20 @@ public class EnemyPatrolling2 : MonoBehaviour
                         agent.angularSpeed = 0f;
                         searchTimer = 0f;
                         policeAnimator.SetBool("isStop", true);
+                        sniffAudioSource.Play();
+                        exclamationObject.SetActive(false);
+                        questionObject.SetActive(true);
                         currentState = EnemyState.Searching;
                     }
                 }
                 break;
 
             case EnemyState.Searching:
-                exclamationObject.SetActive(false);
-                questionObject.SetActive(true);
+
                 searchTimer += Time.deltaTime;
                 if (CanSeePlayer)
                 {
+                    barkAudioSource.Play();
                     agent.angularSpeed = 120f;
                     policeAnimator.SetBool("isStop", false);
                     currentState = EnemyState.Chasing;
