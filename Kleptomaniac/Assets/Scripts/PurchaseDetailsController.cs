@@ -24,6 +24,7 @@ public class PurchaseDetailsController : MonoBehaviour
     [SerializeField] TextMeshProUGUI conversation;
     [SerializeField] TextMeshProUGUI money;
     [SerializeField] TextMeshProUGUI reputation;
+    [SerializeField] Button yesButton, noButton;
 
     ItemSO selectedItem;
 
@@ -32,7 +33,6 @@ public class PurchaseDetailsController : MonoBehaviour
     {
         if (showDetailsEvent == null)
             showDetailsEvent = new ShowItemDetailsEvent();
-
         showDetailsEvent.AddListener(HandleShowDetails);
         money.text = player.money.ToString();
         reputation.text = player.reputation.ToString();
@@ -87,13 +87,29 @@ public class PurchaseDetailsController : MonoBehaviour
         }
     }
 
-    public void HandleBuyItem()
+    public void BuyItemOnClick() {
+        buyButton.interactable = false;
+        conversation.text = "Do you really want to buy that item?";
+        yesButton.gameObject.SetActive(true);
+        noButton.gameObject.SetActive(true);
+    } 
+
+    public void DontBuyItem() {
+        SetBuyButtonInteractable();
+        yesButton.gameObject.SetActive(false);
+        noButton.gameObject.SetActive(false);
+        conversation.text = "Please look around, you'll find something useful!";
+    }
+
+    public void BuyItem()
     {
         player.globalInv.AddItem(selectedItem);
         player.SubstractMoney((int)selectedItem.price);
         money.text = player.money.ToString();
         SetBuyButtonInteractable();
-        conversation.text = "Thank you for your purchase!";
+        yesButton.gameObject.SetActive(false);
+        noButton.gameObject.SetActive(false);
+        conversation.text = "Thank you for your purchase!"; 
     }
 
     public void NavigateTo(string scene) {

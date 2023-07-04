@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reputation: 0
   money: 100
-  backpackbackInv: {fileID: 11400000, guid: 61e977bd1bad4b34e9f9bf49c22c0854, type: 2}
+  backpackbackInv: {fileID: 0}
   globalInv: {fileID: 11400000, guid: 298039ee15503bf4b8cf4b2d3c908760, type: 2}
