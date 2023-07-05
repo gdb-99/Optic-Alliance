@@ -992,7 +992,7 @@ RectTransform:
   m_GameObject: {fileID: 1647718223899349327}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.7628155, y: 2.7628155, z: 2.7628155}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3588255579472177424}
@@ -1001,7 +1001,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 10, y: -17.285995}
+  m_AnchoredPosition: {x: 29, y: -34}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6317201553792956868
@@ -1042,6 +1042,71 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1891887518875762711
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7468348763105762100}
+  - component: {fileID: 2006727300583767501}
+  - component: {fileID: 5226087107090285719}
+  m_Layer: 6
+  m_Name: Brightness
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7468348763105762100
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891887518875762711}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -112.04999, y: -5.049988, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8450031205940271649}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2006727300583767501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891887518875762711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 86d5008a859d84418aa3ff7cfffcb891, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
+--- !u!114 &5226087107090285719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891887518875762711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 587b8ed32aa374399b587d5e815e5f85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brightSlider: {fileID: 0}
+  brightness: {fileID: 11400000, guid: 86d5008a859d84418aa3ff7cfffcb891, type: 2}
+  layer: {fileID: 0}
 --- !u!1 &1910366830151840921
 GameObject:
   m_ObjectHideFlags: 0
@@ -1512,7 +1577,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 8356907930822454601}
         m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
         m_MethodName: SetFullscreen
         m_Mode: 0
@@ -1798,7 +1863,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 12.778015, y: -0.5000038}
+  m_AnchoredPosition: {x: 49, y: -0.5000038}
   m_SizeDelta: {x: -35.556, y: -3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1451144020028210766
@@ -2470,7 +2535,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 8356907930822454601}
         m_TargetAssemblyTypeName: OptionsMenu, Assembly-CSharp
         m_MethodName: SetVolume
         m_Mode: 0
@@ -2481,7 +2546,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!1 &3396822854877413127
 GameObject:
   m_ObjectHideFlags: 0
@@ -3622,6 +3687,7 @@ RectTransform:
   - {fileID: 8450031207404218204}
   - {fileID: 8450031205999022867}
   - {fileID: 7898666657181342290}
+  - {fileID: 7468348763105762100}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3996,7 +4062,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5226087107090285719}
         m_TargetAssemblyTypeName: Brightness, Assembly-CSharp
         m_MethodName: AdjustBrightness
         m_Mode: 0
