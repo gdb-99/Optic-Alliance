@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
 using System;
-
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
     public GamePhase currentPhase;
 
     [SerializeField] PlayerSO _playerData;
+    [SerializeField] LevelDataSO _levelData;
 
     void Start()
     {
@@ -77,5 +78,13 @@ public class GameManager : MonoBehaviour
 
         // Se hai sottoscritto l'evento OnGamePhaseChanged, notifica gli ascoltatori del cambio di fase
         OnGamePhaseChanged?.Invoke(currentPhase);
+    }
+
+    public void EndLevel()
+    {
+        _playerData.AddMoney(_levelData.profit);
+        _playerData.IncreaseReputation();
+
+        SceneManager.LoadScene("SelectLevelScene");
     }
 }
