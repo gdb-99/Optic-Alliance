@@ -42,4 +42,27 @@ public class InventorySO : ScriptableObject
 
     }
 
+    public void RemoveItem(ItemSO item)
+    {
+
+        var findDataIndex = items.FindIndex(x => x.data.id == item.id);
+
+        if (findDataIndex > -1)
+        {
+            var itemData = items[findDataIndex];
+
+            if (items[findDataIndex].counter > 1) {
+                items[findDataIndex].counter--;
+            }
+            else
+            {
+                items.RemoveAt(findDataIndex);
+            }
+
+            totalItems--;
+
+        }
+
+    }
+
 }

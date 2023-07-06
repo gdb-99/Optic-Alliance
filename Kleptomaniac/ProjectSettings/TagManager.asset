@@ -7,6 +7,8 @@ TagManager:
   - BlackMarketItemDetails
   - PostProcessing
   - DetectionCamera
+  - SlotInventory
+  - SlotBackpack
   layers:
   - Default
   - TransparentFX

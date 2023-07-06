@@ -57,15 +57,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AI\EnemyPatrolling2.cs" />
+    <Compile Include="Assets\LevelDetailsController.cs" />
     <Compile Include="Assets\PlayerInputActions.cs" />
+    <Compile Include="Assets\MapPinController.cs" />
     <Compile Include="Assets\Sensors\HearingSensor.cs" />
     <Compile Include="Assets\Scripts\BlackMarketController.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\InventorySO.cs" />
     <Compile Include="Assets\Scripts\PlayerVisual.cs" />
     <Compile Include="Assets\AI\SurveillanceAI.cs" />
     <Compile Include="Assets\Sensors\HearingManager.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\LevelDataSO.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\ItemSO.cs" />
     <Compile Include="Assets\Scripts\FoxHeadController.cs" />
+    <Compile Include="Assets\InventorySlot.cs" />
     <Compile Include="Assets\Scripts\PlayerInGameMenuController.cs" />
     <Compile Include="Assets\AI\EnemyPatrolling.cs" />
     <Compile Include="Assets\AI\Detection.cs" />
@@ -79,13 +83,18 @@
     <Compile Include="Assets\Scripts\PurchaseDetailsController.cs" />
     <Compile Include="Assets\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\GameInput.cs" />
+    <Compile Include="Assets\Scripts\SelectLevelManager.cs" />
     <Compile Include="Assets\Sensors\DetectableTarget.cs" />
+    <Compile Include="Assets\Scripts\AlarmLightController.cs" />
+    <Compile Include="Assets\PlanetController.cs" />
     <Compile Include="Assets\Sensors\AwarenessSystem.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\PlayerSO.cs" />
+    <Compile Include="Assets\DraggableItem.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Sensors\ProximitySensor.cs" />
     <Compile Include="Assets\Scripts\Interactable.cs" />
-    <Compile Include="Assets\Scripts\AlarmLightController.cs" />
+    <Compile Include="Assets\MapPinLevelNameController.cs" />
+    <Compile Include="Assets\InventoryItemController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
