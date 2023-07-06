@@ -93,6 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1714080140429838088}
   - component: {fileID: 1367320253}
+  - component: {fileID: 2969031545557779949}
   m_Layer: 0
   m_Name: Surveillance Camera
   m_TagString: DetectionCamera
@@ -137,6 +138,19 @@ MonoBehaviour:
   pitch: 1
   secondsToRot: 2
   rotSwitchTime: 4
+--- !u!65 &2969031545557779949
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714080140429838086}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 4.13, z: 0}
 --- !u!1 &3659178936863804351
 GameObject:
   m_ObjectHideFlags: 0

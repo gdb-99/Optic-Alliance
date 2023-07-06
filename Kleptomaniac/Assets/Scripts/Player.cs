@@ -12,6 +12,8 @@ public class Player : MonoBehaviour {
     [SerializeField] private float rotateSpeed = 10f;
     [SerializeField] private GameInput gameInput;
 
+    private PlayerItemController playerItemController;
+
     private bool isWalking;
     private float playerRadius = .7f;
     private float playerHeight = 2f;
@@ -28,13 +30,25 @@ public class Player : MonoBehaviour {
 
     private void Start() {
         gameInput.OnInteractAction += GameInput_OnInteractAction;
+        playerItemController = GetComponent<PlayerItemController>();
         SetLookDirection();
+        gameInput.OnInteractAction += GameInput_OnInteractAction;
+        gameInput.OnUseAction += GameInput_OnUseAction;
+        gameInput.OnSwitchItem += GameInput_OnSwitchItem;
     }
 
     private void GameInput_OnInteractAction(object sender, EventArgs e)
     {
         selectedInteractable?.Interact();
         // throw new NotImplementedException();
+    }
+
+    private void GameInput_OnSwitchItem(object sender, GameInput.OnSwitchItemEventArgs e) {
+        playerItemController.SwitchActiveItem(e.itemIndex);
+    }
+
+    private void GameInput_OnUseAction(object sender, EventArgs e) {
+        playerItemController.UseActiveItem();
     }
 
     private void Update() {

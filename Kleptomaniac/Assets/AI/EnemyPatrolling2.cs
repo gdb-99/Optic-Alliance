@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -8,6 +9,9 @@ using UnityEditor;
 
 public class EnemyPatrolling2 : MonoBehaviour
 {
+
+    public event EventHandler OnDistractionReached;
+
     public List<Detection> detectionCameras = new List<Detection>();
     [SerializeField] private bool isActive;
     [SerializeField] private Transform vision;
@@ -52,6 +56,8 @@ public class EnemyPatrolling2 : MonoBehaviour
         Patrolling,
         Chasing,
         Searching,
+        Distracted,
+        Sleeping
         // Warned
     }
 
@@ -181,6 +187,27 @@ public class EnemyPatrolling2 : MonoBehaviour
                     Debug.Log("Forse è qui intorno...");
                 }
                 break;
+
+            case EnemyState.Distracted:
+                if (CanSeePlayer) {
+                    Debug.Log("Ehi ti ho visto!");
+                    currentState = EnemyState.Chasing;
+                    Chase();
+                } else if (agent.remainingDistance < 0.2f) {
+                    OnDistractionReached?.Invoke(this, EventArgs.Empty);
+                    agent.angularSpeed = 0f;
+                    searchTimer = 0f;
+                    policeAnimator.SetBool("isStop", true);
+                    sniffAudioSource.Play();
+                    exclamationObject.SetActive(false);
+                    questionObject.SetActive(true);
+                    currentState = EnemyState.Searching;
+                }
+                break;
+
+            case EnemyState.Sleeping:
+                //DO NOTHING WHILE COROUTINE IS RUNNING
+                break;
         }
     }
 
@@ -243,6 +270,32 @@ public class EnemyPatrolling2 : MonoBehaviour
     void ReturnToLastKnownPlayerPosition()
     {
         agent.destination = lastKnownPlayerPosition;
+    }
+
+    public void Distract(Vector3 distractionPosition) {
+        Debug.Log("GUARD IS GETTING DISTRACTED");
+        if (currentState != EnemyState.Chasing && currentState != EnemyState.Distracted) {
+            currentState = EnemyState.Distracted;
+            //lastKnownPlayerPosition = distractionPosition;
+            agent.destination = distractionPosition;
+        }
+    }
+
+    public void Sleep() {
+        if (currentState != EnemyState.Sleeping) {
+            currentState = EnemyState.Sleeping;
+            agent.isStopped = true;
+            agent.destination = transform.position;
+            StartCoroutine(SleepCoroutine());
+            agent.isStopped = false;
+        }
+    }
+
+    IEnumerator SleepCoroutine() {
+        Debug.Log("ZZZ...");
+        yield return new WaitForSeconds(10f);
+        Debug.Log("WAKING UP");
+        currentState = EnemyState.Patrolling;
     }
 
     private void OnGamePhaseChanged(GameManager.GamePhase newPhase)
