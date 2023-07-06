@@ -27,7 +27,7 @@ public class EMPRemote : Item {
         //    }
         //}
         Debug.Log("TURN OFF TARGET = " + cctvTarget);
-        
+        cctvTarget?.DisableCamera();
     }
 
     private void SearchForNearbyCCTV() {
