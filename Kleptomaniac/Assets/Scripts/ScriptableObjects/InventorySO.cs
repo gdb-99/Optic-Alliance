@@ -33,7 +33,7 @@ public class InventorySO : ScriptableObject
 
         if (findData.IsUnityNull())
         {
-            items.Add(new() { counter = 0, data = item });
+            items.Add(new() { counter = 1, data = item });
             
             
         }

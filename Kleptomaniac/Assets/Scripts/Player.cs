@@ -26,6 +26,9 @@ public class Player : MonoBehaviour {
             Debug.LogError("A player object already exists");
         }
         Instance = this;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void Start() {

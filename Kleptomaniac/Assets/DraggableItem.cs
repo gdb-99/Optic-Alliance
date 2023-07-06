@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
     
     [HideInInspector] public Transform parentAfterDrag;
@@ -61,8 +61,15 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 }
                 else SelectLevelManager.Instance.MoveObjectToInventyory(GetComponent<InventoryItemController>().GetItem());
                 Debug.Log("Sposto oggetto");
+
+                SelectLevelManager.Instance.LoadItemsInventory();
+
             }
         }
     }
 
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        SelectLevelManager.Instance.DisplayItemInfo(GetComponent<InventoryItemController>().GetItem());
+    }
 }

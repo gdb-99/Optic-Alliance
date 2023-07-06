@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SelectLevelManager : MonoBehaviour
 {
@@ -21,40 +23,64 @@ public class SelectLevelManager : MonoBehaviour
 
         Instance = this;
 
-        FillInventory();
-        FillBackpack();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        LoadItemsInventory();
+        SetPlayerData();
     }
     #endregion
+
+    [SerializeField] PlayerSO playerData;
 
     [SerializeField] int totalInventorySlot = 9;
     [SerializeField] int totalBackpackSlot = 3;
 
-    [SerializeField] InventorySO inventory;
-    [SerializeField] InventorySO backpack;
+
+    //[SerializeField] InventorySO inventory;
+    //[SerializeField] InventorySO backpack;
     [SerializeField] GameObject itemPrefab;
     [SerializeField] GameObject slotPrefab;
     [SerializeField] GameObject inventoryGrid;
     [SerializeField] GameObject backpackGrid;
 
     [SerializeField] LevelDetailsController levelDetails;
+    [SerializeField] ItemDetailsController itemDetails;
+
+    [SerializeField] TextMeshProUGUI moneyText;
+    [SerializeField] TextMeshProUGUI reputationText;
 
 
     LevelDataSO.LevelCode _selectedLevel = LevelDataSO.LevelCode.NONE;
 
-    public void FillInventory()
+
+    void SetPlayerData()
+    {
+        moneyText.text = playerData.money.ToString();
+        reputationText.text = playerData.reputation.ToString();
+    }
+
+
+    void FillInventory()
     {
 
         int counter = 0;
 
-        inventory.items.ForEach(item => {
+        foreach (Transform child in inventoryGrid.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        playerData.globalInv.items.ForEach(item => {
             GameObject newItemInstance = Instantiate(itemPrefab);
             GameObject newSlotInstance = Instantiate(slotPrefab);
             newSlotInstance.transform.SetParent(inventoryGrid.transform, false);
+            newSlotInstance.tag = "SlotInventory";
             newItemInstance.transform.SetParent(newSlotInstance.transform, false);
 
             if (!newItemInstance.TryGetComponent<InventoryItemController>(out var controller)) { return; }
 
-            controller.SetItem(item.data);
+            controller.SetItem(item);
 
             counter++;
         });
@@ -64,6 +90,7 @@ public class SelectLevelManager : MonoBehaviour
             for(int i = 0; i < totalInventorySlot - counter;i++)
             {
                 GameObject newSlotInstance = Instantiate(slotPrefab);
+                newSlotInstance.tag = "SlotInventory";
                 newSlotInstance.transform.SetParent(inventoryGrid.transform, false);
             }
         }
@@ -71,20 +98,26 @@ public class SelectLevelManager : MonoBehaviour
       
     }
 
-    public void FillBackpack()
+    void FillBackpack()
     {
 
         int counter = 0;
 
-        backpack.items.ForEach(item => {
+        foreach (Transform child in backpackGrid.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        playerData.backpackbackInv.items.ForEach(item => {
             GameObject newItemInstance = Instantiate(itemPrefab);
             GameObject newSlotInstance = Instantiate(slotPrefab);
             newSlotInstance.transform.SetParent(backpackGrid.transform, false);
+            newSlotInstance.tag = "SlotBackpack";
             newItemInstance.transform.SetParent(newSlotInstance.transform, false);
 
             if (!newItemInstance.TryGetComponent<InventoryItemController>(out var controller)) { return; }
 
-            controller.SetItem(item.data);
+            controller.SetItem(item);
 
             counter++;
         });
@@ -94,11 +127,18 @@ public class SelectLevelManager : MonoBehaviour
             for (int i = 0; i < totalBackpackSlot - counter; i++)
             {
                 GameObject newSlotInstance = Instantiate(slotPrefab);
+                newSlotInstance.tag = "SlotBackpack";
                 newSlotInstance.transform.SetParent(backpackGrid.transform, false);
             }
         }
 
 
+    }
+
+    public void LoadItemsInventory()
+    {
+        FillBackpack();
+        FillInventory();
     }
 
     public void DisplayLevelInfo(LevelDataSO data)
@@ -109,21 +149,27 @@ public class SelectLevelManager : MonoBehaviour
 
     }
 
+    public void DisplayItemInfo(ItemSO data)
+    {
+        itemDetails.ShowInfo(data);
+    }
+
     public void MoveObjectToBackback(ItemSO item)
     {
-        backpack.AddItem(item);
-        inventory.RemoveItem(item);
+        playerData.backpackbackInv.AddItem(item);
+        playerData.globalInv.RemoveItem(item);
     }
 
     public void MoveObjectToInventyory(ItemSO item)
     {
-        inventory.AddItem(item);
-        backpack.RemoveItem(item);
+        playerData.globalInv.AddItem(item);
+        playerData.backpackbackInv.RemoveItem(item);
     }
 
     public void GoToBaclkmarket()
     {
         Debug.Log("Go to balckmarket");
+        SceneManager.LoadScene("BlackMarketScene");
     }
 
     public void GoToLevel()
@@ -133,18 +179,25 @@ public class SelectLevelManager : MonoBehaviour
         {
             case LevelDataSO.LevelCode.TUTORIAL:
                 Debug.Log("Go to Level - Tutorial");
+                SceneManager.LoadScene("TutorialScene");
                 break;
             case LevelDataSO.LevelCode.FIRST:
                 Debug.Log("Go to Level - First");
+                SceneManager.LoadScene("FirstLevelScene");
                 break;
             default:
                 Debug.Log("Go to Level - NO LEVEL SELECTED");
+                
                 break;
         }
     }
 
     public void GoToExit()
     {
-        Debug.Log("Go to Exit");
+        SceneManager.LoadScene("MainMenuScene");
     }
+
+
+
+
 }

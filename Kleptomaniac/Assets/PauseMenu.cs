@@ -21,7 +21,7 @@ public class PauseMenu : MonoBehaviour
     
 
     void Start() {
- 
+       
     }
     // Update is called once per frame
     void Update()
@@ -41,6 +41,10 @@ public class PauseMenu : MonoBehaviour
 
         void Pause()
         {
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
             pauseMenuUI.SetActive(true);    //abilita la visualizzazione del panel della pausa
             Time.timeScale = 0f;    //per bloccare il gioco
             GameIsPaused = true;
@@ -49,6 +53,10 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
