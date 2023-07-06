@@ -24,7 +24,8 @@ public class CamRotation : MonoBehaviour
     public enum CameraState
     {
         Idle,
-        Aware
+        Aware,
+        Disabled
     }
 
     // Start is called before the first frame update
@@ -64,6 +65,8 @@ public class CamRotation : MonoBehaviour
                     startNextRotation = true;
                     //tornaAllAngoloDiPartenza();
                 }
+                break;
+            case CameraState.Disabled:
                 break;
 
         }
@@ -109,6 +112,16 @@ public class CamRotation : MonoBehaviour
     public void SetPlayerTransform(Transform playerTransform)
     {
         this.playerTransform = playerTransform;
+    }
+
+    public void DisableCamera() {
+        Transform spotlight = transform.Find("Spot Light");
+        Transform cone = spotlight.Find("Cone");
+
+        spotlight.GetComponent<Light>().intensity = 0;
+        cone.gameObject.SetActive(false);
+        
+        CurrentCameraState = CameraState.Disabled;
     }
 
 }
