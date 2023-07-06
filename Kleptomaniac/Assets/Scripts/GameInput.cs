@@ -6,6 +6,12 @@ using UnityEngine;
 public class GameInput : MonoBehaviour {
 
     public event EventHandler OnInteractAction;
+    public event EventHandler OnUseAction;
+    public event EventHandler<OnSwitchItemEventArgs> OnSwitchItem;
+
+    public class OnSwitchItemEventArgs : EventArgs {
+        public int itemIndex;
+    }
 
     private PlayerInputActions playerInputActions;
 
@@ -13,6 +19,8 @@ public class GameInput : MonoBehaviour {
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
         playerInputActions.Player.Interact.performed += Interact_performed;
+        playerInputActions.Player.Use.performed += Use_performed;
+        playerInputActions.Player.SwitchItem.performed += SwitchItem_performed;
         //playerInputActions.Player.InteractAlternate.performed += InteractAlternate_performed;
     }
 
@@ -22,6 +30,16 @@ public class GameInput : MonoBehaviour {
 
     private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
         OnInteractAction?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void SwitchItem_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
+        OnSwitchItem?.Invoke(this, new OnSwitchItemEventArgs {
+            itemIndex = (int)obj.ReadValue<float>()
+        });
+    }
+
+    private void Use_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) {
+        OnUseAction?.Invoke(this, EventArgs.Empty);
     }
 
     public Vector2 GetMovementVectorNormalized() {

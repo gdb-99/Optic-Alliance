@@ -12,6 +12,7 @@ public class ItemSO : ScriptableObject
     public float price;
     public GameObject itemModel;
     public Sprite itemSprite;
+    public float targetRange;
 
     public ItemAction action;
 

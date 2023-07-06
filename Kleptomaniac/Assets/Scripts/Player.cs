@@ -12,6 +12,8 @@ public class Player : MonoBehaviour {
     [SerializeField] private float rotateSpeed = 10f;
     [SerializeField] private GameInput gameInput;
 
+    private PlayerItemController playerItemController;
+
     private bool isWalking;
     private float playerRadius = .7f;
     private float playerHeight = 2f;
@@ -27,7 +29,26 @@ public class Player : MonoBehaviour {
     }
 
     private void Start() {
+        gameInput.OnInteractAction += GameInput_OnInteractAction;
+        playerItemController = GetComponent<PlayerItemController>();
         SetLookDirection();
+        gameInput.OnInteractAction += GameInput_OnInteractAction;
+        gameInput.OnUseAction += GameInput_OnUseAction;
+        gameInput.OnSwitchItem += GameInput_OnSwitchItem;
+    }
+
+    private void GameInput_OnInteractAction(object sender, EventArgs e)
+    {
+        selectedInteractable?.Interact();
+        // throw new NotImplementedException();
+    }
+
+    private void GameInput_OnSwitchItem(object sender, GameInput.OnSwitchItemEventArgs e) {
+        playerItemController.SwitchActiveItem(e.itemIndex);
+    }
+
+    private void GameInput_OnUseAction(object sender, EventArgs e) {
+        playerItemController.UseActiveItem();
     }
 
     private void Update() {
@@ -35,23 +56,38 @@ public class Player : MonoBehaviour {
         SetLookDirection();
 
         Move();
-        //Interact();
+        Interact();
 
     }
 
-    private void Interact() {
+    private void Interact()
+    {
         float interactDistance = 2f;
 
-        if (Physics.Raycast(transform.position, myDirection, out RaycastHit raycastHit, interactDistance)) {
-            if (raycastHit.transform.TryGetComponent(out Interactable interactable)) {
-                if (interactable != selectedInteractable) {
-                    selectedInteractable = interactable;
-                }
-            } else {
-                selectedInteractable = null;
-            }
-        } else {
+        RaycastHit[] raycastHits = Physics.CapsuleCastAll(transform.position, transform.position + Vector3.up * 2 * playerHeight, playerRadius, myDirection, interactDistance);
+
+        if (raycastHits.Length == 0)
+        {
             selectedInteractable = null;
+        }
+        else
+        {
+            foreach (RaycastHit raycastHit in raycastHits)
+            {
+                if (raycastHit.transform.gameObject.TryGetComponent(out Interactable interactable))
+                {
+                    if (interactable != selectedInteractable)
+                    {
+                        selectedInteractable = interactable;
+                        Debug.Log("FOUND INTERACTABLE");
+                    }
+                    break;
+                }
+                else
+                {
+                    selectedInteractable = null;
+                }
+            }
         }
     }
 

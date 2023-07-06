@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using static UnityEditor.Progress;
+using UnityEngine.SceneManagement;
 
 public class ShowItemDetailsEvent: UnityEvent<ItemSO> { }
 
@@ -18,7 +19,12 @@ public class PurchaseDetailsController : MonoBehaviour
     [SerializeField] TextMeshProUGUI itemType;
     [SerializeField] TextMeshProUGUI emptyText;
     [SerializeField] Image itemImage;
-    [SerializeField] InventorySO globalInventory;
+    [SerializeField] PlayerSO player;
+    [SerializeField] Button buyButton;
+    [SerializeField] TextMeshProUGUI conversation;
+    [SerializeField] TextMeshProUGUI money;
+    [SerializeField] TextMeshProUGUI reputation;
+    [SerializeField] Button yesButton, noButton;
 
     ItemSO selectedItem;
 
@@ -27,9 +33,9 @@ public class PurchaseDetailsController : MonoBehaviour
     {
         if (showDetailsEvent == null)
             showDetailsEvent = new ShowItemDetailsEvent();
-
         showDetailsEvent.AddListener(HandleShowDetails);
-
+        money.text = player.money.ToString();
+        reputation.text = player.reputation.ToString();
         Reset();
     }
 
@@ -62,13 +68,51 @@ public class PurchaseDetailsController : MonoBehaviour
         itemType.text = item.isPermanent ? "PERMANENT" : "CONSUMABLE";
         itemImage.sprite = item.itemSprite;
         itemImage.enabled = true;
-
+        SetBuyButtonInteractable();
         emptyText.enabled = false;
     }
 
-    public void HandleBuyItem()
+    public void SetBuyButtonInteractable() {
+        if (selectedItem.isPermanent && player.globalInv.items.Exists((i) => i.data == selectedItem)) {
+            buyButton.interactable = false;
+            conversation.text = "You've already bought one! Another one would be useless!";
+        }
+        else if(player.money < selectedItem.price) {
+            buyButton.interactable = false;
+            conversation.text = "You don't have enough money! Try something cheaper!";
+        }
+        else {
+            buyButton.interactable = true;
+            conversation.text = "Do you like it? It's perfect for you!";
+        }
+    }
+
+    public void BuyItemOnClick() {
+        buyButton.interactable = false;
+        conversation.text = "Do you really want to buy that item?";
+        yesButton.gameObject.SetActive(true);
+        noButton.gameObject.SetActive(true);
+    } 
+
+    public void DontBuyItem() {
+        SetBuyButtonInteractable();
+        yesButton.gameObject.SetActive(false);
+        noButton.gameObject.SetActive(false);
+        conversation.text = "Please look around, you'll find something useful!";
+    }
+
+    public void BuyItem()
     {
-        globalInventory.AddItem(selectedItem);
-        Debug.Log("Compro oggetto e lo aggiungo a inventario personaggio");
+        player.globalInv.AddItem(selectedItem);
+        player.SubstractMoney((int)selectedItem.price);
+        money.text = player.money.ToString();
+        SetBuyButtonInteractable();
+        yesButton.gameObject.SetActive(false);
+        noButton.gameObject.SetActive(false);
+        conversation.text = "Thank you for your purchase!"; 
+    }
+
+    public void NavigateTo(string scene) {
+        SceneManager.LoadScene(scene);
     }
 }

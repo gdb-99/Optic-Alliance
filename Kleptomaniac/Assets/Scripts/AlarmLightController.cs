@@ -9,14 +9,21 @@ public class AlarmLightController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        alarmLight.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.L)) { 
+        //if(Input.GetKeyDown(KeyCode.L)) { 
+          //  alarmLight.enabled = true;
+       // }
+       if (GameManager.Instance.currentPhase == GameManager.GamePhase.Escape)
+        {
             alarmLight.enabled = true;
+            alarmLight.bounceIntensity = 10f;
         }
     }
+
+
 }

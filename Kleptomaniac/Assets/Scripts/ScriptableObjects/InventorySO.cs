@@ -16,6 +16,7 @@ public class InventorySO : ScriptableObject
 {
 
     public List<InvetoryData> items = new();
+    public ItemSO[] items2;
 
     public int totalItems = 0;
 
