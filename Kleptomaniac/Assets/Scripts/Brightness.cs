@@ -16,15 +16,16 @@ public class Brightness : MonoBehaviour
     void Start()
     {
         brightness.TryGetSettings(out exposure);
-        AdjustBrightness(brightSlider.value);
+        brightSlider.value = exposure.keyValue.value;
     }
 
     public void AdjustBrightness(float value){
         if(value != 0){
-            exposure.keyValue.value = value;
+            exposure.keyValue.Override(value);
         }
         else{
-            exposure.keyValue.value = .05f;
+            exposure.keyValue.Override(.05f);
         }
+        brightness.AddSettings(exposure);
     }
 }
