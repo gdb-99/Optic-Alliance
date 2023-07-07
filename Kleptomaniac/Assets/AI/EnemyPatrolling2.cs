@@ -39,8 +39,10 @@ public class EnemyPatrolling2 : MonoBehaviour
     Animator policeAnimator;
     private GameObject exclamationObject;
     private GameObject questionObject;
+    private GameObject sheepObject;
     private AudioSource barkAudioSource;
     private AudioSource sniffAudioSource;
+    private AudioSource snoreAudioSource;
     private bool wokeUp = false;
 
     /* public enum GamePhase
@@ -95,8 +97,10 @@ public class EnemyPatrolling2 : MonoBehaviour
         policeAnimator = GetComponent<Animator>();
         exclamationObject = transform.Find("Status/Exclamation").gameObject;
         questionObject = transform.Find("Status/Question").gameObject;
+        sheepObject = transform.Find("Status/Sheep").gameObject;
         barkAudioSource = transform.Find("Audio/Bark").gameObject.GetComponent<AudioSource>();
         sniffAudioSource = transform.Find("Audio/Sniff").gameObject.GetComponent<AudioSource>();
+        snoreAudioSource = transform.Find("Audio/Snore").gameObject.GetComponent<AudioSource>();
         // exclamationObject.SetActive(false);
     }
 
@@ -306,12 +310,17 @@ public class EnemyPatrolling2 : MonoBehaviour
         agent.destination = transform.position;
         policeAnimator.SetBool("isStop", true);
         policeAnimator.SetBool("isSleeping", true);
+        questionObject.SetActive(false);
+        exclamationObject.SetActive(false);
+        sheepObject.SetActive(true);
+        snoreAudioSource.Play();
         yield return new WaitForSeconds(10f);
         Debug.Log("WAKING UP");
         policeAnimator.SetBool("isStop", true);
         policeAnimator.SetBool("isSleeping", false);
         searchTimer = 0f;
         wokeUp = true;
+        sheepObject.SetActive(false);
         currentState = EnemyState.Searching;
     }
 
