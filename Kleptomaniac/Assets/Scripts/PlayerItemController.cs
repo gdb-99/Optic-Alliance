@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerItemController : MonoBehaviour {
     [SerializeField] private InventorySO inventorySO;
     [SerializeField] private Transform itemHoldPoint;
-    private Item[] availableItems = new Item[4];
+    private List<Item> availableItems = new List<Item>();
     private int currentItemIndex = 0;
 
     private void Start() {
@@ -15,9 +15,10 @@ public class PlayerItemController : MonoBehaviour {
         //    GameObject item = Instantiate(invetoryData.data.itemModel, itemHoldPoint);
         //    availableItems[i++] = item.GetComponent<Item>();
         //}
-        foreach (ItemSO itemSO in inventorySO.items2) {
+        foreach (InvetoryData invetoryData in inventorySO.items) {
+            ItemSO itemSO = invetoryData.data;
             GameObject item = Instantiate(itemSO.itemModel, itemHoldPoint);
-            availableItems[i] = item.GetComponent<Item>();
+            availableItems.Add(item.GetComponent<Item>());
             Debug.Log("ITEM = " + availableItems[i]);
             availableItems[i].SetPlayerItemController(this);
             if (i == 0) {
@@ -30,6 +31,9 @@ public class PlayerItemController : MonoBehaviour {
     }
 
     public void SwitchActiveItem(int itemIndex) {
+        if (itemIndex > availableItems.Count)
+            return;
+
         foreach (Item item in availableItems) {
             item.gameObject.SetActive(false);
         }
@@ -43,7 +47,8 @@ public class PlayerItemController : MonoBehaviour {
 
     public void DropActiveItem() {
         Debug.Log("RESETTING AN ITEM");
-        GameObject item = Instantiate(inventorySO.items2[currentItemIndex].itemModel, itemHoldPoint);
+        //GameObject item = Instantiate(inventorySO.items2[currentItemIndex].itemModel, itemHoldPoint);
+        GameObject item = Instantiate(inventorySO.items[currentItemIndex].data.itemModel, itemHoldPoint);
         availableItems[currentItemIndex] = item.GetComponent<Item>();
         availableItems[currentItemIndex].SetPlayerItemController(this);
     }
