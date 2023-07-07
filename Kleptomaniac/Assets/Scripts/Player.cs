@@ -131,7 +131,9 @@ public class Player : MonoBehaviour {
         myDirection = Camera.main.transform.forward;
         myDirection.y = 0;
         myDirection = myDirection.normalized;
-        transform.forward = Vector3.Slerp(transform.forward, myDirection, Time.deltaTime * rotateSpeed);
+        if (!isWalking) {
+            transform.forward = Vector3.Slerp(transform.forward, myDirection, Time.deltaTime * rotateSpeed);
+        }
     }
 
     private bool CanMove(Vector3 moveDir) {
