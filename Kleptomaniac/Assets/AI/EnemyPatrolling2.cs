@@ -41,6 +41,7 @@ public class EnemyPatrolling2 : MonoBehaviour
     private GameObject questionObject;
     private AudioSource barkAudioSource;
     private AudioSource sniffAudioSource;
+    private bool wokeUp = false;
 
     /* public enum GamePhase
     {
@@ -117,6 +118,7 @@ public class EnemyPatrolling2 : MonoBehaviour
         switch (currentState)
         {
             case EnemyState.Patrolling:
+                Debug.Log("STATE = PATROLLING");
                 questionObject.SetActive(false);
                 if (CanSeePlayer)
                 {
@@ -166,7 +168,7 @@ public class EnemyPatrolling2 : MonoBehaviour
                 break;
 
             case EnemyState.Searching:
-
+                Debug.Log("STATE = SEARCHING");
                 searchTimer += Time.deltaTime;
                 if (CanSeePlayer)
                 {
@@ -183,12 +185,14 @@ public class EnemyPatrolling2 : MonoBehaviour
                 }
                 else
                 {
+                    policeAnimator.SetBool("isStop", true);
                     transform.localEulerAngles = new Vector3(0, Mathf.PingPong(Time.time * rotateSpeed, 90) - 30, 0);
                     Debug.Log("Forse è qui intorno...");
                 }
                 break;
 
             case EnemyState.Distracted:
+                Debug.Log("STATE = DISTRACTED");
                 if (CanSeePlayer) {
                     Debug.Log("Ehi ti ho visto!");
                     currentState = EnemyState.Chasing;
@@ -206,7 +210,7 @@ public class EnemyPatrolling2 : MonoBehaviour
                 break;
 
             case EnemyState.Sleeping:
-                //DO NOTHING WHILE COROUTINE IS RUNNING
+                Debug.Log("STATE = SLEEPING");
                 break;
         }
     }
@@ -225,10 +229,16 @@ public class EnemyPatrolling2 : MonoBehaviour
 
         if (agent.remainingDistance < 0.2f)
         {
+            if (wokeUp) {
+                destPoint--;
+                destPoint = (destPoint + navPoint.Length) % navPoint.Length;
+                wokeUp = false;
+            }
             UnityEngine.AI.NavMeshPath path = new UnityEngine.AI.NavMeshPath();
             agent.CalculatePath(navPoint[destPoint].position, path);
             agent.path = path;
             destPoint = (destPoint + 1) % navPoint.Length;
+            
         }
         /*if (GameManager.Instance.currentPhase == GameManager.GamePhase.Theft) //(currentPhase == GamePhase.Theft)
         {
@@ -274,7 +284,7 @@ public class EnemyPatrolling2 : MonoBehaviour
 
     public void Distract(Vector3 distractionPosition) {
         Debug.Log("GUARD IS GETTING DISTRACTED");
-        if (currentState != EnemyState.Chasing && currentState != EnemyState.Distracted) {
+        if (currentState != EnemyState.Chasing && currentState != EnemyState.Distracted && currentState != EnemyState.Sleeping) {
             currentState = EnemyState.Distracted;
             //lastKnownPlayerPosition = distractionPosition;
             agent.destination = distractionPosition;
@@ -285,7 +295,7 @@ public class EnemyPatrolling2 : MonoBehaviour
         if (currentState != EnemyState.Sleeping) {
             currentState = EnemyState.Sleeping;
             agent.isStopped = true;
-            agent.destination = transform.position;
+            //agent.destination = transform.position;
             StartCoroutine(SleepCoroutine());
             agent.isStopped = false;
         }
@@ -293,9 +303,16 @@ public class EnemyPatrolling2 : MonoBehaviour
 
     IEnumerator SleepCoroutine() {
         Debug.Log("ZZZ...");
+        agent.destination = transform.position;
+        policeAnimator.SetBool("isStop", true);
+        policeAnimator.SetBool("isSleeping", true);
         yield return new WaitForSeconds(10f);
         Debug.Log("WAKING UP");
-        currentState = EnemyState.Patrolling;
+        policeAnimator.SetBool("isStop", true);
+        policeAnimator.SetBool("isSleeping", false);
+        searchTimer = 0f;
+        wokeUp = true;
+        currentState = EnemyState.Searching;
     }
 
     private void OnGamePhaseChanged(GameManager.GamePhase newPhase)

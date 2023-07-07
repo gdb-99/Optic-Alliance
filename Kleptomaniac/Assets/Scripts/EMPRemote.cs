@@ -38,8 +38,10 @@ public class EMPRemote : Item {
             if (cctvDetected) {
                 Debug.Log("FOUND CCTV CAMERA IN RANGE");
                 cctvTarget = cctv;
+                cctvTarget.GetComponent<HighlightTarget>().ToggleHighlight(true);
                 break;
             } else {
+                cctvTarget?.GetComponent<HighlightTarget>().ToggleHighlight(false);
                 cctvTarget = null;
             }
         }

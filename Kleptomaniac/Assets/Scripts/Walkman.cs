@@ -41,6 +41,7 @@ public class Walkman : Item {
 
     private void TurnOffWalkman(object sender, System.EventArgs e) {
         isOn = false;
+        Destroy(gameObject);
     }
 
 }
