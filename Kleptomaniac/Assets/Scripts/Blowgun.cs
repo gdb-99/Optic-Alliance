@@ -5,6 +5,12 @@ using UnityEngine;
 public class Blowgun : Item {
 
     private EnemyPatrolling2 guardTarget;
+    private AudioSource audioItem;
+
+    private void Start()
+    {
+        audioItem = GetComponent<AudioSource>();
+    }
 
     private void Update() {
         SearchForNearbyGuard();
@@ -12,6 +18,7 @@ public class Blowgun : Item {
 
     public override void Use() {
         Debug.Log("Putting guard to sleep");
+        audioItem.Play();
         PutGuardToSleep();
     }
 

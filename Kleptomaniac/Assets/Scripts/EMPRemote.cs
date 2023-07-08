@@ -5,6 +5,12 @@ using UnityEngine;
 public class EMPRemote : Item {
 
     private CamRotation cctvTarget;
+    private AudioSource audioItem;
+
+    private void Start()
+    {
+        audioItem = GetComponent<AudioSource>();
+    }
 
     private void Update() {
         SearchForNearbyCCTV();
@@ -12,6 +18,7 @@ public class EMPRemote : Item {
 
 
     public override void Use() {
+        audioItem.Play();
         Debug.Log("Disabilitating surveillance CCTV");
         TurnOffNearbyCCTV();
     }
