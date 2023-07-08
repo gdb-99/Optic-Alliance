@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class EMPRemote : Item {
 
+    private static bool isInCoolDown = false;
+    private static float cooldownTime = 20f;
+
     private CamRotation cctvTarget;
     private AudioSource audioItem;
+    private AudioSource notUsable;
 
     private void Start()
     {
-        audioItem = GetComponent<AudioSource>();
+        audioItem = GetComponents<AudioSource>()[0];
+        notUsable = GetComponents<AudioSource>()[1];
     }
 
     private void Update() {
@@ -18,9 +23,16 @@ public class EMPRemote : Item {
 
 
     public override void Use() {
-        audioItem.Play();
-        Debug.Log("Disabilitating surveillance CCTV");
-        TurnOffNearbyCCTV();
+        if (isInCoolDown || cctvTarget == null) {
+            notUsable.Play();
+        } else {
+            audioItem.Play();
+            Debug.Log("Disabilitating surveillance CCTV");
+            TurnOffNearbyCCTV();
+            isInCoolDown = true;
+            playerItemController.StartCooldown(cooldownTime, () => { EMPRemote.isInCoolDown = false; });
+        }
+        
     }
 
     private void TurnOffNearbyCCTV() {

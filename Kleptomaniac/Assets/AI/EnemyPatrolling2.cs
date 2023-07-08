@@ -176,9 +176,11 @@ public class EnemyPatrolling2 : MonoBehaviour
                 searchTimer += Time.deltaTime;
                 if (CanSeePlayer)
                 {
+                    Debug.Log("I AM SEARCHING BUT I JUST SAW YOU");
                     barkAudioSource.Play();
-                    agent.angularSpeed = 120f;
+                    policeAnimator.SetBool("isSleeping", false);
                     policeAnimator.SetBool("isStop", false);
+                    agent.angularSpeed = 120f;
                     currentState = EnemyState.Chasing;
                 }
                 if (searchTimer >= searchDuration)
@@ -296,17 +298,19 @@ public class EnemyPatrolling2 : MonoBehaviour
     }
 
     public void Sleep() {
-        if (currentState != EnemyState.Sleeping) {
-            currentState = EnemyState.Sleeping;
-            agent.isStopped = true;
-            //agent.destination = transform.position;
-            StartCoroutine(SleepCoroutine());
-            agent.isStopped = false;
-        }
+        //if (currentState != EnemyState.Sleeping) {
+        currentState = EnemyState.Sleeping;
+        agent.isStopped = true;
+        //agent.destination = transform.position;
+        StopCoroutine(SleepCoroutine());
+        StartCoroutine(SleepCoroutine());
+        agent.isStopped = false;
+        //}
     }
 
     IEnumerator SleepCoroutine() {
         Debug.Log("ZZZ...");
+        agent.angularSpeed = 0f;
         agent.destination = transform.position;
         policeAnimator.SetBool("isStop", true);
         policeAnimator.SetBool("isSleeping", true);
@@ -316,12 +320,24 @@ public class EnemyPatrolling2 : MonoBehaviour
         snoreAudioSource.Play();
         yield return new WaitForSeconds(10f);
         Debug.Log("WAKING UP");
-        policeAnimator.SetBool("isStop", true);
-        policeAnimator.SetBool("isSleeping", false);
-        searchTimer = 0f;
-        wokeUp = true;
-        sheepObject.SetActive(false);
-        currentState = EnemyState.Searching;
+        if (CanSeePlayer) {
+            policeAnimator.SetBool("isSleeping", false);
+            policeAnimator.SetBool("isStop", false);
+            wokeUp = true;
+            sheepObject.SetActive(false);
+            agent.angularSpeed = 120f;
+            barkAudioSource.Play();
+            currentState = EnemyState.Chasing;
+        } else {
+            policeAnimator.SetBool("isStop", true);
+            policeAnimator.SetBool("isSleeping", false);
+            searchTimer = 0f;
+            wokeUp = true;
+            sheepObject.SetActive(false);
+            sniffAudioSource.Play();
+            currentState = EnemyState.Searching;
+        }
+        
     }
 
     private void OnGamePhaseChanged(GameManager.GamePhase newPhase)

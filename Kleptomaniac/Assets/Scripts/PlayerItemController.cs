@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class PlayerItemController : MonoBehaviour {
     [SerializeField] private InventorySO inventorySO;
     [SerializeField] private Transform itemHoldPoint;
+
     private List<Item> availableItems = new List<Item>();
     private int currentItemIndex = 0;
 
@@ -51,6 +53,16 @@ public class PlayerItemController : MonoBehaviour {
         GameObject item = Instantiate(inventorySO.items[currentItemIndex].data.itemModel, itemHoldPoint);
         availableItems[currentItemIndex] = item.GetComponent<Item>();
         availableItems[currentItemIndex].SetPlayerItemController(this);
+    }
+
+    public void StartCooldown(float cooldownTime, Action f) {
+        StartCoroutine(CoolDown(cooldownTime, f));
+    }
+    IEnumerator CoolDown(float cooldownTime, Action f) {
+        Debug.Log("ITEM IN COOLDOWN");
+        yield return new WaitForSeconds(cooldownTime);
+        Debug.Log("ITEM FINISHED COOLDOWN");
+        f();
     }
 
 }

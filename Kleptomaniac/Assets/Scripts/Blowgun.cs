@@ -6,6 +6,7 @@ public class Blowgun : Item {
 
     private EnemyPatrolling2 guardTarget;
     private AudioSource audioItem;
+    private int numBullets = 5;
 
     private void Start()
     {
@@ -17,9 +18,15 @@ public class Blowgun : Item {
     }
 
     public override void Use() {
-        Debug.Log("Putting guard to sleep");
-        audioItem.Play();
-        PutGuardToSleep();
+        if(numBullets > 0 && guardTarget != null) {
+            Debug.Log("Putting guard to sleep");
+            audioItem.Play();
+            PutGuardToSleep();
+            numBullets--;
+        } else {
+            Debug.Log("No more ammo");
+        }
+        
     }
 
     private void PutGuardToSleep() {

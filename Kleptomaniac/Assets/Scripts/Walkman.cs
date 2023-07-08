@@ -5,8 +5,12 @@ using UnityEngine;
 
 public class Walkman : Item {
 
+    private static bool isInCoolDown = false;
+    private static float cooldownTime = 20f;
+
     private bool isOn = false;
     private AudioSource audioItem;
+    private AudioSource notUsable;
     private List<EnemyPatrolling2> distractedGuards = new List<EnemyPatrolling2>();
 
 
@@ -20,14 +24,21 @@ public class Walkman : Item {
     }
 
     public override void Use() {
-        Drop();
-        Debug.Log("Placing walkman to distract guards, it will play in 3 seconds");
-        //audioItem.PlayDelayed(3);
-        StartCoroutine(DelayedStartWalkman());
+        if (isInCoolDown) {
+            notUsable.Play();
+        } else {
+            Drop();
+            Debug.Log("Placing walkman to distract guards, it will play in 3 seconds");
+            StartCoroutine(DelayedStartWalkman());
+            isInCoolDown = true;
+            playerItemController.StartCooldown(cooldownTime, () => { Walkman.isInCoolDown = false; });
+        }
+        
     }
 
     private void Start() {
-        audioItem = GetComponent<AudioSource>();
+        audioItem = GetComponents<AudioSource>()[0];
+        notUsable = GetComponents<AudioSource>()[1];
     }
 
     private void Update() {
@@ -64,5 +75,6 @@ public class Walkman : Item {
         audioItem.Play();
         isOn = true;
     }
+
 
 }
