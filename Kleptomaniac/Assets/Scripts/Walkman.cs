@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Walkman : Item {
 
     private bool isOn = false;
+    private AudioSource audioItem;
+    private List<EnemyPatrolling2> distractedGuards = new List<EnemyPatrolling2>();
+
+
 
     private void Drop() {
         transform.parent = null;
@@ -16,8 +21,13 @@ public class Walkman : Item {
 
     public override void Use() {
         Drop();
-        isOn = true;
-        Debug.Log("Placing walkman to distract guards");
+        Debug.Log("Placing walkman to distract guards, it will play in 3 seconds");
+        //audioItem.PlayDelayed(3);
+        StartCoroutine(DelayedStartWalkman());
+    }
+
+    private void Start() {
+        audioItem = GetComponent<AudioSource>();
     }
 
     private void Update() {
@@ -33,6 +43,7 @@ public class Walkman : Item {
             bool guardDetected = collider.TryGetComponent(out EnemyPatrolling2 guard);
             if (guardDetected) {
                 Debug.Log("GUARD ENTERED WALKMAN RANGE");
+                distractedGuards.Add(guard);
                 guard.Distract(transform.position);
                 guard.OnDistractionReached += TurnOffWalkman;
             }
@@ -41,7 +52,17 @@ public class Walkman : Item {
 
     private void TurnOffWalkman(object sender, System.EventArgs e) {
         isOn = false;
+        foreach (EnemyPatrolling2 guard in distractedGuards) {
+            guard.OnDistractionReached -= TurnOffWalkman;
+        }
         Destroy(gameObject);
+    }
+
+    IEnumerator DelayedStartWalkman() {
+        yield return new WaitForSeconds(3f);
+        Debug.Log("PLAYING !!!!");
+        audioItem.Play();
+        isOn = true;
     }
 
 }
