@@ -21,7 +21,7 @@ public class PauseMenu : MonoBehaviour
     
 
     void Start() {
-       
+        Resume();
     }
     // Update is called once per frame
     void Update()
@@ -53,7 +53,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
-
+        Debug.Log("CALLED RESUME FUNCTION!");
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -65,6 +65,7 @@ public class PauseMenu : MonoBehaviour
     public void RestartLevel() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Resume();
+
     }
 
     public void QuitLevel() {

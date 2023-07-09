@@ -11,6 +11,9 @@ public class CanvasManager : MonoBehaviour
     }
 
     private void EnemyPatrolling2_OnGameOver(object sender, System.EventArgs e) {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Time.timeScale = 0f;    //per bloccare il gioco
         transform.Find("Game Over - Canvas").gameObject.SetActive(true);
     }
 
