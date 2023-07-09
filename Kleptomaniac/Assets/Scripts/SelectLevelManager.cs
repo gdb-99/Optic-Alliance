@@ -52,7 +52,12 @@ public class SelectLevelManager : MonoBehaviour
 
 
     LevelDataSO.LevelCode _selectedLevel = LevelDataSO.LevelCode.NONE;
+    public GameObject PauseMenu;
 
+    void Start()
+    {
+        PauseMenu.GetComponent<PauseMenu>().Resume();
+    }
 
     void SetPlayerData()
     {
