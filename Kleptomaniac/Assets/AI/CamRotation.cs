@@ -6,6 +6,8 @@ public class CamRotation : MonoBehaviour
 {
     Transform camGFX;
 
+    private Color normalColor = new Color(1, 0.772549f, 0);
+    private Color detectedColor = new Color(0.745098f, 0.254901f, 0.062745f);
 
     bool startNextRotation = true;
     public bool rotRight;
@@ -55,31 +57,61 @@ public class CamRotation : MonoBehaviour
                     StartCoroutine(Rotate(-yaw, secondsToRot, endPoint));
                 }
                 break;
-            case CameraState.Aware:
-                //QUI
+            //case CameraState.Aware:
+            //    //QUI
 
-                if(playerTransform != null)
-                {
-                    StopAllCoroutines();
-                    //transform.LookAt(playerTransform);
-                    startNextRotation = true;
-                    //tornaAllAngoloDiPartenza();
-                }
-                break;
-            case CameraState.Disabled:
-                break;
+            //    if(playerTransform != null)
+            //    {
+            //        StopAllCoroutines();
+            //        //transform.LookAt(playerTransform);
+            //        startNextRotation = true;
+            //        //tornaAllAngoloDiPartenza();
+            //    }
+            //    break;
+            //case CameraState.Disabled:
+            //    break;
 
         }
     }
 
     public void PlayerDetected() {
-        StartCoroutine(PlayerDetectedCoroutine());
+        //StartCoroutine(PlayerDetectedCoroutine())
+        Transform spotlight = transform.Find("Spot Light");
+        Transform cone = spotlight.Find("Cone");
+
+        spotlight.GetComponent<Light>().color = detectedColor;
+        cone.GetComponent<Renderer>().material.color = detectedColor;
+
+        //audioItem.Play();
+        
     }
+
+    public void PlayerNoLongerDetected() {
+        //StartCoroutine(PlayerDetectedCoroutine())
+        Transform spotlight = transform.Find("Spot Light");
+        Transform cone = spotlight.Find("Cone");
+
+        //audioItem.Play();
+        spotlight.GetComponent<Light>().color = normalColor;
+        cone.GetComponent<Renderer>().material.color = normalColor;
+        CurrentCameraState = CameraState.Idle;
+
+    }
+
+    
 
     IEnumerator PlayerDetectedCoroutine() {
         CurrentCameraState = CameraState.Disabled;
+        Transform spotlight = transform.Find("Spot Light");
+        Transform cone = spotlight.Find("Cone");
+
+        spotlight.GetComponent<Light>().color = detectedColor;
+        cone.GetComponent<Renderer>().material.color= detectedColor;
+
         yield return new WaitForSeconds(3f);
         //audioItem.Play();
+        spotlight.GetComponent<Light>().color = normalColor;
+        cone.GetComponent<Renderer>().material.color = normalColor;
         CurrentCameraState = CameraState.Idle;
     }
 
