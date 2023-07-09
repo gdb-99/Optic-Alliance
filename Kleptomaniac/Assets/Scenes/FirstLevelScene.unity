@@ -2714,6 +2714,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57b3d626885cafe4e895fdca51a9d793, type: 3}
+--- !u!114 &471410661 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5344130663850081545, guid: 57b3d626885cafe4e895fdca51a9d793, type: 3}
+  m_PrefabInstance: {fileID: 471410660}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &508230624
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9324,6 +9335,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2006727300583767501, guid: c8eeb30abf9f535428cfff4885a8122a, type: 3}
+      propertyPath: sharedProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: e4cefc2d355134e97a6fbd0de9736281, type: 2}
     - target: {fileID: 3309193974796063090, guid: c8eeb30abf9f535428cfff4885a8122a, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -9348,6 +9363,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseMenu - Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5094092322888884143, guid: c8eeb30abf9f535428cfff4885a8122a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5226087107090285719, guid: c8eeb30abf9f535428cfff4885a8122a, type: 3}
+      propertyPath: layer
+      value: 
+      objectReference: {fileID: 471410661}
+    - target: {fileID: 5226087107090285719, guid: c8eeb30abf9f535428cfff4885a8122a, type: 3}
+      propertyPath: brightness
+      value: 
+      objectReference: {fileID: 11400000, guid: e4cefc2d355134e97a6fbd0de9736281, type: 2}
     - target: {fileID: 5226087107090285719, guid: c8eeb30abf9f535428cfff4885a8122a, type: 3}
       propertyPath: brightSlider
       value: 

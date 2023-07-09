@@ -186,8 +186,7 @@ public class SelectLevelManager : MonoBehaviour
                 SceneManager.LoadScene("FirstLevelScene");
                 break;
             default:
-                Debug.Log("Go to Level - NO LEVEL SELECTED");
-                
+                Debug.Log("Go to Level - NO LEVEL SELECTED");      
                 break;
         }
     }
