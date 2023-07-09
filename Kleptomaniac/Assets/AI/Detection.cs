@@ -39,7 +39,7 @@ public class Detection : MonoBehaviour
         {
             if (camRotationScript != null)
             {
-                camRotationScript.CurrentCameraState = CamRotation.CameraState.Aware;
+                //camRotationScript.CurrentCameraState = CamRotation.CameraState.Aware;
 
                 Vector3 direction = col.transform.position - lens.position;
                 RaycastHit hit;
@@ -50,12 +50,13 @@ public class Detection : MonoBehaviour
 
                     if (hit.collider.gameObject.CompareTag(playerTag))
                     {
-                        camRotationScript.CurrentCameraState = CamRotation.CameraState.Aware;
+                        //camRotationScript.CurrentCameraState = CamRotation.CameraState.Aware;
                         camRotationScript.SetPlayerTransform(hit.collider.transform);
                         Debug.Log(camRotationScript.CurrentCameraState);
                         if (OnPlayerDetected != null)
                         {
                             OnPlayerDetected.Invoke(this, new OnSwitchItemEventArgs { camera = this, playerTransform = hit.collider.transform }); // + codice univoco
+                            camRotationScript.PlayerDetected();
                         }
                     }
                 }
@@ -65,8 +66,10 @@ public class Detection : MonoBehaviour
 
     private void OnTriggerExit(Collider col)
     {
-        camRotationScript.CurrentCameraState = CamRotation.CameraState.Idle;
-        Debug.Log(camRotationScript.CurrentCameraState);
+        camRotationScript.PlayerNoLongerDetected();
+        //camRotationScript.CurrentCameraState = CamRotation.CameraState.Idle;
+        //camRotationScript.PlayerDetected();
+        //Debug.Log(camRotationScript.CurrentCameraState);
     }
 
     public List<EnemyPatrolling2> GetReactingGuards()

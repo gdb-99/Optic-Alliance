@@ -57,10 +57,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AI\EnemyPatrolling2.cs" />
-    <Compile Include="Assets\LevelDetailsController.cs" />
+    <Compile Include="Assets\Scripts\LevelDetailsController.cs" />
     <Compile Include="Assets\Scripts\Item.cs" />
     <Compile Include="Assets\PlayerInputActions.cs" />
-    <Compile Include="Assets\MapPinController.cs" />
+    <Compile Include="Assets\Scripts\MapPinController.cs" />
     <Compile Include="Assets\Sensors\HearingSensor.cs" />
     <Compile Include="Assets\Scripts\BlackMarketController.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
@@ -70,15 +70,15 @@
     <Compile Include="Assets\Sensors\HearingManager.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\LevelDataSO.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\ItemSO.cs" />
-    <Compile Include="Assets\MapPinLevelNameController.cs" />
+    <Compile Include="Assets\Scripts\MapPinLevelNameController.cs" />
     <Compile Include="Assets\Scripts\FoxHeadController.cs" />
-    <Compile Include="Assets\InventorySlot.cs" />
+    <Compile Include="Assets\Scripts\InventorySlot.cs" />
     <Compile Include="Assets\Scripts\PlayerInGameMenuController.cs" />
     <Compile Include="Assets\Scripts\Walkman.cs" />
     <Compile Include="Assets\AI\EnemyPatrolling.cs" />
     <Compile Include="Assets\AI\Detection.cs" />
     <Compile Include="Assets\AI\EnemyAI.cs" />
-    <Compile Include="Assets\ItemDetailsController.cs" />
+    <Compile Include="Assets\Scripts\ItemDetailsController.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\BlackMarketSO.cs" />
     <Compile Include="Assets\Scripts\Flashlight.cs" />
     <Compile Include="Assets\Scripts\Brightness.cs" />
@@ -90,27 +90,30 @@
     <Compile Include="Assets\Scripts\Blowgun.cs" />
     <Compile Include="Assets\Scripts\OptionsMenu.cs" />
     <Compile Include="Assets\Sensors\VisionSensor.cs" />
-    <Compile Include="Assets\light.cs" />
+    <Compile Include="Assets\Scripts\light.cs" />
     <Compile Include="Assets\Scripts\PurchaseDetailsController.cs" />
     <Compile Include="Assets\Scripts\EMPRemote.cs" />
-    <Compile Include="Assets\PauseMenu.cs" />
+    <Compile Include="Assets\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\PlayerItemController.cs" />
     <Compile Include="Assets\AI\BannerController.cs" />
     <Compile Include="Assets\Scripts\GameInput.cs" />
     <Compile Include="Assets\Scripts\SelectLevelManager.cs" />
     <Compile Include="Assets\Sensors\DetectableTarget.cs" />
-    <Compile Include="Assets\FinishLevelController.cs" />
-    <Compile Include="Assets\InventoryItemController.cs" />
+    <Compile Include="Assets\Scripts\FinishLevelController.cs" />
+    <Compile Include="Assets\Scripts\InventoryItemController.cs" />
     <Compile Include="Assets\Scripts\AlarmLightController.cs" />
     <Compile Include="Assets\Scripts\HighlightTarget.cs" />
-    <Compile Include="Assets\PlanetController.cs" />
+    <Compile Include="Assets\Scripts\PlanetController.cs" />
     <Compile Include="Assets\Sensors\AwarenessSystem.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\PlayerSO.cs" />
-    <Compile Include="Assets\DraggableItem.cs" />
+    <Compile Include="Assets\Scripts\DraggableItem.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Sensors\ProximitySensor.cs" />
-    <Compile Include="Assets\MonaLisa.cs" />
+    <Compile Include="Assets\Scripts\MonaLisa.cs" />
     <Compile Include="Assets\Scripts\Interactable.cs" />
+    <Compile Include="Assets\MusicSwitcher.cs" />
+    <Compile Include="Assets\Scripts\CanvasManager.cs" />
+    <Compile Include="Assets\Scripts\GameOver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -389,6 +392,12 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Android.Types">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.12f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Android.Gradle">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.12f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Gradle.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.12f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>

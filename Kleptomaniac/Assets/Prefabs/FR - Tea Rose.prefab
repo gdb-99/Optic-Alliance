@@ -138,7 +138,7 @@ Transform:
   - {fileID: 6915005254560974607}
   - {fileID: 1327047936380318648}
   - {fileID: 6488281701967055718}
-  - {fileID: 2268679723239357374}
+  - {fileID: 7530821146099751628}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1011,7 +1011,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2268679723239357374}
+  - component: {fileID: 7530821146099751628}
+  - component: {fileID: 2335649611403625653}
   m_Layer: 0
   m_Name: Treasure
   m_TagString: Untagged
@@ -1019,15 +1020,15 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2268679723239357374
-Transform:
+--- !u!224 &7530821146099751628
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9109347236258165310}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -37.820763, y: -11.255124, z: 57.05462}
+  m_LocalPosition: {x: 0, y: 0, z: 57.05462}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1035,6 +1036,19 @@ Transform:
   m_Father: {fileID: 2949838606776190788}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -37.820763, y: -11.255124}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &2335649611403625653
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9109347236258165310}
+  m_CullTransparentMesh: 1
 --- !u!1001 &952397546604952715
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1164,7 +1178,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 2268679723239357374}
+    m_TransformParent: {fileID: 7530821146099751628}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 3937283dc2566944a8655d3e535d17a8, type: 3}
       propertyPath: m_RootOrder

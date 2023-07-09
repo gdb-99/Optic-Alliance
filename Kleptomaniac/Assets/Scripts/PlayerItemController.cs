@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerItemController : MonoBehaviour {
+
+    public event EventHandler OnItemSwitched;
+
     [SerializeField] private InventorySO inventorySO;
     [SerializeField] private Transform itemHoldPoint;
 
@@ -41,10 +44,12 @@ public class PlayerItemController : MonoBehaviour {
         }
         availableItems[itemIndex - 1].gameObject.SetActive(true);
         currentItemIndex = itemIndex - 1;
+        OnItemSwitched?.Invoke(this, EventArgs.Empty);
     }
 
     public void UseActiveItem() {
-        availableItems[currentItemIndex].Use();
+        if(availableItems.Count > 0)
+            availableItems[currentItemIndex].Use();
     }
 
     public void DropActiveItem() {
@@ -53,6 +58,10 @@ public class PlayerItemController : MonoBehaviour {
         GameObject item = Instantiate(inventorySO.items[currentItemIndex].data.itemModel, itemHoldPoint);
         availableItems[currentItemIndex] = item.GetComponent<Item>();
         availableItems[currentItemIndex].SetPlayerItemController(this);
+    }
+
+    public int GetCurrentItemIndex() {
+        return currentItemIndex;
     }
 
     public void StartCooldown(float cooldownTime, Action f) {
