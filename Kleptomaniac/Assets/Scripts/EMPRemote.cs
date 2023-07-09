@@ -66,4 +66,9 @@ public class EMPRemote : Item {
         }
     }
 
+    private void OnDisable() {
+        cctvTarget?.GetComponent<HighlightTarget>().ToggleHighlight(false);
+        cctvTarget = null;
+    }
+
 }

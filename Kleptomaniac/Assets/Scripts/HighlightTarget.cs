@@ -5,7 +5,7 @@ using UnityEngine;
 public class HighlightTarget : MonoBehaviour {
 
     private Renderer[] renderers;
-    private Color color = new Color(1, 1, 1, 0);
+    private Color color = new Color(112, 207, 20, 0);
     private List<Material> materials;
 
     //Gets all the materials from each renderer
