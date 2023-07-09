@@ -61,7 +61,7 @@ public class CamRotation : MonoBehaviour
                 if(playerTransform != null)
                 {
                     StopAllCoroutines();
-                    transform.LookAt(playerTransform);
+                    //transform.LookAt(playerTransform);
                     startNextRotation = true;
                     //tornaAllAngoloDiPartenza();
                 }
@@ -70,6 +70,17 @@ public class CamRotation : MonoBehaviour
                 break;
 
         }
+    }
+
+    public void PlayerDetected() {
+        StartCoroutine(PlayerDetectedCoroutine());
+    }
+
+    IEnumerator PlayerDetectedCoroutine() {
+        CurrentCameraState = CameraState.Disabled;
+        yield return new WaitForSeconds(3f);
+        //audioItem.Play();
+        CurrentCameraState = CameraState.Idle;
     }
 
 

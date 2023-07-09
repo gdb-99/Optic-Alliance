@@ -65,8 +65,9 @@ public class Detection : MonoBehaviour
 
     private void OnTriggerExit(Collider col)
     {
-        camRotationScript.CurrentCameraState = CamRotation.CameraState.Idle;
-        Debug.Log(camRotationScript.CurrentCameraState);
+        //camRotationScript.CurrentCameraState = CamRotation.CameraState.Idle;
+        camRotationScript.PlayerDetected();
+        //Debug.Log(camRotationScript.CurrentCameraState);
     }
 
     public List<EnemyPatrolling2> GetReactingGuards()

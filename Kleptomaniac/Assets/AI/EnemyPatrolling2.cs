@@ -11,6 +11,7 @@ public class EnemyPatrolling2 : MonoBehaviour
 {
 
     public event EventHandler OnDistractionReached;
+    public static event EventHandler OnGameOver;
 
     public List<Detection> detectionCameras = new List<Detection>();
     [SerializeField] private bool isActive;
@@ -109,6 +110,7 @@ public class EnemyPatrolling2 : MonoBehaviour
         // Controllo se la telecamera corrente è nella lista detectionCameras
         if (detectionCameras.Contains(aaa.camera)) //
         {
+            barkAudioSource.Play();
             currentState = EnemyState.Chasing;
             lastKnownPlayerPosition = aaa.playerTransform.position;
             // Esegui le azioni specifiche per la guardia quando il giocatore viene rilevato da questa telecamera
@@ -152,6 +154,7 @@ public class EnemyPatrolling2 : MonoBehaviour
                     else
                     {
                         Debug.Log("Game Over");
+                        OnGameOver?.Invoke(this, EventArgs.Empty);
                     }
                 }
                 else
