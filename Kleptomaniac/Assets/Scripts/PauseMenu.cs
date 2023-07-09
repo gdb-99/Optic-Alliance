@@ -4,11 +4,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+
 public class PauseMenu : MonoBehaviour
 {
+    //Per mettere in pausa il gioco e mostrare il corretto panel:
     public static bool GameIsPaused = false;
-    public ShowItemDetailsEvent showDetailsEvent;
     public GameObject pauseMenuUI;
+
+    public ShowItemDetailsEvent showDetailsEvent;
     [SerializeField] GameObject _prefabItem;
     [SerializeField] TextMeshProUGUI itemName;
     [SerializeField] TextMeshProUGUI itemDesc;
@@ -17,42 +20,46 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] PlayerSO player;
     [SerializeField] VerticalLayoutGroup itemList;
     ItemSO selectedItem;
- 
-    
 
+    /*
     void Start() {
         Resume();
     }
+    */
+  
     // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Tab))
         {
-            if(GameIsPaused)
+            if(pauseMenuUI.activeSelf)
             {
                 Resume();
-            } else
+            }
+            else 
             {
-                Pause();
+                if(!GameIsPaused){
+                    Pause();
+                }
             }
         }
 
-        
+    }
 
-        void Pause()
-        {
+    public void Pause()
+    {
+        //Mostra il cursore del mouse:
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-
-            pauseMenuUI.SetActive(true);    //abilita la visualizzazione del panel della pausa
-            Time.timeScale = 0f;    //per bloccare il gioco
-            GameIsPaused = true;
-        }
+        pauseMenuUI.SetActive(true);    //abilita la visualizzazione del panel della pausa
+        Time.timeScale = 0f;    //per bloccare il gioco
+        GameIsPaused = true;
     }
 
     public void Resume()
     {
+        //Nascondi il cursore del mouse:
         Debug.Log("CALLED RESUME FUNCTION!");
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -65,11 +72,11 @@ public class PauseMenu : MonoBehaviour
     public void RestartLevel() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Resume();
-
     }
 
     public void QuitLevel() {
         SceneManager.LoadScene("SelectLevelScene");
+        Resume();
     }
     
     /*
@@ -101,21 +108,27 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void MyObjects() {
-       //FillBackpack();
+
+       FillBackpack();
+
         if (showDetailsEvent == null)
             showDetailsEvent = new ShowItemDetailsEvent();
 
         showDetailsEvent.AddListener(HandleShowDetails);
-        ResetShowPanel();
+        //ResetShowPanel();
     }
 
     public void FillBackpack()
     {
+
         player.backpackbackInv.items.ForEach(item => {
+            
             GameObject newItemInstance = Instantiate(_prefabItem);
             newItemInstance.transform.SetParent(itemList.transform, false);
 
-            if(!newItemInstance.TryGetComponent<MenuItemController>(out var controller)) { return; }
+            if(!newItemInstance.TryGetComponent<MenuItemController>(out var controller)) { 
+                return; 
+            }
 
             controller.SetItem(item.data);
         });

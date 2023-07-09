@@ -36,7 +36,6 @@ public class SelectLevelManager : MonoBehaviour
     [SerializeField] int totalInventorySlot = 9;
     [SerializeField] int totalBackpackSlot = 3;
 
-
     //[SerializeField] InventorySO inventory;
     //[SerializeField] InventorySO backpack;
     [SerializeField] GameObject itemPrefab;
@@ -52,19 +51,18 @@ public class SelectLevelManager : MonoBehaviour
 
 
     LevelDataSO.LevelCode _selectedLevel = LevelDataSO.LevelCode.NONE;
-    public GameObject PauseMenu;
+    /*public GameObject PauseMenu;
 
     void Start()
     {
         PauseMenu.GetComponent<PauseMenu>().Resume();
-    }
+    }*/
 
     void SetPlayerData()
     {
         moneyText.text = playerData.money.ToString();
         reputationText.text = playerData.reputation.ToString();
     }
-
 
     void FillInventory()
     {
