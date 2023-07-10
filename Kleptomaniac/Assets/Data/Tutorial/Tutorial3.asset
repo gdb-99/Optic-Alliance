@@ -10,8 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ea795f570547f04285307779e7dc0ba, type: 3}
-  m_Name: Tutorial1
+  m_Name: Tutorial3
   m_EditorClassIdentifier: 
-  title: CCTV camera
-  info: A CCTV camera. My first advice is to avoid them. If it turns red it means
-    you are in trouble..maybe.
+  title: Camera and Guard
+  info: If a camera sees you, it can alert a guard who will start looking for you.

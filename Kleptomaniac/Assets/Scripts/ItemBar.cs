@@ -39,7 +39,7 @@ public class ItemBar : MonoBehaviour {
             RectTransform itemSlotRectTransform = itemSlotTransform.GetComponent<RectTransform>();
             itemSlotRectTransform.anchoredPosition = new Vector2(50f * i, 0f);
             itemSlotTransform.Find("ItemImage").GetComponent<Image>().sprite = backpack.items[i].data.itemSprite;
-            itemSlotTransform.Find("ItemNum").GetComponent<TextMeshProUGUI>().text = "(" + (i+1).ToString() + ")";
+            itemSlotTransform.Find("ItemNum").GetComponent<TextMeshProUGUI>().text = "( " + (i+1).ToString() + " )";
             itemSlotTransform.gameObject.SetActive(true);
             i++;
         }
