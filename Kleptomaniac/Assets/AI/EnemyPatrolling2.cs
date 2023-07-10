@@ -126,7 +126,12 @@ public class EnemyPatrolling2 : MonoBehaviour
 
         switch (currentState)
         {
+            //WALKING
             case EnemyState.Patrolling:
+
+                policeAnimator.SetTrigger("patrolling");
+                agent.speed = 1.0f;
+
                 Debug.Log("STATE = PATROLLING");
                 questionObject.SetActive(false);
                 if (CanSeePlayer)
@@ -148,6 +153,8 @@ public class EnemyPatrolling2 : MonoBehaviour
                 questionObject.SetActive(false);
                 if (CanSeePlayer)
                 {
+                    policeAnimator.SetTrigger("chasing");
+                    agent.speed = 1.8f;
                     exclamationObject.SetActive(true);
                     LookAtPlayer();
                     if (playerDistance > 1f)
@@ -168,7 +175,7 @@ public class EnemyPatrolling2 : MonoBehaviour
                     {
                         agent.angularSpeed = 0f;
                         searchTimer = 0f;
-                        policeAnimator.SetBool("isStop", true);
+                        //policeAnimator.SetBool("isStop", true);
                         sniffAudioSource.Play();
                         exclamationObject.SetActive(false);
                         questionObject.SetActive(true);
@@ -184,20 +191,27 @@ public class EnemyPatrolling2 : MonoBehaviour
                 {
                     Debug.Log("I AM SEARCHING BUT I JUST SAW YOU");
                     barkAudioSource.Play();
-                    policeAnimator.SetBool("isSleeping", false);
-                    policeAnimator.SetBool("isStop", false);
+                    //policeAnimator.SetBool("isSleeping", false);
+                    //policeAnimator.SetBool("isStop", false);
+
+                    policeAnimator.SetTrigger("chasing");
+
                     agent.angularSpeed = 120f;
                     currentState = EnemyState.Chasing;
                 }
                 if (searchTimer >= searchDuration)
                 {
                     agent.angularSpeed = 120f;
-                    policeAnimator.SetBool("isStop", false);
+
+                 
+
+                    //policeAnimator.SetBool("isStop", false);
                     currentState = EnemyState.Patrolling;
                 }
                 else
                 {
-                    policeAnimator.SetBool("isStop", true);
+                    policeAnimator.SetTrigger("searching");
+                    //policeAnimator.SetBool("isStop", true);
                     transform.localEulerAngles = new Vector3(0, Mathf.PingPong(Time.time * rotateSpeed, 90) - 30, 0);
                     Debug.Log("Forse è qui intorno...");
                 }
@@ -213,7 +227,7 @@ public class EnemyPatrolling2 : MonoBehaviour
                     OnDistractionReached?.Invoke(this, EventArgs.Empty);
                     agent.angularSpeed = 0f;
                     searchTimer = 0f;
-                    policeAnimator.SetBool("isStop", true);
+                    //policeAnimator.SetBool("isStop", true);
                     sniffAudioSource.Play();
                     exclamationObject.SetActive(false);
                     questionObject.SetActive(true);
@@ -318,8 +332,9 @@ public class EnemyPatrolling2 : MonoBehaviour
         Debug.Log("ZZZ...");
         agent.angularSpeed = 0f;
         agent.destination = transform.position;
-        policeAnimator.SetBool("isStop", true);
-        policeAnimator.SetBool("isSleeping", true);
+        policeAnimator.SetTrigger("sleeping");
+        //policeAnimator.SetBool("isStop", true);
+        //policeAnimator.SetBool("isSleeping", true);
         questionObject.SetActive(false);
         exclamationObject.SetActive(false);
         sheepObject.SetActive(true);
@@ -327,16 +342,16 @@ public class EnemyPatrolling2 : MonoBehaviour
         yield return new WaitForSeconds(10f);
         Debug.Log("WAKING UP");
         if (CanSeePlayer) {
-            policeAnimator.SetBool("isSleeping", false);
-            policeAnimator.SetBool("isStop", false);
+            //policeAnimator.SetBool("isSleeping", false);
+            //policeAnimator.SetBool("isStop", false);
             wokeUp = true;
             sheepObject.SetActive(false);
             agent.angularSpeed = 120f;
             barkAudioSource.Play();
             currentState = EnemyState.Chasing;
         } else {
-            policeAnimator.SetBool("isStop", true);
-            policeAnimator.SetBool("isSleeping", false);
+            //policeAnimator.SetBool("isStop", true);
+            //policeAnimator.SetBool("isSleeping", false);
             searchTimer = 0f;
             wokeUp = true;
             sheepObject.SetActive(false);
