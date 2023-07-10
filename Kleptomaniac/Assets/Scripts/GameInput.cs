@@ -50,4 +50,10 @@ public class GameInput : MonoBehaviour {
         return inputVector.normalized;
     }
 
+    private void OnDestroy() {
+        playerInputActions.Player.Interact.performed -= Interact_performed;
+        playerInputActions.Player.Use.performed -= Use_performed;
+        playerInputActions.Player.SwitchItem.performed -= SwitchItem_performed;
+    }
+
 }

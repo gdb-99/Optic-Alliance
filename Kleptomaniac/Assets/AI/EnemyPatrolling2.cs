@@ -358,6 +358,13 @@ public class EnemyPatrolling2 : MonoBehaviour
         }
     }
 
+    private void OnDestroy() {
+        GameManager.Instance.OnGamePhaseChanged -= OnGamePhaseChanged;
+        foreach(Detection detectionCamera in detectionCameras) {
+            detectionCamera.OnPlayerDetected -= DetectionScript_OnPlayerDetected;
+        }
+    }
+
 
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()

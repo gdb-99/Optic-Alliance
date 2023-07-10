@@ -3530,6 +3530,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5644609105212738065, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+--- !u!1 &759248882 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5644609105752843479, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+  m_PrefabInstance: {fileID: 759248881}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &761183590 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5644609105212738071, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
@@ -8371,7 +8376,7 @@ MonoBehaviour:
   clips:
   - {fileID: 1417217327}
   - {fileID: 1706244768}
-  panel: {fileID: 0}
+  panel: {fileID: 759248882}
 --- !u!4 &1961248966
 Transform:
   m_ObjectHideFlags: 0

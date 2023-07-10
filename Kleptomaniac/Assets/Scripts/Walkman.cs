@@ -69,6 +69,12 @@ public class Walkman : Item {
         Destroy(gameObject);
     }
 
+    private void OnDestroy() {
+        foreach(EnemyPatrolling2 guard in distractedGuards) {
+            guard.OnDistractionReached -= TurnOffWalkman;
+        }
+    }
+
     IEnumerator DelayedStartWalkman() {
         yield return new WaitForSeconds(3f);
         Debug.Log("PLAYING !!!!");
