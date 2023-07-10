@@ -11,6 +11,7 @@ public class CanvasManager : MonoBehaviour
     }
 
     private void EnemyPatrolling2_OnGameOver(object sender, System.EventArgs e) {
+        EnemyPatrolling2.OnGameOver -= EnemyPatrolling2_OnGameOver;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         Time.timeScale = 0f;    //per bloccare il gioco
