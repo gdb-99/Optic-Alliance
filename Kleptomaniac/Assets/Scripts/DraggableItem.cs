@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
 {
@@ -70,6 +72,13 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        SelectLevelManager.Instance.DisplayItemInfo(GetComponent<InventoryItemController>().GetItem());
+        if(SceneManager.GetActiveScene().name == "SelectLevelScene" || 
+        SceneManager.GetActiveScene().name == "BlackMarketScene"){
+            SelectLevelManager.Instance.DisplayItemInfo(GetComponent<InventoryItemController>().GetItem());
+        }
+        else{
+            Debug.Log("CALL PAUSE MENU");
+            PauseMenu.Instance.HandleShowDetails(GetComponent<InventoryItemController>().GetItem());
+        }
     }
 }

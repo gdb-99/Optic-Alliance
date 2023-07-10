@@ -7,18 +7,44 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+
+    //Instance:
+    #region Singleton Creation
+    public static PauseMenu Instance { get; private set; }
+
+    private PauseMenu()
+    {
+        // Private constructor to prevent instantiation from outside the class.
+    }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+
+        Instance = this;
+    }
+    #endregion
+
     //Per mettere in pausa il gioco e mostrare il corretto panel:
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
 
     public ShowItemDetailsEvent showDetailsEvent;
     [SerializeField] GameObject _prefabItem;
+    [SerializeField] GameObject slotPrefab;
+    [SerializeField] PlayerSO player;
+    [SerializeField] VerticalLayoutGroup itemList;
+
     [SerializeField] TextMeshProUGUI itemName;
     [SerializeField] TextMeshProUGUI itemDesc;
     [SerializeField] TextMeshProUGUI emptyText;
     [SerializeField] Image itemImage;
-    [SerializeField] PlayerSO player;
-    [SerializeField] VerticalLayoutGroup itemList;
+
+    [SerializeField] GameObject itemPanel;
+    
     ItemSO selectedItem;
 
     /*
@@ -78,13 +104,6 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene("SelectLevelScene");
         Resume();
     }
-    
-    /*
-    public void fillBackpack() {
-        item1 = player.backpackbackInv.items[0].data;
-        item2 = player.backpackbackInv.items[1].data;
-    }
-    */
 
     private void ResetShowPanel()
     {
@@ -92,45 +111,64 @@ public class PauseMenu : MonoBehaviour
         itemDesc.text = string.Empty;
         itemImage.sprite = null;
         itemImage.enabled = false;
-
         emptyText.enabled = true;
     }
 
-    void HandleShowDetails(ItemSO item)
+    public void HandleShowDetails(ItemSO item)
     {
-        selectedItem = item;
+        //selectedItem = item;
+        Debug.Log("Item:" + item.name);
 
         itemName.text = item.name;
         itemDesc.text = item.description;
         itemImage.sprite = item.itemSprite;
+        itemPanel.SetActive(true);
         itemImage.enabled = true;
         emptyText.enabled = false;
     }
 
     public void MyObjects() {
 
-       FillBackpack();
-
-        if (showDetailsEvent == null)
-            showDetailsEvent = new ShowItemDetailsEvent();
-
-        showDetailsEvent.AddListener(HandleShowDetails);
-        //ResetShowPanel();
+        FillBackpack();
+        ResetShowPanel();
+        
     }
 
     public void FillBackpack()
     {
 
-        player.backpackbackInv.items.ForEach(item => {
-            
-            GameObject newItemInstance = Instantiate(_prefabItem);
-            newItemInstance.transform.SetParent(itemList.transform, false);
+        int counter = 0;
 
-            if(!newItemInstance.TryGetComponent<MenuItemController>(out var controller)) { 
+        foreach (Transform child in itemList.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        player.backpackbackInv.items.ForEach(item => {
+            GameObject newItemInstance = Instantiate(_prefabItem);
+            GameObject newSlotInstance = Instantiate(slotPrefab);
+            newSlotInstance.transform.SetParent(itemList.transform, false);
+            newSlotInstance.tag = "SlotBackpack";
+            newItemInstance.transform.SetParent(newSlotInstance.transform, false);
+
+            if (!newItemInstance.TryGetComponent<InventoryItemController>(out var controller)) 
+            { 
                 return; 
             }
 
-            controller.SetItem(item.data);
+            controller.SetItem(item);
+
+            counter++;
         });
+
+        if (counter < 3)
+        {
+            for (int i = 0; i < 3 - counter; i++)
+            {
+                GameObject newSlotInstance = Instantiate(slotPrefab);
+                newSlotInstance.tag = "SlotBackpack";
+                newSlotInstance.transform.SetParent(itemList.transform, false);
+            }
+        }
     }
 }

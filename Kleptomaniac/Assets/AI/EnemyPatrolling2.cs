@@ -7,8 +7,7 @@ using System;
 using UnityEditor;
 #endif // UNITY_EDITOR
 
-public class EnemyPatrolling2 : MonoBehaviour
-{
+public class EnemyPatrolling2 : MonoBehaviour {
 
     public event EventHandler OnDistractionReached;
     public static event EventHandler OnGameOver;
@@ -55,8 +54,7 @@ public class EnemyPatrolling2 : MonoBehaviour
     //public GamePhase currentPhase;
 
 
-    enum EnemyState
-    {
+    enum EnemyState {
         Patrolling,
         Chasing,
         Searching,
@@ -67,8 +65,7 @@ public class EnemyPatrolling2 : MonoBehaviour
 
     private EnemyState currentState;
 
-    void Start()
-    {
+    void Start() {
         destPoint = 0;
         UnityEngine.AI.NavMeshAgent agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         agent.destination = goal.position;
@@ -82,17 +79,14 @@ public class EnemyPatrolling2 : MonoBehaviour
 
         wokeUp = false;
 
-        foreach (GameObject detectionObject in detectionObjects)
-        {
+        foreach (GameObject detectionObject in detectionObjects) {
             Detection detectionScript = detectionObject.GetComponentInChildren<Detection>();
 
-            if (detectionScript != null)
-            {
+            if (detectionScript != null) {
                 //detectionScript.OnPlayerDetected += OnPlayerDetectedHandler;
                 detectionScript.OnPlayerDetected += DetectionScript_OnPlayerDetected;
                 // Controlla se questa guardia deve reagire a questa telecamera
-                if (detectionScript.GetReactingGuards().Contains(this))
-                {
+                if (detectionScript.GetReactingGuards().Contains(this)) {
                     detectionCameras.Add(detectionScript);
                 }
             }
@@ -108,24 +102,23 @@ public class EnemyPatrolling2 : MonoBehaviour
         // exclamationObject.SetActive(false);
     }
 
-    private void DetectionScript_OnPlayerDetected(object sender, Detection.OnSwitchItemEventArgs aaa)
-    {
+    private void DetectionScript_OnPlayerDetected(object sender, Detection.OnSwitchItemEventArgs aaa) {
         // Controllo se la telecamera corrente è nella lista detectionCameras
-        if (detectionCameras.Contains(aaa.camera)) //
-        {
-            //barkAudioSource.Play();
-            currentState = EnemyState.Chasing;
-            lastKnownPlayerPosition = aaa.playerTransform.position;
-            // Esegui le azioni specifiche per la guardia quando il giocatore viene rilevato da questa telecamera
+        if (currentState != EnemyState.Sleeping) {
+            if (detectionCameras.Contains(aaa.camera)) //
+            {
+                //barkAudioSource.Play();
+                currentState = EnemyState.Chasing;
+                lastKnownPlayerPosition = aaa.playerTransform.position;
+                // Esegui le azioni specifiche per la guardia quando il giocatore viene rilevato da questa telecamera
+            }
         }
     }
 
-    void Update()
-    {
+    void Update() {
         playerDistance = Vector3.Distance(player.position, transform.position);
 
-        switch (currentState)
-        {
+        switch (currentState) {
             //WALKING
             case EnemyState.Patrolling:
 
@@ -134,16 +127,13 @@ public class EnemyPatrolling2 : MonoBehaviour
 
                 Debug.Log("STATE = PATROLLING");
                 questionObject.SetActive(false);
-                if (CanSeePlayer)
-                {
+                if (CanSeePlayer) {
                     exclamationObject.SetActive(true);
                     barkAudioSource.Play();
                     Debug.Log("Ehi ti ho visto!");
                     currentState = EnemyState.Chasing;
                     Chase();
-                }
-                else if (agent.remainingDistance < 0.2f)
-                {
+                } else if (agent.remainingDistance < 0.2f) {
                     Debug.Log("Punto raggiunto, next");
                     GotoNextPoint();
                 }
@@ -151,29 +141,22 @@ public class EnemyPatrolling2 : MonoBehaviour
 
             case EnemyState.Chasing:
                 questionObject.SetActive(false);
-                if (CanSeePlayer)
-                {
+                if (CanSeePlayer) {
                     GameManager.Instance.quest2 = false;
                     policeAnimator.SetTrigger("chasing");
                     agent.speed = chaseSpeed;
                     exclamationObject.SetActive(true);
                     LookAtPlayer();
-                    if (playerDistance > 1f)
-                    {
+                    if (playerDistance > 1f) {
                         Chase();
-                    }
-                    else
-                    {
+                    } else {
                         Debug.Log("Game Over");
                         OnGameOver?.Invoke(this, EventArgs.Empty);
                     }
-                }
-                else
-                {
+                } else {
                     Debug.Log("Dove sei finito?");
                     ReturnToLastKnownPlayerPosition();
-                    if (agent.remainingDistance < 0.1f)
-                    {
+                    if (agent.remainingDistance < 0.1f) {
                         agent.angularSpeed = 0f;
                         searchTimer = 0f;
                         //policeAnimator.SetBool("isStop", true);
@@ -188,8 +171,7 @@ public class EnemyPatrolling2 : MonoBehaviour
             case EnemyState.Searching:
                 Debug.Log("STATE = SEARCHING");
                 searchTimer += Time.deltaTime;
-                if (CanSeePlayer)
-                {
+                if (CanSeePlayer) {
                     Debug.Log("I AM SEARCHING BUT I JUST SAW YOU");
                     barkAudioSource.Play();
                     //policeAnimator.SetBool("isSleeping", false);
@@ -200,17 +182,14 @@ public class EnemyPatrolling2 : MonoBehaviour
                     agent.angularSpeed = 120f;
                     currentState = EnemyState.Chasing;
                 }
-                if (searchTimer >= searchDuration)
-                {
+                if (searchTimer >= searchDuration) {
                     agent.angularSpeed = 120f;
 
-                 
+
 
                     //policeAnimator.SetBool("isStop", false);
                     currentState = EnemyState.Patrolling;
-                }
-                else
-                {
+                } else {
                     policeAnimator.SetTrigger("searching");
                     //policeAnimator.SetBool("isStop", true);
                     transform.localEulerAngles = new Vector3(0, Mathf.PingPong(Time.time * rotateSpeed, 90) - 30, 0);
@@ -243,20 +222,16 @@ public class EnemyPatrolling2 : MonoBehaviour
         }
     }
 
-    void LookAtPlayer()
-    {
+    void LookAtPlayer() {
         transform.LookAt(player);
     }
 
-    void GotoNextPoint()
-    {
-        if (navPoint.Length == 0)
-        {
+    void GotoNextPoint() {
+        if (navPoint.Length == 0) {
             return;
         }
 
-        if (agent.remainingDistance < 0.2f)
-        {
+        if (agent.remainingDistance < 0.2f) {
             if (wokeUp) {
                 destPoint--;
                 destPoint = (destPoint + navPoint.Length) % navPoint.Length;
@@ -266,7 +241,7 @@ public class EnemyPatrolling2 : MonoBehaviour
             agent.CalculatePath(navPoint[destPoint].position, path);
             agent.path = path;
             destPoint = (destPoint + 1) % navPoint.Length;
-            
+
         }
         /*if (GameManager.Instance.currentPhase == GameManager.GamePhase.Theft) //(currentPhase == GamePhase.Theft)
         {
@@ -300,13 +275,11 @@ public class EnemyPatrolling2 : MonoBehaviour
         } */
     }
 
-    void Chase()
-    {
+    void Chase() {
         agent.destination = player.position;
     }
 
-    void ReturnToLastKnownPlayerPosition()
-    {
+    void ReturnToLastKnownPlayerPosition() {
         agent.destination = lastKnownPlayerPosition;
     }
 
@@ -359,19 +332,15 @@ public class EnemyPatrolling2 : MonoBehaviour
             sniffAudioSource.Play();
             currentState = EnemyState.Searching;
         }
-        
+
     }
 
-    private void OnGamePhaseChanged(GameManager.GamePhase newPhase)
-    {
+    private void OnGamePhaseChanged(GameManager.GamePhase newPhase) {
         // Controlla la nuova fase di gioco e abilita o disabilita gli oggetti di conseguenza
-        if (newPhase == GameManager.GamePhase.Theft)
-        {
+        if (newPhase == GameManager.GamePhase.Theft) {
             // Abilita gli oggetti per la fase di furto
             //gameObject.SetActive(true);
-        }
-        else if (newPhase == GameManager.GamePhase.Escape)
-        {
+        } else if (newPhase == GameManager.GamePhase.Escape) {
             // Abilita gli oggetti per la fase di fuga
             gameObject.SetActive(true);
         }
@@ -379,20 +348,18 @@ public class EnemyPatrolling2 : MonoBehaviour
 
     private void OnDestroy() {
         GameManager.Instance.OnGamePhaseChanged -= OnGamePhaseChanged;
-        foreach(Detection detectionCamera in detectionCameras) {
+        foreach (Detection detectionCamera in detectionCameras) {
             detectionCamera.OnPlayerDetected -= DetectionScript_OnPlayerDetected;
         }
     }
 
 
 #if UNITY_EDITOR
-    private void OnDrawGizmosSelected()
-    {
+    private void OnDrawGizmosSelected() {
         DrawVisionCone(vision.position, transform.forward, VisionConeAngle, VisionConeRange);
     }
 
-    private void DrawVisionCone(Vector3 center, Vector3 forward, float angle, float range)
-    {
+    private void DrawVisionCone(Vector3 center, Vector3 forward, float angle, float range) {
         Vector3 startPoint = Mathf.Cos(-angle * Mathf.Deg2Rad) * forward +
                              Mathf.Sin(-angle * Mathf.Deg2Rad) * transform.right;
 
@@ -400,18 +367,14 @@ public class EnemyPatrolling2 : MonoBehaviour
         Handles.DrawSolidArc(center, Vector3.up, startPoint, angle * 2f, range);
     }
 
-    private bool IsPlayerInVisionCone()
-    {
+    private bool IsPlayerInVisionCone() {
         Vector3 directionToPlayer = player.position - transform.position;
         float angleToPlayer = Vector3.Angle(directionToPlayer, transform.forward);
 
-        if (angleToPlayer <= VisionConeAngle)
-        {
+        if (angleToPlayer <= VisionConeAngle) {
             RaycastHit hit;
-            if (Physics.Raycast(vision.position, directionToPlayer, out hit, VisionConeRange))
-            {
-                if (hit.transform.CompareTag("Player"))
-                {
+            if (Physics.Raycast(vision.position, directionToPlayer, out hit, VisionConeRange)) {
+                if (hit.transform.CompareTag("Player")) {
                     lastKnownPlayerPosition = player.position;
                     Debug.Log("True");
                     return true;
@@ -422,15 +385,12 @@ public class EnemyPatrolling2 : MonoBehaviour
         return false;
     }
 
-    private bool IsPlayerObstructed()
-    {
+    private bool IsPlayerObstructed() {
         Vector3 directionToPlayer = player.position - transform.position;
         RaycastHit hit;
 
-        if (Physics.Raycast(vision.position, directionToPlayer, out hit, playerDistance))
-        {
-            if (hit.transform.CompareTag("Player"))
-            {
+        if (Physics.Raycast(vision.position, directionToPlayer, out hit, playerDistance)) {
+            if (hit.transform.CompareTag("Player")) {
                 return false;
             }
         }
