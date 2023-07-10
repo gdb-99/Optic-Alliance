@@ -8,6 +8,8 @@ public class Detection : MonoBehaviour
     CamRotation camRotationScript;
     [SerializeField] private List<EnemyPatrolling2> reactingGuards = new List<EnemyPatrolling2>();
 
+    private AudioSource audioItem;
+    private bool isPlayerDetected;
     string playerTag;
 
     public event EventHandler<OnSwitchItemEventArgs> OnPlayerDetected;
@@ -22,9 +24,11 @@ public class Detection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioItem = GetComponent<AudioSource>();
         camRotationScript = GetComponentInParent<CamRotation>();
         lens = transform.parent.GetComponent<Transform>();
         playerTag = GameObject.FindGameObjectWithTag("Player").tag;
+        isPlayerDetected = false;
     }
 
     // Update is called once per frame
@@ -33,10 +37,11 @@ public class Detection : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider col) //era OnTriggerStay
+    private void OnTriggerStay(Collider col) //era OnTriggerStay
     {
         if (col.gameObject.CompareTag(playerTag))
         {
+            Debug.Log("PLAYER ENTERED COLLIDER");
             if (camRotationScript != null)
             {
                 //camRotationScript.CurrentCameraState = CamRotation.CameraState.Aware;
@@ -46,10 +51,11 @@ public class Detection : MonoBehaviour
 
                 if (Physics.Raycast(lens.transform.position, direction.normalized, out hit, 1000))
                 {
-                    Debug.Log(hit.collider.name);
+                    Debug.Log("OBJECT RAYCASTED = " + hit.collider.name);
 
                     if (hit.collider.gameObject.CompareTag(playerTag))
                     {
+                        Debug.Log("PLAYER HAS BEEN DETECTED");
                         //camRotationScript.CurrentCameraState = CamRotation.CameraState.Aware;
                         camRotationScript.SetPlayerTransform(hit.collider.transform);
                         Debug.Log(camRotationScript.CurrentCameraState);
@@ -57,6 +63,10 @@ public class Detection : MonoBehaviour
                         {
                             OnPlayerDetected.Invoke(this, new OnSwitchItemEventArgs { camera = this, playerTransform = hit.collider.transform }); // + codice univoco
                             camRotationScript.PlayerDetected();
+                            if (!isPlayerDetected) {
+                                audioItem.Play();
+                                isPlayerDetected = true;
+                            }
                         }
                     }
                 }
@@ -67,6 +77,7 @@ public class Detection : MonoBehaviour
     private void OnTriggerExit(Collider col)
     {
         camRotationScript.PlayerNoLongerDetected();
+        isPlayerDetected = false;
         //camRotationScript.CurrentCameraState = CamRotation.CameraState.Idle;
         //camRotationScript.PlayerDetected();
         //Debug.Log(camRotationScript.CurrentCameraState);

@@ -113,7 +113,7 @@ public class EnemyPatrolling2 : MonoBehaviour
         // Controllo se la telecamera corrente è nella lista detectionCameras
         if (detectionCameras.Contains(aaa.camera)) //
         {
-            barkAudioSource.Play();
+            //barkAudioSource.Play();
             currentState = EnemyState.Chasing;
             lastKnownPlayerPosition = aaa.playerTransform.position;
             // Esegui le azioni specifiche per la guardia quando il giocatore viene rilevato da questa telecamera
