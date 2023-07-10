@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: FirstLevel
   m_EditorClassIdentifier: 
   name: Art Museum
-  description: There is a famous paint in town today! A friend of mine said that
-    a flashlight could be usefull...
+  description: There is a famous painting in town today! A friend of mine said that
+    bringing a FLASHLIGHT could be useful...
   minReputationLevel: 1
   profit: 1000
   code: 1

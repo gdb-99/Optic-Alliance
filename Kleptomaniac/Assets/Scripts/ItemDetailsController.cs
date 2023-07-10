@@ -8,6 +8,14 @@ public class ItemDetailsController : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI detailsText;
     public void ShowInfo(ItemSO item) {
-        detailsText.text = item.description;
+
+        if(item.isPermanent){
+            detailsText.text = "PERMANENT ITEM.\n";
+        }
+        else{
+            detailsText.text = "CONSUMSBLE ITEM.\n";
+        }
+
+        detailsText.text += item.description;
     }
 }

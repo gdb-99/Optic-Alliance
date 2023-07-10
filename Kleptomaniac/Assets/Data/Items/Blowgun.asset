@@ -15,7 +15,8 @@ MonoBehaviour:
   isPermanent: 1
   id: blowgun
   name: Blowgun
-  description: Puts guards to sleep
+  description: Strangely, guards do not like meeting new friends. Oh, well! Use this
+    item with TAB to put the big fellas to sleep!
   price: 25
   itemModel: {fileID: 2464252244053038579, guid: 1a6c9e382a24b754d9326f822a637581, type: 3}
   itemSprite: {fileID: 21300000, guid: 8671b1592b2c06f4e9d0dd1e7d0c1ba8, type: 3}

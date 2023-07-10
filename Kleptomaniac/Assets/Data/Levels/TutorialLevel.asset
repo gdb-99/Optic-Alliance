@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TutorialLevel
   m_EditorClassIdentifier: 
   name: Music center
-  description: The perfect place to improve your skill
+  description: The perfect place to improve your skill!
   minReputationLevel: 0
   profit: 100
+  code: 0
