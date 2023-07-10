@@ -4,7 +4,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 using UnityEngine.SceneManagement;
 
 public class ShowItemDetailsEvent: UnityEvent<ItemSO> { }

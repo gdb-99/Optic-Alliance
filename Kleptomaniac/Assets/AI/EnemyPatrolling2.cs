@@ -354,6 +354,44 @@ public class EnemyPatrolling2 : MonoBehaviour {
     }
 
 
+    private bool IsPlayerInVisionCone()
+    {
+        Vector3 directionToPlayer = player.position - transform.position;
+        float angleToPlayer = Vector3.Angle(directionToPlayer, transform.forward);
+
+        if (angleToPlayer <= VisionConeAngle)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(vision.position, directionToPlayer, out hit, VisionConeRange))
+            {
+                if (hit.transform.CompareTag("Player"))
+                {
+                    lastKnownPlayerPosition = player.position;
+                    Debug.Log("True");
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private bool IsPlayerObstructed()
+    {
+        Vector3 directionToPlayer = player.position - transform.position;
+        RaycastHit hit;
+
+        if (Physics.Raycast(vision.position, directionToPlayer, out hit, playerDistance))
+        {
+            if (hit.transform.CompareTag("Player"))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected() {
         DrawVisionCone(vision.position, transform.forward, VisionConeAngle, VisionConeRange);
@@ -367,35 +405,6 @@ public class EnemyPatrolling2 : MonoBehaviour {
         Handles.DrawSolidArc(center, Vector3.up, startPoint, angle * 2f, range);
     }
 
-    private bool IsPlayerInVisionCone() {
-        Vector3 directionToPlayer = player.position - transform.position;
-        float angleToPlayer = Vector3.Angle(directionToPlayer, transform.forward);
-
-        if (angleToPlayer <= VisionConeAngle) {
-            RaycastHit hit;
-            if (Physics.Raycast(vision.position, directionToPlayer, out hit, VisionConeRange)) {
-                if (hit.transform.CompareTag("Player")) {
-                    lastKnownPlayerPosition = player.position;
-                    Debug.Log("True");
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    private bool IsPlayerObstructed() {
-        Vector3 directionToPlayer = player.position - transform.position;
-        RaycastHit hit;
-
-        if (Physics.Raycast(vision.position, directionToPlayer, out hit, playerDistance)) {
-            if (hit.transform.CompareTag("Player")) {
-                return false;
-            }
-        }
-
-        return true;
-    }
+    
 #endif // UNITY_EDITOR
 }

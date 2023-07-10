@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnityEditor.Progress;
 
 public class PlanetController : MonoBehaviour
 {
@@ -50,19 +49,4 @@ public class PlanetController : MonoBehaviour
     {
         Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
     }
-
-    /*
-    private void AddPin()
-    {
-        Vector3 randomPosition = Random.onUnitSphere * planetRadius;
-
-        GameObject o = Instantiate(pinPrefab, transform, false) as GameObject;
-        o.transform.SetLocalPositionAndRotation(randomPosition, Quaternion.identity);
-        o.transform.localScale = new(20f, 20f, 20f);
-
-        Vector3 up = randomPosition;
-        Vector3 LookAt = Vector3.Cross(up, -transform.right) + up;
-        o.transform.LookAt(LookAt, up);
-    }
-    */
 }
