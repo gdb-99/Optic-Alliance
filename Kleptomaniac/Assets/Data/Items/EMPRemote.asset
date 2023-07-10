@@ -15,7 +15,8 @@ MonoBehaviour:
   isPermanent: 0
   id: emp_remote
   name: EMP remote
-  description: Diasbles nearby CCTV
+  description: You're a shy person? Do cameras frighten you? Then select this object
+    and use it with TAB to hide yourself from these CCTV snitches!
   price: 30
   itemModel: {fileID: 6940922369737826429, guid: 1c9326746849b7447af77939d2df5b6c, type: 3}
   itemSprite: {fileID: 21300000, guid: 0c850a42d3cabc24eacca75ca477e894, type: 3}
