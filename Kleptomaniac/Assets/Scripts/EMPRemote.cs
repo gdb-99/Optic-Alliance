@@ -28,6 +28,7 @@ public class EMPRemote : Item {
         if (isInCoolDown || cctvTarget == null) {
             notUsable.Play();
         } else {
+            GameManager.Instance.quest3 = false;
             audioItem.Play();
             Debug.Log("Disabilitating surveillance CCTV");
             TurnOffNearbyCCTV();

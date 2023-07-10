@@ -64,6 +64,7 @@ public class Detection : MonoBehaviour
                             OnPlayerDetected.Invoke(this, new OnSwitchItemEventArgs { camera = this, playerTransform = hit.collider.transform }); // + codice univoco
                             camRotationScript.PlayerDetected();
                             if (!isPlayerDetected) {
+                                GameManager.Instance.quest2 = false;
                                 audioItem.Play();
                                 isPlayerDetected = true;
                             }

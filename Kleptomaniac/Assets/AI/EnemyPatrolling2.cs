@@ -153,6 +153,7 @@ public class EnemyPatrolling2 : MonoBehaviour
                 questionObject.SetActive(false);
                 if (CanSeePlayer)
                 {
+                    GameManager.Instance.quest2 = false;
                     policeAnimator.SetTrigger("chasing");
                     agent.speed = chaseSpeed;
                     exclamationObject.SetActive(true);

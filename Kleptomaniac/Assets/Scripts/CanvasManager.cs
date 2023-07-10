@@ -8,6 +8,16 @@ public class CanvasManager : MonoBehaviour
     void Start()
     {
         EnemyPatrolling2.OnGameOver += EnemyPatrolling2_OnGameOver;
+        GameManager.Instance.OnGamePhaseChanged += Instance_OnGamePhaseChanged;
+    }
+
+    private void Instance_OnGamePhaseChanged(GameManager.GamePhase obj)
+    {
+        if(obj == GameManager.GamePhase.Escape)
+        {
+            transform.Find("Escape - Canvas").gameObject.SetActive(true);
+        }
+        
     }
 
     private void EnemyPatrolling2_OnGameOver(object sender, System.EventArgs e) {
@@ -20,6 +30,7 @@ public class CanvasManager : MonoBehaviour
 
     private void OnDestroy() {
         EnemyPatrolling2.OnGameOver -= EnemyPatrolling2_OnGameOver;
+        GameManager.Instance.OnGamePhaseChanged -= Instance_OnGamePhaseChanged;
     }
 
 }
