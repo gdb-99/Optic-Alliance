@@ -11,6 +11,7 @@ public class Player : MonoBehaviour {
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private float rotateSpeed = 10f;
     [SerializeField] private GameInput gameInput;
+    [SerializeField] private GameObject interactPanel;
 
     private PlayerItemController playerItemController;
 
@@ -82,6 +83,7 @@ public class Player : MonoBehaviour {
                     if (interactable != selectedInteractable)
                     {
                         selectedInteractable = interactable;
+                        interactPanel.SetActive(true);
                         Debug.Log("FOUND INTERACTABLE");
                     }
                     break;
@@ -89,6 +91,7 @@ public class Player : MonoBehaviour {
                 else
                 {
                     selectedInteractable = null;
+                    interactPanel.SetActive(false);
                 }
             }
         }

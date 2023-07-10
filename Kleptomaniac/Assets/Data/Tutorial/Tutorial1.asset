@@ -9,13 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d17f84ae3e92fa04b9d58fe493dadc40, type: 3}
-  m_Name: TutorialLevel
+  m_Script: {fileID: 11500000, guid: 0ea795f570547f04285307779e7dc0ba, type: 3}
+  m_Name: Tutorial1
   m_EditorClassIdentifier: 
-  name: Music center
-  description: The perfect place to improve your skill!
-  minReputationLevel: 0
-  profit: 100
-  code: 0
-  done: 0
-  hasSecondaryQuestion: 0
+  title: CCTV camera
+  info: A CCTV camera. My first advice is to avoid them. If it turns red it means
+    you are in trouble..maybe.

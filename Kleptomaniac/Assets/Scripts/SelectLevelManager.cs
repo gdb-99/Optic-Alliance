@@ -53,7 +53,7 @@ public class SelectLevelManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI reputationText;
 
 
-    LevelDataSO.LevelCode _selectedLevel = LevelDataSO.LevelCode.NONE;
+    LevelDataSO _selectedLevel;
     
     void Start()
     {
@@ -61,7 +61,7 @@ public class SelectLevelManager : MonoBehaviour
     }
 
     void Update(){
-        if(_selectedLevel != LevelDataSO.LevelCode.NONE){
+        if(_selectedLevel != null){
             startButton.enabled = true;
         }
     }
@@ -155,8 +155,7 @@ public class SelectLevelManager : MonoBehaviour
     public void DisplayLevelInfo(LevelDataSO data)
     {
         levelDetails.ShowInfo(data);
-
-        _selectedLevel = data.code;
+        _selectedLevel = data;
 
     }
 
@@ -186,20 +185,29 @@ public class SelectLevelManager : MonoBehaviour
     public void GoToLevel()
     {
 
-        switch (_selectedLevel)
+        if (_selectedLevel.minReputationLevel > playerData.reputation)
         {
-            case LevelDataSO.LevelCode.TUTORIAL:
-                Debug.Log("Go to Level - Tutorial");
-                SceneManager.LoadScene("TutorialScene");
-                break;
-            case LevelDataSO.LevelCode.FIRST:
-                Debug.Log("Go to Level - First");
-                SceneManager.LoadScene("FirstLevelScene");
-                break;
-            default:
-                Debug.Log("Go to Level - NO LEVEL SELECTED");      
-                break;
+            levelDetails.ShowError();
         }
+        else
+        {
+            switch (_selectedLevel.code)
+            {
+                case LevelDataSO.LevelCode.TUTORIAL:
+                    Debug.Log("Go to Level - Tutorial");
+                    SceneManager.LoadScene("TutorialScene");
+                    break;
+                case LevelDataSO.LevelCode.FIRST:
+                    Debug.Log("Go to Level - First");
+                    SceneManager.LoadScene("FirstLevelScene");
+                    break;
+                default:
+                    Debug.Log("Go to Level - NO LEVEL SELECTED");
+                    break;
+            }
+        }
+
+        
     }
 
     public void GoToExit()

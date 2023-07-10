@@ -10,6 +10,13 @@ public class LevelDataSO : ScriptableObject
     public int minReputationLevel;
     public int profit;
     public LevelCode code;
+    public bool done;
+    public bool hasSecondaryQuestion;
+
+    private void Awake()
+    {
+        done = false;
+    }
 
     public enum LevelCode
     {
