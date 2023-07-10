@@ -18,4 +18,8 @@ public class CanvasManager : MonoBehaviour
         transform.Find("Game Over - Canvas").gameObject.SetActive(true);
     }
 
+    private void OnDestroy() {
+        EnemyPatrolling2.OnGameOver -= EnemyPatrolling2_OnGameOver;
+    }
+
 }

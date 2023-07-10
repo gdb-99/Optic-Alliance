@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class SelectLevelManager : MonoBehaviour
@@ -31,6 +32,8 @@ public class SelectLevelManager : MonoBehaviour
     }
     #endregion
 
+    [SerializeField] Button startButton;
+
     [SerializeField] PlayerSO playerData;
 
     [SerializeField] int totalInventorySlot = 9;
@@ -51,12 +54,17 @@ public class SelectLevelManager : MonoBehaviour
 
 
     LevelDataSO.LevelCode _selectedLevel = LevelDataSO.LevelCode.NONE;
-    /*public GameObject PauseMenu;
-
+    
     void Start()
     {
-        PauseMenu.GetComponent<PauseMenu>().Resume();
-    }*/
+        startButton.enabled = false;
+    }
+
+    void Update(){
+        if(_selectedLevel != LevelDataSO.LevelCode.NONE){
+            startButton.enabled = true;
+        }
+    }
 
     void SetPlayerData()
     {
