@@ -4,35 +4,28 @@ using UnityEngine;
 
 public class HighlightTarget : MonoBehaviour {
 
-    private Renderer[] renderers;
-    private Color color = new Color(112, 207, 20, 0);
-    private List<Material> materials;
+    //private Renderer[] renderers;
+    //private Color color = new Color(112, 207, 20, 0);
+    //private List<Material> materials;
+    private GameObject arrow;
 
     //Gets all the materials from each renderer
     private void Start() {
-        renderers = GetComponentsInChildren<Renderer>();
-        materials = new List<Material>();
-        foreach (var renderer in renderers) {
+        arrow = gameObject.transform.Find("Arrow").gameObject;
+        arrow.SetActive(false);
+        //materials = new List<Material>();
+        //foreach (var renderer in renderers) {
             //A single child-object might have mutliple materials on it
             //that is why we need to all materials with "s"
-            materials.AddRange(new List<Material>(renderer.materials));
-        }
+            //materials.AddRange(new List<Material>(renderer.materials));
+        //}
     }
 
     public void ToggleHighlight(bool val) {
         if (val) {
-            foreach (var material in materials) {
-                //We need to enable the EMISSION
-                material.EnableKeyword("_EMISSION");
-                //before we can set the color
-                material.SetColor("_EmissionColor", color);
-            }
+            arrow.SetActive(true);
         } else {
-            foreach (var material in materials) {
-                //we can just disable the EMISSION
-                //if we don't use emission color anywhere else
-                material.DisableKeyword("_EMISSION");
-            }
+            arrow.SetActive(false);
         }
     }
 }
