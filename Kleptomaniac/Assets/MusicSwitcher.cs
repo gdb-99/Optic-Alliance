@@ -7,10 +7,14 @@ public class MusicSwitcher : MonoBehaviour
     [SerializeField] GameObject[] clips; // drag and add audio clips in the inspector
     [SerializeField] GameObject panel;
     GameObject thisClip;
+    private AudioSource audioItem;
+    private bool flag;
 
     // Start is called before the first frame update
     void Start()
     {
+        flag = false;
+        audioItem = GetComponent<AudioSource>();
         clips[0].SetActive(true);
         thisClip = clips[0];
     }
@@ -31,6 +35,11 @@ public class MusicSwitcher : MonoBehaviour
 
         if (GameManager.Instance.currentPhase == GameManager.GamePhase.Escape)
         {
+            if (!flag)
+            {
+                flag = true;
+                audioItem.Play();
+            }
             clips[0].SetActive(false);  //stealth
             panel.SetActive(true);
             clips[1].SetActive(true);   //escape
