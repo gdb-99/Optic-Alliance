@@ -18,7 +18,7 @@ public class EnemyPatrolling2 : MonoBehaviour
     [SerializeField] private Transform vision;
     public Transform player;
     public float playerDistance;
-    public float AIMoveSpeed;
+    public float chaseSpeed = 1.8f;
     public float damping = 6.0f;
     [SerializeField] private Color gizmoColor = Color.red;
     // [SerializeField] private float awareAI = 10f;
@@ -154,7 +154,7 @@ public class EnemyPatrolling2 : MonoBehaviour
                 if (CanSeePlayer)
                 {
                     policeAnimator.SetTrigger("chasing");
-                    agent.speed = 1.8f;
+                    agent.speed = chaseSpeed;
                     exclamationObject.SetActive(true);
                     LookAtPlayer();
                     if (playerDistance > 1f)
@@ -237,6 +237,7 @@ public class EnemyPatrolling2 : MonoBehaviour
 
             case EnemyState.Sleeping:
                 Debug.Log("STATE = SLEEPING");
+                policeAnimator.SetTrigger("sleeping");
                 break;
         }
     }
@@ -332,7 +333,6 @@ public class EnemyPatrolling2 : MonoBehaviour
         Debug.Log("ZZZ...");
         agent.angularSpeed = 0f;
         agent.destination = transform.position;
-        policeAnimator.SetTrigger("sleeping");
         //policeAnimator.SetBool("isStop", true);
         //policeAnimator.SetBool("isSleeping", true);
         questionObject.SetActive(false);
