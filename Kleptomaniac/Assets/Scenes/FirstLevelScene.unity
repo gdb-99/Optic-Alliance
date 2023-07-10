@@ -1175,6 +1175,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5036517073193609429, guid: d94d282393512f44996ff98bbf14ea9d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5050513479766414624, guid: d94d282393512f44996ff98bbf14ea9d, type: 3}
       propertyPath: m_Name
       value: police_1
@@ -9123,6 +9127,10 @@ PrefabInstance:
       propertyPath: reactingGuards.Array.data[0]
       value: 
       objectReference: {fileID: 2048033007}
+    - target: {fileID: 1253865534684145745, guid: 0c2a5f64e4336d04a9add75400ea5dcd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1714080140429838086, guid: 0c2a5f64e4336d04a9add75400ea5dcd, type: 3}
       propertyPath: m_Name
       value: Surveillance Camera_1
