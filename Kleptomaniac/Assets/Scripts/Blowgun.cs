@@ -7,10 +7,11 @@ public class Blowgun : Item {
     private EnemyPatrolling2 guardTarget;
     private AudioSource audioItem;
     private AudioSource notUsable;
-    private int numBullets = 5;
+    private int numBullets;
 
     private void Start()
     {
+        numBullets = 5;
         audioItem = GetComponents<AudioSource>()[0];
         notUsable = GetComponents<AudioSource>()[1];
     }

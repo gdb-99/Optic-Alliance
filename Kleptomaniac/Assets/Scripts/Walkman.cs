@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Walkman : Item {
 
-    private static bool isInCoolDown = false;
-    private static float cooldownTime = 20f;
+    private static bool isInCoolDown;
+    private static float cooldownTime;
 
     private bool isOn = false;
     private AudioSource audioItem;
@@ -37,6 +37,8 @@ public class Walkman : Item {
     }
 
     private void Start() {
+        isInCoolDown = false;
+        cooldownTime = 20f;
         audioItem = GetComponents<AudioSource>()[0];
         notUsable = GetComponents<AudioSource>()[1];
     }
