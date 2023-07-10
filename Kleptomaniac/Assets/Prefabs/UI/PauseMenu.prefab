@@ -8836,7 +8836,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: End the level without being seen by any camera
+  m_text: End the level without being seen by any camera or guard
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d50e6cc04a6c04745baab42cb75a3fc4, type: 2}
   m_sharedMaterial: {fileID: 5738674133054424040, guid: d50e6cc04a6c04745baab42cb75a3fc4, type: 2}
@@ -8971,7 +8971,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Knock out one or more guards
+  m_text: End the level without using the EMP Remote
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d50e6cc04a6c04745baab42cb75a3fc4, type: 2}
   m_sharedMaterial: {fileID: 5738674133054424040, guid: d50e6cc04a6c04745baab42cb75a3fc4, type: 2}
@@ -9807,13 +9807,14 @@ GameObject:
   - component: {fileID: 8450031207085203970}
   - component: {fileID: 8450031207085203971}
   - component: {fileID: 8450031207085203980}
+  - component: {fileID: 3904503523064239271}
   m_Layer: 5
   m_Name: Level Goals - Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8450031207085203970
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9880,6 +9881,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3904503523064239271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8450031207085203981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 873c2df3e7512e545b2a48ac86ec277d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questimg1: {fileID: 0}
+  questimg2: {fileID: 0}
+  questimg3: {fileID: 0}
 --- !u!1 &8450031207104316771
 GameObject:
   m_ObjectHideFlags: 0
@@ -10172,7 +10188,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Steal the Vitruvian Man
+  m_text: Steal Golden Fishes
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d50e6cc04a6c04745baab42cb75a3fc4, type: 2}
   m_sharedMaterial: {fileID: 5738674133054424040, guid: d50e6cc04a6c04745baab42cb75a3fc4, type: 2}

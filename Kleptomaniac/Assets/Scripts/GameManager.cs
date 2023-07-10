@@ -26,6 +26,10 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    public bool quest1;
+    public bool quest2;
+    public bool quest3;
+
     public enum GameState
     {
         GameOver,
@@ -52,6 +56,9 @@ public class GameManager : MonoBehaviour
         
         // Inizializza lo stato di gioco
         currentPhase = GamePhase.Theft;
+        quest1 = false;
+        quest2 = true;
+        quest3 = true;
     }
 
     public PlayerSO PlayerData
