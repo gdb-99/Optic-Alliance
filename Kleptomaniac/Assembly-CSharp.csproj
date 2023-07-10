@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AI\EnemyPatrolling2.cs" />
+    <Compile Include="Assets\Scripts\SideQuests.cs" />
     <Compile Include="Assets\Scripts\LevelDetailsController.cs" />
     <Compile Include="Assets\Scripts\Item.cs" />
     <Compile Include="Assets\PlayerInputActions.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Assets\Sensors\HearingSensor.cs" />
     <Compile Include="Assets\Scripts\BlackMarketController.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
+    <Compile Include="Assets\LevelGoals.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\InventorySO.cs" />
     <Compile Include="Assets\Scripts\PlayerVisual.cs" />
     <Compile Include="Assets\Scripts\GameOver.cs" />
@@ -87,6 +89,7 @@
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\AI\CamRotation.cs" />
     <Compile Include="Assets\Sensors\DetectableTargetManager.cs" />
+    <Compile Include="Assets\Scripts\QuestItem1.cs" />
     <Compile Include="Assets\Scripts\ItemBar.cs" />
     <Compile Include="Assets\Scripts\MenuItemController.cs" />
     <Compile Include="Assets\Scripts\Blowgun.cs" />
@@ -107,6 +110,7 @@
     <Compile Include="Assets\Scripts\HighlightTarget.cs" />
     <Compile Include="Assets\Scripts\PlanetController.cs" />
     <Compile Include="Assets\Sensors\AwarenessSystem.cs" />
+    <Compile Include="Assets\scr.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\PlayerSO.cs" />
     <Compile Include="Assets\MusicSwitcher.cs" />
     <Compile Include="Assets\Scripts\DraggableItem.cs" />
@@ -114,10 +118,6 @@
     <Compile Include="Assets\Sensors\ProximitySensor.cs" />
     <Compile Include="Assets\Scripts\MonaLisa.cs" />
     <Compile Include="Assets\Scripts\Interactable.cs" />
-    <Compile Include="Assets\LevelGoals.cs" />
-    <Compile Include="Assets\Scripts\SideQuests.cs" />
-    <Compile Include="Assets\Scripts\QuestItem1.cs" />
-    <Compile Include="Assets\scr.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
