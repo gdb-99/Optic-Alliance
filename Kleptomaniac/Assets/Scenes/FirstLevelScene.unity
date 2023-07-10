@@ -3271,6 +3271,70 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5644609104616584411, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609104616584411, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609104616584411, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609104616584411, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -17.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609104616584411, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609104972701057, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609104972701057, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609104972701057, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609104972701057, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609104972701057, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609104972701057, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609104972701059, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609104972701061, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609105165026918, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609105165026920, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609105212738071, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5644609105234195004, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -3310,6 +3374,38 @@ PrefabInstance:
     - target: {fileID: 5644609105234195004, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609105430243468, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609105430243468, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609105430243468, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609105430243468, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 338.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609105430243468, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 177.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609105430243468, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609105430243469, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609105596047274, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5644609105618276227, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
       propertyPath: m_RootOrder
@@ -3370,6 +3466,22 @@ PrefabInstance:
     - target: {fileID: 5644609105618276229, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
       propertyPath: m_Name
       value: CanvasManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609105752843476, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609105752843476, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609105752843476, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644609105752843476, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5644609106413608834, guid: 9e49f949cc0c6e541b761d8d2c2bc44b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
