@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviour
     {
         _playerData.AddMoney(_levelData.profit);
         _playerData.IncreaseReputation();
+        _levelData.done = true;
 
         SceneManager.LoadScene("SelectLevelScene");
     }
