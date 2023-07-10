@@ -114,10 +114,10 @@
     <Compile Include="Assets\Sensors\ProximitySensor.cs" />
     <Compile Include="Assets\Scripts\MonaLisa.cs" />
     <Compile Include="Assets\Scripts\Interactable.cs" />
-    <Compile Include="Assets\scr.cs" />
+    <Compile Include="Assets\LevelGoals.cs" />
     <Compile Include="Assets\Scripts\SideQuests.cs" />
     <Compile Include="Assets\Scripts\QuestItem1.cs" />
-    <Compile Include="Assets\LevelGoals.cs" />
+    <Compile Include="Assets\scr.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
