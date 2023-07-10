@@ -147,7 +147,7 @@ public class EnemyPatrolling2 : MonoBehaviour
                 {
                     exclamationObject.SetActive(true);
                     LookAtPlayer();
-                    if (playerDistance > 2f)
+                    if (playerDistance > 1f)
                     {
                         Chase();
                     }

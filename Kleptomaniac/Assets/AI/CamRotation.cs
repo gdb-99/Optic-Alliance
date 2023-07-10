@@ -38,6 +38,12 @@ public class CamRotation : MonoBehaviour
         startPoint = transform.rotation;
         endPoint = Quaternion.Euler(0, yaw, 0) * startPoint;
         SetUpStartRotation();
+        Transform spotlight = transform.Find("Spot Light");
+        Transform cone = spotlight.Find("Cone");
+
+        spotlight.GetComponent<Light>().color = normalColor;
+        cone.GetComponent<Renderer>().material.color = normalColor;
+        CurrentCameraState = CameraState.Idle;
     }
 
     // Update is called once per frame
@@ -98,22 +104,6 @@ public class CamRotation : MonoBehaviour
 
     }
 
-    
-
-    IEnumerator PlayerDetectedCoroutine() {
-        CurrentCameraState = CameraState.Disabled;
-        Transform spotlight = transform.Find("Spot Light");
-        Transform cone = spotlight.Find("Cone");
-
-        spotlight.GetComponent<Light>().color = detectedColor;
-        cone.GetComponent<Renderer>().material.color= detectedColor;
-
-        yield return new WaitForSeconds(3f);
-        //audioItem.Play();
-        spotlight.GetComponent<Light>().color = normalColor;
-        cone.GetComponent<Renderer>().material.color = normalColor;
-        CurrentCameraState = CameraState.Idle;
-    }
 
 
 
@@ -133,8 +123,12 @@ public class CamRotation : MonoBehaviour
                 yield return null;
             }
 
-            yield return new WaitForSeconds(rotSwitchTime);
-
+            //yield return new WaitForSeconds(rotSwitchTime);
+            float timer2 = 0f;
+            while(timer2 < rotSwitchTime) {
+                timer2 += Time.deltaTime;
+                yield return null;
+            }
             startNextRotation = true;
             rotRight = !rotRight;
         }
