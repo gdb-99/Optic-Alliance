@@ -28,7 +28,7 @@ public class EnemyPatrolling2 : MonoBehaviour
     public Transform[] navPoint;
     public Transform[] escapeNavPoint;
     public UnityEngine.AI.NavMeshAgent agent;
-    public int destPoint = 0;
+    public int destPoint;
     public Transform goal;
     private GameManager gameManager;
     private bool CanSeePlayer => IsPlayerInVisionCone() && !IsPlayerObstructed();
@@ -44,7 +44,7 @@ public class EnemyPatrolling2 : MonoBehaviour
     private AudioSource barkAudioSource;
     private AudioSource sniffAudioSource;
     private AudioSource snoreAudioSource;
-    private bool wokeUp = false;
+    private bool wokeUp;
 
     /* public enum GamePhase
     {
@@ -69,6 +69,7 @@ public class EnemyPatrolling2 : MonoBehaviour
 
     void Start()
     {
+        destPoint = 0;
         UnityEngine.AI.NavMeshAgent agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         agent.destination = goal.position;
 
@@ -78,6 +79,8 @@ public class EnemyPatrolling2 : MonoBehaviour
         currentState = EnemyState.Patrolling;
 
         GameObject[] detectionObjects = GameObject.FindGameObjectsWithTag("DetectionCamera");
+
+        wokeUp = false;
 
         foreach (GameObject detectionObject in detectionObjects)
         {
