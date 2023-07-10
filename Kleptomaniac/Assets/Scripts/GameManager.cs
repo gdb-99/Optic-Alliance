@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] PlayerSO _playerData;
     [SerializeField] LevelDataSO _levelData;
+    [SerializeField] MissionCompletedUIController missionCompletedUI;
 
     void Start()
     {
@@ -68,6 +69,15 @@ public class GameManager : MonoBehaviour
             return _playerData;
         }
     }
+
+    public LevelDataSO LevelData
+    {
+        get
+        {
+            return _levelData;
+        }
+    }
+
 
     public void SetPhaseTheft()
     {
@@ -89,10 +99,44 @@ public class GameManager : MonoBehaviour
 
     public void EndLevel()
     {
-        _playerData.AddMoney(_levelData.profit);
-        _playerData.IncreaseReputation();
+        //Reward solo la prima volta che il livello viene completato
+        if (_levelData.done == false)
+        {
+            _playerData.AddMoney(_levelData.profit);
+            _playerData.IncreaseReputation();
+        }
+        
         _levelData.done = true;
 
+        int completedQuest = 0;
+
+        if (quest1)
+        {
+            completedQuest++;
+        }
+
+        if (quest2)
+        {
+            completedQuest++;
+        }
+
+        if (quest3)
+        {
+            completedQuest++;
+        }
+
+        missionCompletedUI.ShowVictory(completedQuest);
+
+        Time.timeScale = 0;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+    }
+
+    public void GoToSelectLevel()
+    {
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene("SelectLevelScene");
     }
 }

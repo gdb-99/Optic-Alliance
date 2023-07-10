@@ -11,6 +11,7 @@ public class LevelDataSO : ScriptableObject
     public int profit;
     public LevelCode code;
     public bool done;
+    public bool hasSecondaryQuestion;
 
     private void Awake()
     {

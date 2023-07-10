@@ -17,3 +17,5 @@ MonoBehaviour:
   minReputationLevel: 0
   profit: 100
   code: 0
+  done: 0
+  hasSecondaryQuestion: 0
