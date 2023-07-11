@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Camera and Guard
   info: If a camera sees you, it can alert a guard who will start looking for you.
+    If you want to make sure nobody noticied you, check the icon at the bottom right
+    of the screen. If it turns red... Well... Maybe you should hide.

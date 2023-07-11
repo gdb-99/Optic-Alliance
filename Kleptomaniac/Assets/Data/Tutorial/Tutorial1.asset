@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Tutorial1
   m_EditorClassIdentifier: 
   title: CCTV camera
-  info: A CCTV camera. My first advice is to avoid them. If it turns red it means
-    you are in trouble..maybe.
+  info: That's a CCTV camera. My first advice is to avoid them. If it turns red it
+    means you are in trouble..maybe.
