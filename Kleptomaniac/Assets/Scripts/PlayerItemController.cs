@@ -6,6 +6,12 @@ using UnityEngine;
 public class PlayerItemController : MonoBehaviour {
 
     public event EventHandler OnItemSwitched;
+    public event EventHandler<OnItemEnteredCooldownEventArgs> OnItemEnteredCooldown;
+
+    public class OnItemEnteredCooldownEventArgs : EventArgs {
+        public int itemIndex;
+        public float coolDownTime;
+    }
 
     [SerializeField] private InventorySO inventorySO;
     [SerializeField] private Transform itemHoldPoint;
@@ -65,6 +71,10 @@ public class PlayerItemController : MonoBehaviour {
     }
 
     public void StartCooldown(float cooldownTime, Action f) {
+        OnItemEnteredCooldown?.Invoke(this, new OnItemEnteredCooldownEventArgs {
+            itemIndex = currentItemIndex,
+            coolDownTime = cooldownTime
+        });
         StartCoroutine(CoolDown(cooldownTime, f));
     }
     IEnumerator CoolDown(float cooldownTime, Action f) {

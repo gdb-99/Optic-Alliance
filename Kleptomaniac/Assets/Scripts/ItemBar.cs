@@ -23,6 +23,7 @@ public class ItemBar : MonoBehaviour {
     void Start() {
         playerItemController = Player.Instance.GetComponent<PlayerItemController>();
         playerItemController.OnItemSwitched += PlayerItemController_OnItemSwitched;
+        playerItemController.OnItemEnteredCooldown += PlayerItemController_OnItemEnteredCooldown;
 
         int i = 0;
         foreach (InvetoryData invetoryData in backpack.items) {
@@ -45,6 +46,10 @@ public class ItemBar : MonoBehaviour {
         }
     }
 
+    private void PlayerItemController_OnItemEnteredCooldown(object sender, PlayerItemController.OnItemEnteredCooldownEventArgs e) {
+        StartCoroutine(ItemEnteredCooldownCoroutine(e.coolDownTime, e.itemIndex));
+    }
+
     private void PlayerItemController_OnItemSwitched(object sender, System.EventArgs e) {
         int i = 0;
         foreach(Transform slot in slots) {
@@ -55,5 +60,23 @@ public class ItemBar : MonoBehaviour {
             }
             i++;
         }
+    }
+
+    IEnumerator ItemEnteredCooldownCoroutine(float cooldownTime, int itemIndex) {
+
+        float timer = 0f;
+        Transform cooldownBar = slots[itemIndex].Find("CooldownBar");
+        cooldownBar.gameObject.SetActive(true);
+        Image barImage = cooldownBar.Find("Bar").GetComponent<Image>();
+        barImage.fillAmount = 0f;
+
+
+        while (timer < cooldownTime) {
+            timer += Time.deltaTime;
+            barImage.fillAmount = timer / cooldownTime;
+            yield return null;
+        }
+
+        cooldownBar.gameObject.SetActive(false);
     }
 }

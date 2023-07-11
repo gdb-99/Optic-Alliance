@@ -121,12 +121,12 @@ public class EnemyPatrolling2 : MonoBehaviour {
         switch (currentState) {
             //WALKING
             case EnemyState.Patrolling:
-
                 policeAnimator.SetTrigger("patrolling");
                 agent.speed = 1.0f;
 
                 Debug.Log("STATE = PATROLLING");
                 questionObject.SetActive(false);
+                GameManager.Instance.isPigInDanger = false;
                 if (CanSeePlayer) {
                     exclamationObject.SetActive(true);
                     barkAudioSource.Play();
@@ -141,6 +141,7 @@ public class EnemyPatrolling2 : MonoBehaviour {
 
             case EnemyState.Chasing:
                 questionObject.SetActive(false);
+                GameManager.Instance.isPigInDanger = true;
                 if (CanSeePlayer) {
                     GameManager.Instance.quest2 = false;
                     policeAnimator.SetTrigger("chasing");
@@ -169,6 +170,7 @@ public class EnemyPatrolling2 : MonoBehaviour {
                 break;
 
             case EnemyState.Searching:
+                GameManager.Instance.isPigInDanger = true;
                 Debug.Log("STATE = SEARCHING");
                 searchTimer += Time.deltaTime;
                 if (CanSeePlayer) {

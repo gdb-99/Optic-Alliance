@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class Walkman : Item {
 
-    private static bool isInCoolDown;
+    public bool isInCoolDown = false;
     private static float cooldownTime;
+    private static Walkman activeWalkman;
 
     private bool isOn = false;
     private AudioSource audioItem;
@@ -16,6 +17,11 @@ public class Walkman : Item {
 
 
     private void Drop() {
+        if(activeWalkman != null) {
+            Debug.Log("DESTROYING ACTIVE WALKMAN");
+            Destroy(activeWalkman.gameObject);
+        }
+        activeWalkman = this;
         transform.parent = null;
         Vector3 dropPosition = new Vector3(transform.position.x, 0, transform.position.z);
         transform.position = dropPosition;
@@ -24,21 +30,27 @@ public class Walkman : Item {
     }
 
     public override void Use() {
-        if (isInCoolDown) {
-            notUsable.Play();
-        } else {
-            Drop();
-            Debug.Log("Placing walkman to distract guards, it will play in 3 seconds");
-            StartCoroutine(DelayedStartWalkman());
-            isInCoolDown = true;
-            playerItemController.StartCooldown(cooldownTime, () => { Walkman.isInCoolDown = false; });
+        if(activeWalkman != null) {
+            if (activeWalkman.isInCoolDown) {
+                notUsable.Play();
+                return;
+            }
         }
+
+        Drop();
+        Debug.Log("Placing walkman to distract guards, it will play in 3 seconds");
+        StartCoroutine(DelayedStartWalkman());
+        isInCoolDown = true;
+        playerItemController.StartCooldown(cooldownTime, () => { isInCoolDown = false; });
         
     }
 
     private void Start() {
-        isInCoolDown = false;
+        //if(activeWalkman == null) {
+        //    activeWalkman = this;
+        //}
         cooldownTime = 20f;
+        isInCoolDown = false;
         audioItem = GetComponents<AudioSource>()[0];
         notUsable = GetComponents<AudioSource>()[1];
     }
