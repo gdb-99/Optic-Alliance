@@ -13,7 +13,7 @@ public class ItemDetailsController : MonoBehaviour
             detailsText.text = "PERMANENT ITEM.\n";
         }
         else{
-            detailsText.text = "CONSUMSBLE ITEM.\n";
+            detailsText.text = "CONSUMABLE ITEM.\n";
         }
 
         detailsText.text += item.description;
