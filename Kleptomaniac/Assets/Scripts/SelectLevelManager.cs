@@ -166,8 +166,11 @@ public class SelectLevelManager : MonoBehaviour
 
     public void MoveObjectToBackback(ItemSO item)
     {
-        playerData.backpackbackInv.AddItem(item);
-        playerData.globalInv.RemoveItem(item);
+        if (!playerData.backpackbackInv.ContainsItem(item)) {
+            playerData.backpackbackInv.AddItem(item);
+            playerData.globalInv.RemoveItem(item);
+        }
+        
     }
 
     public void MoveObjectToInventyory(ItemSO item)

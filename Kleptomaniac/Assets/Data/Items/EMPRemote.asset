@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93177d13d4482b1419ee9257257c73f6, type: 3}
   m_Name: EMPRemote
   m_EditorClassIdentifier: 
-  isPermanent: 0
+  isPermanent: 1
   id: emp_remote
   name: EMP remote
   description: 'You''re a shy person? Do cameras frighten you? Then select this object

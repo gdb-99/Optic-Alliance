@@ -66,4 +66,13 @@ public class InventorySO : ScriptableObject
 
     }
 
+    public bool ContainsItem(ItemSO item) {
+        foreach(InvetoryData invetoryData in items) {
+            if(invetoryData.data.id == item.id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
