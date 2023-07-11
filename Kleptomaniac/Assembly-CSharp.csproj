@@ -105,6 +105,7 @@
     <Compile Include="Assets\Scripts\EMPRemote.cs" />
     <Compile Include="Assets\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\PlayerItemController.cs" />
+    <Compile Include="Assets\Scripts\DangerIcon.cs" />
     <Compile Include="Assets\AI\BannerController.cs" />
     <Compile Include="Assets\Scripts\GameInput.cs" />
     <Compile Include="Assets\Scripts\SelectLevelManager.cs" />
@@ -123,8 +124,6 @@
     <Compile Include="Assets\Sensors\ProximitySensor.cs" />
     <Compile Include="Assets\Scripts\MonaLisa.cs" />
     <Compile Include="Assets\Scripts\Interactable.cs" />
-    <Compile Include="Assets\Scripts\DangerIcon.cs" />
-    <Compile Include="Assets\Scripts\ItemBarSlot.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

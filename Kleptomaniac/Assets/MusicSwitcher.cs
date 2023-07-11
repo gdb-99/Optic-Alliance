@@ -6,7 +6,6 @@ public class MusicSwitcher : MonoBehaviour
 {
     [SerializeField] GameObject[] clips; // drag and add audio clips in the inspector
     [SerializeField] GameObject panel;
-    GameObject thisClip;
     private AudioSource audioItem;
     private bool flag;
 
@@ -18,7 +17,7 @@ public class MusicSwitcher : MonoBehaviour
         clips[0].SetActive(true);
         clips[1].SetActive(false);
         clips[2].SetActive(false);
-        thisClip = clips[0];
+        clips[3].SetActive(false);
     }
 
     // Update is called once per frame
@@ -52,6 +51,15 @@ public class MusicSwitcher : MonoBehaviour
             clips[0].SetActive(false);
             clips[1].SetActive(false);
             clips[2].SetActive(true);
+            clips[3].SetActive(false);
+        }
+
+        if (GameManager.Instance.isGameOver == true)
+        {
+            clips[0].SetActive(false);
+            clips[1].SetActive(false);
+            clips[2].SetActive(false);
+            clips[3].SetActive(true);
         }
     }
 }
