@@ -126,6 +126,15 @@ public class GameManager : MonoBehaviour
         missionCompletedUI.ShowVictory(completedQuest);
         isVictory = true;
 
+        for(int i = 0; i < _playerData.backpackbackInv.items.Count; i++) {
+            InvetoryData invetoryData = _playerData.backpackbackInv.items[i];
+            string itemId = invetoryData.data.id;
+            if (!invetoryData.data.isPermanent) {
+                _playerData.backpackbackInv.items.Remove(invetoryData);
+            }
+        }
+
+
         Time.timeScale = 0;
 
         Cursor.lockState = CursorLockMode.None;

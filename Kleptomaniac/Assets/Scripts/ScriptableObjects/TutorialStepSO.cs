@@ -7,4 +7,6 @@ public class TutorialStepSO : ScriptableObject
 {
     public string title;
     public string info;
+
+    public bool premiseScene;
 }
