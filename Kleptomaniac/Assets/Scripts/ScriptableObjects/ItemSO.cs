@@ -14,6 +14,7 @@ public class ItemSO : ScriptableObject
     public Sprite itemSprite;
     public float targetRange;
     public int numberOfUses;
+    public int reputation;
 
     public ItemAction action;
 

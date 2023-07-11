@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b55f4f1fb1ec574198e2f75ceb4ba96, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  reputation: 0
-  money: 10
+  reputation: 1
+  money: 700
   backpackbackInv: {fileID: 11400000, guid: 0c71d05f6de19ca4794184a235f1472d, type: 2}
   globalInv: {fileID: 11400000, guid: 298039ee15503bf4b8cf4b2d3c908760, type: 2}

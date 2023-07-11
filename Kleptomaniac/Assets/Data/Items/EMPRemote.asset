@@ -18,9 +18,10 @@ MonoBehaviour:
   description: 'You''re a shy person? Do cameras frighten you? Then select this object
     and use it with SPACE to hide yourself from these CCTV snitches! Camera disabled
     for 20 s; Cooldown time: 20 s;'
-  price: 30
+  price: 250
   itemModel: {fileID: 6940922369737826429, guid: 1c9326746849b7447af77939d2df5b6c, type: 3}
   itemSprite: {fileID: 21300000, guid: 0c850a42d3cabc24eacca75ca477e894, type: 3}
   targetRange: 8
   numberOfUses: -1
+  reputation: 1
   action: 1
