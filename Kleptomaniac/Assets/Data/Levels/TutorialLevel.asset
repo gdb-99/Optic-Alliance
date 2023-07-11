@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: TutorialLevel
   m_EditorClassIdentifier: 
   name: Music center
-  description: The perfect place to improve your skill!
+  description: There's an exposition of a famous violin. Nobody really cares about
+    it, so why not start here to test your skills? Also, you might want to bring
+    a BLOWGUN in here. You know what classical music does to people, don't you?
   minReputationLevel: 0
   profit: 100
   code: 0
-  done: 0
+  done: 1
   hasSecondaryQuestion: 0
