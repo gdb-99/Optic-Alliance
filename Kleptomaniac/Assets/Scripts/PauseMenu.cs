@@ -31,6 +31,7 @@ public class PauseMenu : MonoBehaviour
     //Per mettere in pausa il gioco e mostrare il corretto panel:
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
+    public GameObject tabPanel;
 
     public ShowItemDetailsEvent showDetailsEvent;
     [SerializeField] GameObject _prefabItem;
@@ -79,6 +80,7 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = true;
 
         pauseMenuUI.SetActive(true);    //abilita la visualizzazione del panel della pausa
+        tabPanel.SetActive(false);
         Time.timeScale = 0f;    //per bloccare il gioco
         GameIsPaused = true;
     }
@@ -91,6 +93,7 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = false;
 
         pauseMenuUI.SetActive(false);
+        tabPanel.SetActive(true);
         Time.timeScale = 1f;
         GameIsPaused = false;
     }

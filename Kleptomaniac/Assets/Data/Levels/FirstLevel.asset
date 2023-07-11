@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: FirstLevel
   m_EditorClassIdentifier: 
   name: Art Museum
-  description: There is a famous painting in town today! A friend of mine said that
-    bringing a FLASHLIGHT could be useful...
+  description: A famous painting is coming to town today! A friend of mine said that
+    bringing a FLASHLIGHT could be useful... If you want to have some more fun, you
+    could try to steal the "Golden Fishes" statue. It would look good in my bathroom.
+    What? You'd like some more challenge? Then try doing the mission without being
+    seen by anyone, just like a ghost. And no cheating with that EMP REMOTE!
   minReputationLevel: 1
   profit: 1000
   code: 1
