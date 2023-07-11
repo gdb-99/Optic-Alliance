@@ -81,7 +81,7 @@ public class PurchaseDetailsController : MonoBehaviour
     }
 
     public void SetBuyButtonInteractable() {
-        if (selectedItem.isPermanent && player.globalInv.items.Exists((i) => i.data == selectedItem)) {
+        if (selectedItem.isPermanent && (player.globalInv.items.Exists((i) => i.data == selectedItem) || player.backpackbackInv.items.Exists((i) => i.data == selectedItem))) {
             buyButton.interactable = false;
             conversation.text = "You've already bought one! Another one would be useless!";
         }

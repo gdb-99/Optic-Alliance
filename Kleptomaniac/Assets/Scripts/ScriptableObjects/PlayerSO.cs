@@ -15,7 +15,7 @@ public class PlayerSO : ScriptableObject
     private void OnEnable()
     {
         reputation = 0;
-        //money = 100;
+        money = 700;
     }
 
     public void AddMoney(int valueToAdd)
