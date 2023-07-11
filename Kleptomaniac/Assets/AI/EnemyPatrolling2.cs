@@ -44,6 +44,7 @@ public class EnemyPatrolling2 : MonoBehaviour {
     private AudioSource sniffAudioSource;
     private AudioSource snoreAudioSource;
     private bool wokeUp;
+    public bool isAware;
 
     /* public enum GamePhase
     {
@@ -66,6 +67,7 @@ public class EnemyPatrolling2 : MonoBehaviour {
     private EnemyState currentState;
 
     void Start() {
+        isAware = false;
         destPoint = 0;
         UnityEngine.AI.NavMeshAgent agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         agent.destination = goal.position;
@@ -126,7 +128,8 @@ public class EnemyPatrolling2 : MonoBehaviour {
 
                 Debug.Log("STATE = PATROLLING");
                 questionObject.SetActive(false);
-                GameManager.Instance.isPigInDanger = false;
+                isAware = false;
+                //GameManager.Instance.isPigInDanger = false;
                 if (CanSeePlayer) {
                     exclamationObject.SetActive(true);
                     barkAudioSource.Play();
@@ -141,7 +144,8 @@ public class EnemyPatrolling2 : MonoBehaviour {
 
             case EnemyState.Chasing:
                 questionObject.SetActive(false);
-                GameManager.Instance.isPigInDanger = true;
+                isAware = true;
+                //GameManager.Instance.isPigInDanger |= isAware;
                 if (CanSeePlayer) {
                     GameManager.Instance.quest2 = false;
                     policeAnimator.SetTrigger("chasing");
@@ -170,7 +174,8 @@ public class EnemyPatrolling2 : MonoBehaviour {
                 break;
 
             case EnemyState.Searching:
-                GameManager.Instance.isPigInDanger = true;
+                isAware = true;
+                //GameManager.Instance.isPigInDanger |= isAware;
                 Debug.Log("STATE = SEARCHING");
                 searchTimer += Time.deltaTime;
                 if (CanSeePlayer) {
@@ -219,6 +224,7 @@ public class EnemyPatrolling2 : MonoBehaviour {
 
             case EnemyState.Sleeping:
                 Debug.Log("STATE = SLEEPING");
+                isAware = false;
                 policeAnimator.SetTrigger("sleeping");
                 break;
         }

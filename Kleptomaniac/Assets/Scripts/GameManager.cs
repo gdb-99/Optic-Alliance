@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] PlayerSO _playerData;
     [SerializeField] LevelDataSO _levelData;
     [SerializeField] MissionCompletedUIController missionCompletedUI;
+    [SerializeField] EnemyPatrolling2[] guards;
 
     void Start()
     {
@@ -58,6 +59,16 @@ public class GameManager : MonoBehaviour
         isPigInDanger = false;
         isVictory = false;
         isGameOver = false;
+    }
+
+    private void Update() {
+        foreach(EnemyPatrolling2 guard in guards) {
+            if(guard.isAware) {
+                isPigInDanger = true;
+                return;
+            }
+        }
+        isPigInDanger = false;
     }
 
     public PlayerSO PlayerData

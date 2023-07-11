@@ -657,6 +657,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d94d282393512f44996ff98bbf14ea9d, type: 3}
+--- !u!114 &181473587 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 85956583, guid: d94d282393512f44996ff98bbf14ea9d, type: 3}
+  m_PrefabInstance: {fileID: 181473586}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455ca3aea11b4624384dd95912738185, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &189530007
 GameObject:
   m_ObjectHideFlags: 0
@@ -4549,6 +4560,9 @@ MonoBehaviour:
   _playerData: {fileID: 11400000, guid: 932f15615a5566a48ac5217077a67dc6, type: 2}
   _levelData: {fileID: 11400000, guid: c4de02df0c7934f49919a284f47cfa00, type: 2}
   missionCompletedUI: {fileID: 943964199}
+  guards:
+  - {fileID: 181473587}
+  - {fileID: 771375944}
 --- !u!1001 &4351300173143759567
 PrefabInstance:
   m_ObjectHideFlags: 0

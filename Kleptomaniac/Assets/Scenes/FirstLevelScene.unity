@@ -692,6 +692,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5574567851089252250, guid: d94d282393512f44996ff98bbf14ea9d, type: 3}
   m_PrefabInstance: {fileID: 154997502}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &154997504 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 85956583, guid: d94d282393512f44996ff98bbf14ea9d, type: 3}
+  m_PrefabInstance: {fileID: 154997502}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455ca3aea11b4624384dd95912738185, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &175651233
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7136,6 +7147,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d94d282393512f44996ff98bbf14ea9d, type: 3}
+--- !u!114 &1354871282 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 85956583, guid: d94d282393512f44996ff98bbf14ea9d, type: 3}
+  m_PrefabInstance: {fileID: 1354871281}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455ca3aea11b4624384dd95912738185, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1411173006
 GameObject:
   m_ObjectHideFlags: 0
@@ -7282,6 +7304,14 @@ MonoBehaviour:
   _playerData: {fileID: 11400000, guid: 932f15615a5566a48ac5217077a67dc6, type: 2}
   _levelData: {fileID: 11400000, guid: ec0aaf05d9d0b814f8ecd8d9f61e0a28, type: 2}
   missionCompletedUI: {fileID: 692950415}
+  guards:
+  - {fileID: 2048033007}
+  - {fileID: 425718934}
+  - {fileID: 1354871282}
+  - {fileID: 154997504}
+  - {fileID: 605311859}
+  - {fileID: 842734671}
+  - {fileID: 1886648719}
 --- !u!1 &1543826063
 GameObject:
   m_ObjectHideFlags: 0
