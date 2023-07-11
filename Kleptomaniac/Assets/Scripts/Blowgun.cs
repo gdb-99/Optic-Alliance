@@ -56,7 +56,9 @@ public class Blowgun : Item {
     }
 
     private void OnDisable() {
-        guardTarget?.GetComponent<HighlightTarget>().ToggleHighlight(false);
+        if(guardTarget != null) {
+            guardTarget?.GetComponent<HighlightTarget>().ToggleHighlight(false);
+        }
         guardTarget = null;
     }
 
