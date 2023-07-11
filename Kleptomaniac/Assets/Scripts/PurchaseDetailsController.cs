@@ -23,6 +23,9 @@ public class PurchaseDetailsController : MonoBehaviour
     [SerializeField] TextMeshProUGUI conversation;
     [SerializeField] TextMeshProUGUI money;
     [SerializeField] TextMeshProUGUI reputation;
+    [SerializeField] TextMeshProUGUI itemReputation;
+    [SerializeField] Image itemPriceImage;
+    [SerializeField] Image itemReputationImage;
     [SerializeField] Button yesButton, noButton;
 
     ItemSO selectedItem;
@@ -50,8 +53,11 @@ public class PurchaseDetailsController : MonoBehaviour
         itemDesc.text = string.Empty;
         itemPrice.text = string.Empty;
         itemType.text = string.Empty;
+        itemReputation.text = string.Empty;
         itemImage.sprite = null;
         itemImage.enabled = false;
+        itemPriceImage.enabled = false;
+        itemReputationImage.enabled = false;
 
         emptyText.enabled = true;
 
@@ -63,22 +69,29 @@ public class PurchaseDetailsController : MonoBehaviour
 
         itemName.text = item.name;
         itemDesc.text = item.description;
-        itemPrice.text = item.price + " $";
+        itemPrice.text = item.price.ToString();
         itemType.text = item.isPermanent ? "PERMANENT" : "CONSUMABLE";
         itemImage.sprite = item.itemSprite;
         itemImage.enabled = true;
+        itemPriceImage.enabled = true;
+        itemReputationImage.enabled = true;
+        itemReputation.text = item.reputation.ToString();
         SetBuyButtonInteractable();
         emptyText.enabled = false;
     }
 
     public void SetBuyButtonInteractable() {
-        if (selectedItem.isPermanent && player.globalInv.items.Exists((i) => i.data == selectedItem)) {
+        if (selectedItem.isPermanent && (player.globalInv.items.Exists((i) => i.data == selectedItem) || player.backpackbackInv.items.Exists((i) => i.data == selectedItem))) {
             buyButton.interactable = false;
             conversation.text = "You've already bought one! Another one would be useless!";
         }
         else if(player.money < selectedItem.price) {
             buyButton.interactable = false;
             conversation.text = "You don't have enough money! Try something cheaper!";
+        }
+        else if (player.reputation < selectedItem.reputation) {
+            buyButton.interactable = false;
+            conversation.text = "You don't have enough reputation! Come back some other time!";
         }
         else {
             buyButton.interactable = true;
