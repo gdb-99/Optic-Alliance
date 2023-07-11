@@ -12,6 +12,7 @@ public class ItemBar : MonoBehaviour {
     private Transform itemSlotTemplate;
     private Color notSelected = new Color(0.9254902f, 0.6235294f, 0.0196078f);
     private Color selected = new Color(0.7490196f, 0.1921569f, 0f);
+    private Color notUsableColor = new Color(0.16470588235294117f, 0.16862745098039217f, 0.16470588235294117f);
 
     private List<Transform> slots = new List<Transform>();
 
@@ -35,7 +36,11 @@ public class ItemBar : MonoBehaviour {
             if(playerItemController.GetCurrentItemIndex() == i) {
                 itemSlotTransform.GetComponent<Image>().color = selected;
             } else {
-                itemSlotTransform.GetComponent<Image>().color = notSelected;
+                if (itemSlotTransform.GetComponent<ItemBarSlot>().GetIsUsable()) {
+                    itemSlotTransform.GetComponent<Image>().color = notSelected;
+                } else {
+                    itemSlotTransform.GetComponent<Image>().color = notUsableColor;
+                }
             }
 
             RectTransform itemSlotRectTransform = itemSlotTransform.GetComponent<RectTransform>();
@@ -55,6 +60,9 @@ public class ItemBar : MonoBehaviour {
 
     private void PlayerItemController_OnItemCounterDecreased(object sender, PlayerItemController.OnItemCounterDecreasedEventArgs e) {
         Transform counter = slots[e.itemIndex].Find("Counter");
+        if(e.counterCurrent == 0) {
+            slots[e.itemIndex].GetComponent<ItemBarSlot>().SetIsUsable(false);
+        }
         counter.GetComponent<TextMeshProUGUI>().text = e.counterCurrent + " / " + e.counterMax;
     }
 
@@ -63,19 +71,27 @@ public class ItemBar : MonoBehaviour {
     }
 
     private void PlayerItemController_OnItemSwitched(object sender, System.EventArgs e) {
+        UpdateBackgroudColors();
+    }
+
+    private void UpdateBackgroudColors() {
         int i = 0;
-        foreach(Transform slot in slots) {
-            if(playerItemController.GetCurrentItemIndex() == i) {
+        foreach (Transform slot in slots) {
+            if (playerItemController.GetCurrentItemIndex() == i) {
                 slot.GetComponent<Image>().color = selected;
             } else {
-                slot.GetComponent<Image>().color = notSelected;
+                if (slot.GetComponent<ItemBarSlot>().GetIsUsable()) {
+                    slot.GetComponent<Image>().color = notSelected;
+                } else {
+                    slot.GetComponent<Image>().color = notUsableColor;
+                }
             }
             i++;
         }
     }
 
     IEnumerator ItemEnteredCooldownCoroutine(float cooldownTime, int itemIndex) {
-
+        slots[itemIndex].GetComponent<ItemBarSlot>().SetIsUsable(false);
         float timer = 0f;
         Transform cooldownBar = slots[itemIndex].Find("CooldownBar");
         cooldownBar.gameObject.SetActive(true);
@@ -90,5 +106,7 @@ public class ItemBar : MonoBehaviour {
         }
 
         cooldownBar.gameObject.SetActive(false);
+        slots[itemIndex].GetComponent<ItemBarSlot>().SetIsUsable(true);
+        UpdateBackgroudColors();
     }
 }
