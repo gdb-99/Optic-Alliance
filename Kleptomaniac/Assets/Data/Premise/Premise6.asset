@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ea795f570547f04285307779e7dc0ba, type: 3}
+  m_Name: Premise6
+  m_EditorClassIdentifier: 
+  title: Let's Begin!
+  info: 'Ok, this is pretty much everything. Try buying your first object. Or don''t,
+    whatever. If you really want to follow this weird dream of yours, come and find
+    me: I think I have the perfect mission for you...'
+  premiseScene: 0

@@ -29,9 +29,11 @@ public class PlanetController : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if(Time.timeScale != 0.0f){
         isPointed = true;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        }
     }
     private void OnMouseUp()
     {
@@ -42,7 +44,9 @@ public class PlanetController : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        Cursor.SetCursor(rotateCursor, Vector2.zero, CursorMode.ForceSoftware);
+        if(Time.timeScale != 0.0f){
+            Cursor.SetCursor(rotateCursor, Vector2.zero, CursorMode.ForceSoftware);
+        }
     }
 
     private void OnMouseExit()

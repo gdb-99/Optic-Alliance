@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ea795f570547f04285307779e7dc0ba, type: 3}
+  m_Name: Premise3
+  m_EditorClassIdentifier: 
+  title: Inventory and Backpack
+  info: 'Here instead you can manage your inventory: it shows your items and you
+    can drag them to your backpack to take them on your missions. Click the item
+    to see its info. You seem a bit shorthanded... You should pay a visit to the
+    Black Market. Tap the button below!'
+  premiseScene: 0
