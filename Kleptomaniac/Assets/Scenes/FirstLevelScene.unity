@@ -7399,6 +7399,7 @@ MonoBehaviour:
   quest1: 0
   quest2: 0
   quest3: 0
+  isPigInDanger: 0
   currentPhase: 0
   _playerData: {fileID: 11400000, guid: 932f15615a5566a48ac5217077a67dc6, type: 2}
   _levelData: {fileID: 11400000, guid: ec0aaf05d9d0b814f8ecd8d9f61e0a28, type: 2}

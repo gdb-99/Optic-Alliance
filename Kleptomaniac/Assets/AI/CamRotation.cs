@@ -152,13 +152,25 @@ public class CamRotation : MonoBehaviour
     }
 
     public void DisableCamera() {
+        if(CurrentCameraState == CameraState.Idle) {
+            StartCoroutine(DisableCameraCoroutine());
+        }
+    }
+
+    IEnumerator DisableCameraCoroutine() {
         Transform spotlight = transform.Find("Spot Light");
         Transform cone = spotlight.Find("Cone");
 
         spotlight.GetComponent<Light>().intensity = 0;
         cone.gameObject.SetActive(false);
-        
+
         CurrentCameraState = CameraState.Disabled;
+        
+        yield return new WaitForSeconds(20f);
+
+        spotlight.GetComponent<Light>().intensity = 3.5f;
+        cone.gameObject.SetActive(true);
+        CurrentCameraState = CameraState.Idle;
     }
 
 }

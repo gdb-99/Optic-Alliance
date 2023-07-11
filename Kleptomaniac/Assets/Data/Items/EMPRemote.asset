@@ -21,4 +21,5 @@ MonoBehaviour:
   itemModel: {fileID: 6940922369737826429, guid: 1c9326746849b7447af77939d2df5b6c, type: 3}
   itemSprite: {fileID: 21300000, guid: 0c850a42d3cabc24eacca75ca477e894, type: 3}
   targetRange: 8
+  numberOfUses: -1
   action: 1

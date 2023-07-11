@@ -13,6 +13,7 @@ public class ItemSO : ScriptableObject
     public GameObject itemModel;
     public Sprite itemSprite;
     public float targetRange;
+    public int numberOfUses;
 
     public ItemAction action;
 

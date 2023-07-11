@@ -24,6 +24,7 @@ public class ItemBar : MonoBehaviour {
         playerItemController = Player.Instance.GetComponent<PlayerItemController>();
         playerItemController.OnItemSwitched += PlayerItemController_OnItemSwitched;
         playerItemController.OnItemEnteredCooldown += PlayerItemController_OnItemEnteredCooldown;
+        playerItemController.OnItemCounterDecreased += PlayerItemController_OnItemCounterDecreased;
 
         int i = 0;
         foreach (InvetoryData invetoryData in backpack.items) {
@@ -40,10 +41,21 @@ public class ItemBar : MonoBehaviour {
             RectTransform itemSlotRectTransform = itemSlotTransform.GetComponent<RectTransform>();
             itemSlotRectTransform.anchoredPosition = new Vector2(50f * i, 0f);
             itemSlotTransform.Find("ItemImage").GetComponent<Image>().sprite = backpack.items[i].data.itemSprite;
-            itemSlotTransform.Find("ItemNum").GetComponent<TextMeshProUGUI>().text = "( " + (i+1).ToString() + " )";
+            //itemSlotTransform.Find("ItemNum").GetComponent<TextMeshProUGUI>().text = "( " + (i+1).ToString() + " )";
             itemSlotTransform.gameObject.SetActive(true);
+            if(invetoryData.data.numberOfUses > 0) {
+                Transform counter = itemSlotTransform.Find("Counter");
+                counter.gameObject.SetActive(true);
+                Debug.Log("Counter = " + counter);
+                counter.GetComponent<TextMeshProUGUI>().text = invetoryData.data.numberOfUses + " / " + invetoryData.data.numberOfUses;
+            }
             i++;
         }
+    }
+
+    private void PlayerItemController_OnItemCounterDecreased(object sender, PlayerItemController.OnItemCounterDecreasedEventArgs e) {
+        Transform counter = slots[e.itemIndex].Find("Counter");
+        counter.GetComponent<TextMeshProUGUI>().text = e.counterCurrent + " / " + e.counterMax;
     }
 
     private void PlayerItemController_OnItemEnteredCooldown(object sender, PlayerItemController.OnItemEnteredCooldownEventArgs e) {

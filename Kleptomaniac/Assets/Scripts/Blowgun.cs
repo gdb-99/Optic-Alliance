@@ -7,11 +7,13 @@ public class Blowgun : Item {
     private EnemyPatrolling2 guardTarget;
     private AudioSource audioItem;
     private AudioSource notUsable;
+    private int maxBullets;
     private int numBullets;
 
     private void Start()
     {
-        numBullets = 5;
+        maxBullets = itemSO.numberOfUses;
+        numBullets = itemSO.numberOfUses;
         audioItem = GetComponents<AudioSource>()[0];
         notUsable = GetComponents<AudioSource>()[1];
     }
@@ -25,6 +27,7 @@ public class Blowgun : Item {
             audioItem.Play();
             PutGuardToSleep();
             numBullets--;
+            playerItemController.NotifyItemCounterDecreased(numBullets, maxBullets);
         } else {
             notUsable.Play();
         }

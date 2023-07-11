@@ -7,10 +7,17 @@ public class PlayerItemController : MonoBehaviour {
 
     public event EventHandler OnItemSwitched;
     public event EventHandler<OnItemEnteredCooldownEventArgs> OnItemEnteredCooldown;
+    public event EventHandler<OnItemCounterDecreasedEventArgs> OnItemCounterDecreased;
 
     public class OnItemEnteredCooldownEventArgs : EventArgs {
         public int itemIndex;
         public float coolDownTime;
+    }
+
+    public class OnItemCounterDecreasedEventArgs : EventArgs {
+        public int itemIndex;
+        public int counterMax;
+        public int counterCurrent;
     }
 
     [SerializeField] private InventorySO inventorySO;
@@ -68,6 +75,14 @@ public class PlayerItemController : MonoBehaviour {
 
     public int GetCurrentItemIndex() {
         return currentItemIndex;
+    }
+
+    public void NotifyItemCounterDecreased(int current, int max) {
+        OnItemCounterDecreased?.Invoke(this, new OnItemCounterDecreasedEventArgs {
+            itemIndex = currentItemIndex,
+            counterCurrent = current,
+            counterMax = max
+        });
     }
 
     public void StartCooldown(float cooldownTime, Action f) {
