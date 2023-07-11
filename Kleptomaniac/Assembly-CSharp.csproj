@@ -78,6 +78,8 @@
     <Compile Include="Assets\Scripts\FoxHeadController.cs" />
     <Compile Include="Assets\Scripts\InventorySlot.cs" />
     <Compile Include="Assets\Scripts\PlayerInGameMenuController.cs" />
+    <Compile Include="Assets\TutorialStepController.cs" />
+    <Compile Include="Assets\SetText.cs" />
     <Compile Include="Assets\Scripts\Walkman.cs" />
     <Compile Include="Assets\AI\EnemyPatrolling.cs" />
     <Compile Include="Assets\AI\Detection.cs" />
@@ -85,6 +87,7 @@
     <Compile Include="Assets\Scripts\ItemDetailsController.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\BlackMarketSO.cs" />
     <Compile Include="Assets\Scripts\Flashlight.cs" />
+    <Compile Include="Assets\MissionCompletedUIController.cs" />
     <Compile Include="Assets\Scripts\Brightness.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\AI\CamRotation.cs" />
@@ -94,6 +97,7 @@
     <Compile Include="Assets\Scripts\MenuItemController.cs" />
     <Compile Include="Assets\Scripts\Blowgun.cs" />
     <Compile Include="Assets\Scripts\OptionsMenu.cs" />
+    <Compile Include="Assets\Scripts\ScriptableObjects\TutorialStepSO.cs" />
     <Compile Include="Assets\Sensors\VisionSensor.cs" />
     <Compile Include="Assets\Scripts\light.cs" />
     <Compile Include="Assets\Scripts\PurchaseDetailsController.cs" />

@@ -5558,7 +5558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cad245caa523a947ac126bb17d19463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 250
+  rotationSpeed: 400
   rotateCursor: {fileID: 2800000, guid: 8d18edd271beedb4f9b9254a3fd88a50, type: 3}
 --- !u!114 &1765529857 stripped
 MonoBehaviour:
