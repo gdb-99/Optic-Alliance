@@ -91,10 +91,10 @@
     <Compile Include="Assets\Scripts\Brightness.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\AI\CamRotation.cs" />
+    <Compile Include="Assets\Scripts\ItemBarSlot.cs" />
     <Compile Include="Assets\Sensors\DetectableTargetManager.cs" />
     <Compile Include="Assets\Scripts\QuestItem1.cs" />
     <Compile Include="Assets\Scripts\ItemBar.cs" />
-    <Compile Include="Assets\Scripts\ItemBarSlot.cs" />
     <Compile Include="Assets\Scripts\MenuItemController.cs" />
     <Compile Include="Assets\Scripts\Blowgun.cs" />
     <Compile Include="Assets\Scripts\OptionsMenu.cs" />

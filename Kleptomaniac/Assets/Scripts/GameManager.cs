@@ -5,16 +5,20 @@ using UnityEngine;
 using System;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
     #region Singleton Creation
     public static GameManager Instance { get; private set; }
 
-    private GameManager() {
+    private GameManager()
+    {
         // Private constructor to prevent instantiation from outside the class.
     }
 
-    private void Awake() {
-        if (Instance != null && Instance != this) {
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
             Destroy(this);
         }
 
@@ -26,18 +30,13 @@ public class GameManager : MonoBehaviour {
     public bool quest2;
     public bool quest3;
     public bool isPigInDanger;
-
-
-    public enum GameState {
-        GameOver,
-        Running,
-        Pause,
-        Clear
-    }
+    public bool isVictory;
+    public bool isGameOver;
 
     public event Action<GamePhase> OnGamePhaseChanged;
 
-    public enum GamePhase {
+    public enum GamePhase
+    {
         Theft,
         Escape
     }
@@ -48,7 +47,8 @@ public class GameManager : MonoBehaviour {
     [SerializeField] LevelDataSO _levelData;
     [SerializeField] MissionCompletedUIController missionCompletedUI;
 
-    void Start() {
+    void Start()
+    {
 
         // Inizializza lo stato di gioco
         currentPhase = GamePhase.Theft;
@@ -56,39 +56,50 @@ public class GameManager : MonoBehaviour {
         quest2 = true;
         quest3 = true;
         isPigInDanger = false;
+        isVictory = false;
+        isGameOver = false;
     }
 
-    public PlayerSO PlayerData {
-        get {
+    public PlayerSO PlayerData
+    {
+        get
+        {
             return _playerData;
         }
     }
 
-    public LevelDataSO LevelData {
-        get {
+    public LevelDataSO LevelData
+    {
+        get
+        {
             return _levelData;
         }
     }
 
 
-    public void SetPhaseTheft() {
+    public void SetPhaseTheft()
+    {
         currentPhase = GamePhase.Theft;
     }
 
-    public void SetPhaseEscape() {
+    public void SetPhaseEscape()
+    {
         currentPhase = GamePhase.Escape;
     }
 
-    public void SetGamePhase(GamePhase phase) {
+    public void SetGamePhase(GamePhase phase)
+    {
         currentPhase = phase;
 
         // Se hai sottoscritto l'evento OnGamePhaseChanged, notifica gli ascoltatori del cambio di fase
         OnGamePhaseChanged?.Invoke(currentPhase);
     }
 
-    public void EndLevel() {
+    public void EndLevel()
+    {
         //Reward solo la prima volta che il livello viene completato
-        if (_levelData.done == false) {
+        if (_levelData.done == false)
+        {
             _playerData.AddMoney(_levelData.profit);
             _playerData.IncreaseReputation();
         }
@@ -97,19 +108,23 @@ public class GameManager : MonoBehaviour {
 
         int completedQuest = 0;
 
-        if (quest1) {
+        if (quest1)
+        {
             completedQuest++;
         }
 
-        if (quest2) {
+        if (quest2)
+        {
             completedQuest++;
         }
 
-        if (quest3) {
+        if (quest3)
+        {
             completedQuest++;
         }
 
         missionCompletedUI.ShowVictory(completedQuest);
+        isVictory = true;
 
         Time.timeScale = 0;
 
@@ -118,7 +133,8 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    public void GoToSelectLevel() {
+    public void GoToSelectLevel()
+    {
         Time.timeScale = 1.0f;
         SceneManager.LoadScene("SelectLevelScene");
     }

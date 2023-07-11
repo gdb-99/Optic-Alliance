@@ -16,6 +16,8 @@ public class MusicSwitcher : MonoBehaviour
         flag = false;
         audioItem = GetComponent<AudioSource>();
         clips[0].SetActive(true);
+        clips[1].SetActive(false);
+        clips[2].SetActive(false);
         thisClip = clips[0];
     }
 
@@ -43,6 +45,13 @@ public class MusicSwitcher : MonoBehaviour
             clips[0].SetActive(false);  //stealth
             panel.SetActive(true);
             clips[1].SetActive(true);   //escape
+        }
+
+        if (GameManager.Instance.isVictory == true)
+        {
+            clips[0].SetActive(false);
+            clips[1].SetActive(false);
+            clips[2].SetActive(true);
         }
     }
 }
