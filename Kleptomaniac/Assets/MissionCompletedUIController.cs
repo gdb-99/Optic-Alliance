@@ -57,7 +57,7 @@ public class MissionCompletedUIController : MonoBehaviour
        
 
         levelName.text = data.name + " completed!";
-        moneyText.text = data.profit.ToString() + (completedQuest > 0 ? " | +"+(10 * completedQuest) : "");
+        moneyText.text = data.profit.ToString() + (completedQuest > 0 ? " +"+(10 * completedQuest) : "");
         reputationText.text = "1";
 
         gameObject.SetActive(true);
