@@ -56,6 +56,7 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\PremiseController.cs" />
     <Compile Include="Assets\AI\EnemyPatrolling2.cs" />
     <Compile Include="Assets\Scripts\SideQuests.cs" />
     <Compile Include="Assets\Scripts\LevelDetailsController.cs" />
@@ -85,12 +86,14 @@
     <Compile Include="Assets\AI\Detection.cs" />
     <Compile Include="Assets\AI\EnemyAI.cs" />
     <Compile Include="Assets\Scripts\ItemDetailsController.cs" />
+    <Compile Include="Assets\Scripts\VolumetricLight\VolumetricLight.cs" />
     <Compile Include="Assets\Scripts\ScriptableObjects\BlackMarketSO.cs" />
     <Compile Include="Assets\Scripts\Flashlight.cs" />
     <Compile Include="Assets\MissionCompletedUIController.cs" />
     <Compile Include="Assets\Scripts\Brightness.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\AI\CamRotation.cs" />
+    <Compile Include="Assets\Scripts\ItemBarSlot.cs" />
     <Compile Include="Assets\Sensors\DetectableTargetManager.cs" />
     <Compile Include="Assets\Scripts\QuestItem1.cs" />
     <Compile Include="Assets\Scripts\ItemBar.cs" />
@@ -104,11 +107,13 @@
     <Compile Include="Assets\Scripts\EMPRemote.cs" />
     <Compile Include="Assets\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\PlayerItemController.cs" />
+    <Compile Include="Assets\Scripts\DangerIcon.cs" />
     <Compile Include="Assets\AI\BannerController.cs" />
     <Compile Include="Assets\Scripts\GameInput.cs" />
     <Compile Include="Assets\Scripts\SelectLevelManager.cs" />
     <Compile Include="Assets\Sensors\DetectableTarget.cs" />
     <Compile Include="Assets\Scripts\FinishLevelController.cs" />
+    <Compile Include="Assets\Scripts\VolumetricLight\VolumetricLightRenderer.cs" />
     <Compile Include="Assets\Scripts\InventoryItemController.cs" />
     <Compile Include="Assets\Scripts\AlarmLightController.cs" />
     <Compile Include="Assets\Scripts\HighlightTarget.cs" />
@@ -122,11 +127,6 @@
     <Compile Include="Assets\Sensors\ProximitySensor.cs" />
     <Compile Include="Assets\Scripts\MonaLisa.cs" />
     <Compile Include="Assets\Scripts\Interactable.cs" />
-    <Compile Include="Assets\Scripts\DangerIcon.cs" />
-    <Compile Include="Assets\Scripts\ItemBarSlot.cs" />
-    <Compile Include="Assets\PremiseController.cs" />
-    <Compile Include="Assets\Scripts\VolumetricLight\VolumetricLight.cs" />
-    <Compile Include="Assets\Scripts\VolumetricLight\VolumetricLightRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -408,6 +408,12 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Android.Types">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.12f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Android.Gradle">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.12f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Gradle.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.12f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>

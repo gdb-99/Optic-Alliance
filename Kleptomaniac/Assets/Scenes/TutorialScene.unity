@@ -1499,6 +1499,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialStep (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4351300174574368250, guid: 5a66fe31d99106a49aba68a8738c8a15, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a66fe31d99106a49aba68a8738c8a15, type: 3}
 --- !u!1 &651388246
@@ -2096,6 +2100,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialStep (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4351300174574368250, guid: 5a66fe31d99106a49aba68a8738c8a15, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a66fe31d99106a49aba68a8738c8a15, type: 3}
 --- !u!1001 &943964198
@@ -2496,6 +2504,10 @@ PrefabInstance:
     - target: {fileID: 4351300173069283355, guid: 5a66fe31d99106a49aba68a8738c8a15, type: 3}
       propertyPath: m_Name
       value: TutorialStep (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351300174574368250, guid: 5a66fe31d99106a49aba68a8738c8a15, type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a66fe31d99106a49aba68a8738c8a15, type: 3}
@@ -3134,6 +3146,10 @@ PrefabInstance:
     - target: {fileID: 4351300173069283355, guid: 5a66fe31d99106a49aba68a8738c8a15, type: 3}
       propertyPath: m_Name
       value: TutorialStep (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351300174574368250, guid: 5a66fe31d99106a49aba68a8738c8a15, type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a66fe31d99106a49aba68a8738c8a15, type: 3}
@@ -4124,6 +4140,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialStep (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4351300174574368250, guid: 5a66fe31d99106a49aba68a8738c8a15, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a66fe31d99106a49aba68a8738c8a15, type: 3}
 --- !u!1 &1713822820
@@ -4621,6 +4641,10 @@ PrefabInstance:
     - target: {fileID: 4351300173069283355, guid: 5a66fe31d99106a49aba68a8738c8a15, type: 3}
       propertyPath: m_Name
       value: TutorialStep
+      objectReference: {fileID: 0}
+    - target: {fileID: 4351300174574368250, guid: 5a66fe31d99106a49aba68a8738c8a15, type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a66fe31d99106a49aba68a8738c8a15, type: 3}
