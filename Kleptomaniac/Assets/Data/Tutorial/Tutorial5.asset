@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Look Out!
   info: 'A guard is coming! Avoid it or try using the BLOWGUN to put it to sleep
-    for a while: select it with the corresponding number and press TAB!'
+    for a while: select it with the corresponding number and press SPACE!'
+  premiseScene: 0

@@ -90,9 +90,9 @@ public class Walkman : Item {
     }
 
     IEnumerator DelayedStartWalkman() {
+        audioItem.Play();
         yield return new WaitForSeconds(3f);
         Debug.Log("PLAYING !!!!");
-        audioItem.Play();
         isOn = true;
     }
 
